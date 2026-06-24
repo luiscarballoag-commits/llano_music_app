@@ -1,13 +1,13 @@
 class Cancion {
-  final String titulo;
   final String artista;
-  final String audio;
+  final String titulo;
   final String imagen;
+  final String audio;
 
   Cancion({
-    required this.titulo,
     required this.artista,
-    required this.audio,
+    required this.titulo,
     required this.imagen,
+    required this.audio,
   });
 }

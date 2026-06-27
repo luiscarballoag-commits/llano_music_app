@@ -1,4 +1,9 @@
-name: llano_music
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/audio/
+    - assets/images/name: llano_music
 description: Aplicación de música llanera
 publish_to: 'none'
 

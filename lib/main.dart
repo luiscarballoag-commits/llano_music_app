@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+(import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const LlanoMusicApp());
@@ -13,9 +14,7 @@ class LlanoMusicApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Llano Music',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+      theme: AppTheme.lightTheme,
       home: const HomePage(),
     );
   }

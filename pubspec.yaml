@@ -1,23 +1,30 @@
-flutter:
-  uses-material-design: true
+name: llano_music_app
+description: La aplicación del auténtico sonido del llano venezolano.
 
-  assets:
-    - assets/audio/
-    - assets/images/name: llano_music
-description: Aplicación de música llanera
 publish_to: 'none'
 
-version: 1.0.0
+version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.8.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  audioplayers: ^6.0.0
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
 
 flutter:
+
+  uses-material-design: true
+
   assets:
     - assets/audio/
+    - assets/banners/
     - assets/images/

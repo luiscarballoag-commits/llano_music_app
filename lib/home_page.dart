@@ -6,6 +6,7 @@ import 'widgets/buscador.dart';
 import 'widgets/artistas_destacados.dart';
 import 'widgets/canciones_populares.dart';
 import 'widgets/mini_player.dart';
+import 'widgets/bottom_navigation_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,7 +19,6 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
             /// Encabezado
             const HomeHeader(),
 
@@ -27,7 +27,6 @@ class HomePage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: const [
-
                     BannerPrincipal(),
 
                     SizedBox(height: 10),
@@ -43,7 +42,6 @@ class HomePage extends StatelessWidget {
                     CancionesPopulares(),
 
                     SizedBox(height: 120),
-
                   ],
                 ),
               ),
@@ -54,6 +52,9 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+
+      /// Barra de navegación inferior
+      bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
 }

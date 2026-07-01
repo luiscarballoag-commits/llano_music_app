@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../viewmodels/home_view_model.dart';
+import 'artist_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -23,10 +24,26 @@ class HomeScreen extends StatelessWidget {
           final artist = artists[index];
 
           return Card(
+            margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
-              leading: const Icon(Icons.person),
+              leading: const CircleAvatar(
+                child: Icon(Icons.person),
+              ),
               title: Text(artist.nombre),
-              subtitle: Text('${artist.genero} • ${artist.estado}'),
+              subtitle: Text(
+                '${artist.genero} • ${artist.estado}',
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ArtistScreen(
+                      artist: artist,
+                    ),
+                  ),
+                );
+              },
             ),
           );
         },

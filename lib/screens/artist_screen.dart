@@ -17,69 +17,70 @@ class ArtistScreen extends StatelessWidget {
         title: Text(artist.nombre),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Center(
-              child: CircleAvatar(
-                radius: 70,
-                child: const Icon(
-                  Icons.person,
-                  size: 70,
-                ),
-              ),
+            Image.asset(
+              artist.imagen,
+              width: double.infinity,
+              height: 300,
+              fit: BoxFit.cover,
             ),
 
-            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
 
-            Text(
-              artist.nombre,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+                  Text(
+                    artist.nombre,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
-            const SizedBox(height: 12),
+                  const SizedBox(height: 16),
 
-            Text(
-              'Estado: ${artist.estado}',
-              style: const TextStyle(fontSize: 18),
-            ),
+                  Row(
+                    children: [
+                      const Icon(Icons.music_note),
+                      const SizedBox(width: 8),
+                      Text(artist.genero),
+                    ],
+                  ),
 
-            const SizedBox(height: 8),
+                  const SizedBox(height: 12),
 
-            Text(
-              'Género: ${artist.genero}',
-              style: const TextStyle(fontSize: 18),
-            ),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      const SizedBox(width: 8),
+                      Text('${artist.estado}, ${artist.pais}'),
+                    ],
+                  ),
 
-            const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
-            Text(
-              'País: ${artist.pais}',
-              style: const TextStyle(fontSize: 18),
-            ),
+                  const Text(
+                    'Biografía',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
-            const SizedBox(height: 24),
+                  const SizedBox(height: 12),
 
-            const Text(
-              'Biografía',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Text(
-              artist.descripcion,
-              style: const TextStyle(
-                fontSize: 16,
-                height: 1.5,
+                  Text(
+                    artist.descripcion,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      height: 1.6,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

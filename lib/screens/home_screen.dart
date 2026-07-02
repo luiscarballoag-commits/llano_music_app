@@ -25,15 +25,31 @@ class HomeScreen extends StatelessWidget {
 
           return Card(
             margin: const EdgeInsets.only(bottom: 12),
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
             child: ListTile(
-              leading: const CircleAvatar(
-                child: Icon(Icons.person),
+              contentPadding: const EdgeInsets.all(10),
+
+              leading: CircleAvatar(
+                radius: 32,
+                backgroundImage: AssetImage(artist.imagen),
               ),
-              title: Text(artist.nombre),
+
+              title: Text(
+                artist.nombre,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
               subtitle: Text(
                 '${artist.genero} • ${artist.estado}',
               ),
+
               trailing: const Icon(Icons.arrow_forward_ios),
+
               onTap: () {
                 Navigator.push(
                   context,

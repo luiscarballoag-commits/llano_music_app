@@ -4,6 +4,7 @@ import 'widgets/home_header.dart';
 import 'widgets/banner_principal.dart';
 import 'widgets/buscador.dart';
 import 'widgets/artistas_destacados.dart';
+import 'widgets/clasicos_llano.dart';
 import 'widgets/canciones_populares.dart';
 import 'widgets/mini_player.dart';
 import 'widgets/bottom_navigation_bar.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+
             /// Encabezado
             const HomeHeader(),
 
@@ -27,6 +29,7 @@ class HomePage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: const [
+
                     BannerPrincipal(),
 
                     SizedBox(height: 10),
@@ -39,21 +42,27 @@ class HomePage extends StatelessWidget {
 
                     SizedBox(height: 25),
 
+                    ClasicosLlano(),
+
+                    SizedBox(height: 25),
+
                     CancionesPopulares(),
 
                     SizedBox(height: 120),
+
                   ],
                 ),
               ),
             ),
 
             /// Mini reproductor
-            const MiniPlayer(),
+            MiniPlayer(),
+
           ],
         ),
       ),
 
-      /// Barra de navegación inferior
+      /// Barra inferior
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }

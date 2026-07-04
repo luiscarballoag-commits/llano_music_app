@@ -1,5 +1,5 @@
 name: llano_music_app
-description: La aplicación del auténtico sonido del llano venezolano.
+description: La aplicación del auténtico sonido del Llano venezolano.
 
 publish_to: 'none'
 
@@ -27,4 +27,6 @@ flutter:
   assets:
     - assets/audio/
     - assets/banners/
-    - assets/images/
+    - assets/images/artistas/
+    - assets/images/logo/
+    - assets/images/icons/

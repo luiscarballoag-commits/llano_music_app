@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/audio_player_service.dart';
 
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({super.key});
@@ -22,11 +23,10 @@ class MiniPlayer extends StatelessWidget {
       ),
       child: Row(
         children: [
-
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-              "assets/images/roberto_carballo.jpg",
+              "assets/images/artistas/roberto_carballo.jpg",
               width: 60,
               height: 60,
               fit: BoxFit.cover,
@@ -40,7 +40,6 @@ class MiniPlayer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Text(
                   "Tema Reproduciéndose",
                   maxLines: 1,
@@ -51,9 +50,7 @@ class MiniPlayer extends StatelessWidget {
                     fontSize: 17,
                   ),
                 ),
-
                 SizedBox(height: 4),
-
                 Text(
                   "Roberto Carballo",
                   style: TextStyle(
@@ -74,23 +71,4 @@ class MiniPlayer extends StatelessWidget {
           ),
 
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.play_circle_fill,
-              color: Colors.white,
-              size: 42,
-            ),
-          ),
-
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.skip_next,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+            onPressed: () {

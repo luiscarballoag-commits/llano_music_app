@@ -19,38 +19,42 @@ class HomeHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: 30,
-            ),
+          Image.asset(
+            "assets/images/logo/Logo_Oficial.png",
+            width: 55,
+            height: 55,
           ),
+
+          const SizedBox(width: 12),
+
           const Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "LLANO MUSIC",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 26,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
                 ),
+
                 SizedBox(height: 4),
+
                 Text(
                   "El sonido auténtico del llano venezolano",
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 13,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
+
           IconButton(
             onPressed: () {},
             icon: const Icon(

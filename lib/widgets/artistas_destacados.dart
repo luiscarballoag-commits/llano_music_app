@@ -6,23 +6,23 @@ class ArtistasDestacados extends StatelessWidget {
   final List<Map<String, String>> artistas = const [
     {
       "nombre": "Roberto Carballo",
-      "imagen": "assets/images/roberto_carballo.jpg",
+      "imagen": "assets/images/artistas/roberto_carballo.jpg",
     },
     {
       "nombre": "Mary Pacheco",
-      "imagen": "assets/images/mary_pacheco.jpg",
+      "imagen": "assets/images/artistas/mary_pacheco.jpg",
     },
     {
       "nombre": "Francisco Camacho",
-      "imagen": "assets/images/francisco_camacho.jpg",
+      "imagen": "assets/images/artistas/francisco_camacho.jpg",
     },
     {
       "nombre": "José Ángel Cordero",
-      "imagen": "assets/images/jose_angel_cordero.jpg",
+      "imagen": "assets/images/artistas/jose_angel_cordero.jpg",
     },
     {
       "nombre": "Omar García",
-      "imagen": "assets/images/omar_garcia.jpg",
+      "imagen": "assets/images/artistas/omar_garcia.jpg",
     },
   ];
 

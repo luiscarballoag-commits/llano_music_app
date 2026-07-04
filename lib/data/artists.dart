@@ -1,12 +1,12 @@
 import '../models/artist.dart';
 
 const List<Artist> artists = [
-
   Artist(
     id: 'francisco_camacho',
     nombre: 'Francisco Camacho',
-    imagen: 'assets/images/francisco_camacho.jpg',
-    descripcion: 'Cantautor cojedeño de música llanera y promotor de la cultura tradicional venezolana.',
+    imagen: 'assets/images/artistas/francisco_camacho.jpg',
+    descripcion:
+        'Cantautor cojedeño de música llanera y promotor de la cultura tradicional venezolana.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -17,8 +17,9 @@ const List<Artist> artists = [
   Artist(
     id: 'mary_pacheco',
     nombre: 'Mary Pacheco',
-    imagen: 'assets/images/mary_pacheco.jpg',
-    descripcion: 'Cantante cojedeña dedicada a la interpretación de la música llanera venezolana.',
+    imagen: 'assets/images/artistas/mary_pacheco.jpg',
+    descripcion:
+        'Cantante cojedeña dedicada a la interpretación de la música llanera venezolana.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -29,8 +30,9 @@ const List<Artist> artists = [
   Artist(
     id: 'roberto_carballo',
     nombre: 'Roberto Carballo',
-    imagen: 'assets/images/roberto_carballo.jpg',
-    descripcion: 'Cantautor cojedeño con una amplia trayectoria en la música criolla y llanera.',
+    imagen: 'assets/images/artistas/roberto_carballo.jpg',
+    descripcion:
+        'Cantautor cojedeño con una amplia trayectoria en la música criolla y llanera.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -41,19 +43,22 @@ const List<Artist> artists = [
   Artist(
     id: 'omar_garcia',
     nombre: 'Omar García',
-    imagen: 'assets/images/omar_garcia.jpg',
-    descripcion: 'Intérprete cojedeño reconocido por su aporte a la música del llano venezolano.',
+    imagen: 'assets/images/artistas/omar_garcia.jpg',
+    descripcion:
+        'Intérprete cojedeño reconocido por su aporte a la música del llano venezolano.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
     destacado: true,
     verificado: true,
   ),
+
   Artist(
     id: 'tatiana_lopez',
     nombre: 'Tatiana López',
-    imagen: 'assets/images/tatiana_lopez.jpg',
-    descripcion: 'Cantante cojedeña de música llanera con una propuesta auténtica y tradicional.',
+    imagen: 'assets/images/artistas/tatiana_lopez.jpg',
+    descripcion:
+        'Cantante cojedeña de música llanera con una propuesta auténtica y tradicional.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -64,8 +69,9 @@ const List<Artist> artists = [
   Artist(
     id: 'fabiana_diaz',
     nombre: 'Fabiana Díaz',
-    imagen: 'assets/images/fabiana_diaz.jpg',
-    descripcion: 'Joven intérprete cojedeña dedicada a la difusión de la música llanera venezolana.',
+    imagen: 'assets/images/artistas/fabiana_diaz.jpg',
+    descripcion:
+        'Joven intérprete cojedeña dedicada a la difusión de la música llanera venezolana.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -76,8 +82,9 @@ const List<Artist> artists = [
   Artist(
     id: 'edwin_trosel',
     nombre: 'Edwin Trosel',
-    imagen: 'assets/images/edwin_trosel.jpg',
-    descripcion: 'Cantautor cojedeño comprometido con la preservación del folclore llanero.',
+    imagen: 'assets/images/artistas/edwin_trosel.jpg',
+    descripcion:
+        'Cantautor cojedeño comprometido con la preservación del folclore llanero.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -88,19 +95,22 @@ const List<Artist> artists = [
   Artist(
     id: 'enrique_de_la_vega',
     nombre: 'Enrique de la Vega',
-    imagen: 'assets/images/enrique_de_la_vega.jpg',
-    descripcion: 'Cantante cojedeño de música criolla con trayectoria en escenarios nacionales.',
+    imagen: 'assets/images/artistas/enrique_de_la_vega.jpg',
+    descripcion:
+        'Cantante cojedeño de música criolla con trayectoria en escenarios nacionales.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
     destacado: false,
     verificado: true,
   ),
+
   Artist(
     id: 'manuel_oliveros',
     nombre: 'Manuel Oliveros',
-    imagen: 'assets/images/manuel_oliveros.jpg',
-    descripcion: 'Cantautor cojedeño dedicado a promover la música llanera venezolana.',
+    imagen: 'assets/images/artistas/manuel_oliveros.jpg',
+    descripcion:
+        'Cantautor cojedeño dedicado a promover la música llanera venezolana.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -111,8 +121,9 @@ const List<Artist> artists = [
   Artist(
     id: 'nicolas_castillo',
     nombre: 'Nicolás Castillo',
-    imagen: 'assets/images/nicolas_castillo.jpg',
-    descripcion: 'Intérprete cojedeño de música llanera con participación en festivales regionales.',
+    imagen: 'assets/images/artistas/nicolas_castillo.jpg',
+    descripcion:
+        'Intérprete cojedeño de música llanera con participación en festivales regionales.',
     genero: 'Música Llanera',
     estado: 'Cojedes',
     pais: 'Venezuela',
@@ -123,13 +134,13 @@ const List<Artist> artists = [
   Artist(
     id: 'jose_angel_cordero',
     nombre: 'José Ángel Cordero',
-    imagen: 'assets/images/jose_angel_cordero.jpg',
-    descripcion: 'Cantautor portugueseño reconocido por su aporte a la música llanera venezolana.',
+    imagen: 'assets/images/artistas/jose_angel_cordero.jpg',
+    descripcion:
+        'Cantautor portugueseño reconocido por su aporte a la música llanera venezolana.',
     genero: 'Música Llanera',
     estado: 'Portuguesa',
     pais: 'Venezuela',
     destacado: true,
     verificado: true,
   ),
-
 ];

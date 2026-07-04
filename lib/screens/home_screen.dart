@@ -14,8 +14,18 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Llano Music'),
         centerTitle: true,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/images/logo/logo_llano_music.png',
+              height: 40,
+            ),
+            const SizedBox(width: 10),
+            const Text("Llano Music"),
+          ],
+        ),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
@@ -24,32 +34,25 @@ class HomeScreen extends StatelessWidget {
           final artist = artists[index];
 
           return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            elevation: 4,
+            elevation: 5,
+            margin: const EdgeInsets.only(bottom: 14),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: ListTile(
-              contentPadding: const EdgeInsets.all(10),
-
               leading: CircleAvatar(
-                radius: 32,
                 backgroundImage: AssetImage(artist.imagen),
               ),
-
               title: Text(
                 artist.nombre,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               subtitle: Text(
-                '${artist.genero} • ${artist.estado}',
+                "${artist.genero} • ${artist.estado}",
               ),
-
               trailing: const Icon(Icons.arrow_forward_ios),
-
               onTap: () {
                 Navigator.push(
                   context,

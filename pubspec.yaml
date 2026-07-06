@@ -1,5 +1,5 @@
 name: llano_music_app
-description: La aplicación del auténtico sonido del Llano venezolano.
+description: La aplicación del auténtico sonido del Llano
 
 publish_to: 'none'
 
@@ -14,6 +14,10 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+  # Reproductor de audio
+  just_audio: ^0.10.5
+  audio_session: ^0.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -21,12 +25,12 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/audio/
     - assets/banners/
     - assets/images/artistas/
+    - assets/images/clasicos/
     - assets/images/logo/
     - assets/images/icons/

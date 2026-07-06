@@ -16,11 +16,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F7),
-
       body: SafeArea(
         child: Column(
           children: [
-
             /// Encabezado
             const HomeHeader(),
 
@@ -29,7 +27,6 @@ class HomePage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: const [
-
                     BannerPrincipal(),
 
                     SizedBox(height: 10),
@@ -49,7 +46,6 @@ class HomePage extends StatelessWidget {
                     CancionesPopulares(),
 
                     SizedBox(height: 120),
-
                   ],
                 ),
               ),
@@ -57,13 +53,12 @@ class HomePage extends StatelessWidget {
 
             /// Mini reproductor
             MiniPlayer(),
-
           ],
         ),
       ),
 
       /// Barra inferior
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

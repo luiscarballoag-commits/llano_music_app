@@ -1,93 +1,129 @@
 import 'package:flutter/material.dart';
+import '../data/clasicos_llano.dart';
 
 class ClasicosLlano extends StatelessWidget {
   const ClasicosLlano({super.key});
 
-  final List<Map<String, String>> clasicos = const [
-    {
-      "titulo": "Cajón de Arauca",
-      "artista": "Reynaldo Armas",
-    },
-    {
-      "titulo": "Fiesta en Elorza",
-      "artista": "Eneas Perdomo",
-    },
-    {
-      "titulo": "Sentimiento Apureño",
-      "artista": "Cristóbal Jiménez",
-    },
-    {
-      "titulo": "La Viuda Millonaria",
-      "artista": "Teo Galíndez",
-    },
-    {
-      "titulo": "Linda Barinas",
-      "artista": "Luis Silva",
-    },
-    {
-      "titulo": "Caballo Viejo",
-      "artista": "Simón Díaz",
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "⭐ Clásicos del Llano",
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Clásicos del Llano",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
-        ),
+          const SizedBox(height: 15),
+          SizedBox(
+            height: 230,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: clasicosLlano.length,
+              itemBuilder: (context, index) {
+                final artista = clasicosLlano[index];
 
-        const SizedBox(height: 10),
-
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: clasicos.length,
-          itemBuilder: (context, index) {
-
-            final cancion = clasicos[index];
-
-            return Card(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 6,
-              ),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: ListTile(
-                leading: const CircleAvatar(
-                  backgroundColor: Colors.green,
-                  child: Icon(
-                    Icons.music_note,
+                return Container(
+                  width: 170,
+                  margin: const EdgeInsets.only(right: 15),
+                  decoration: BoxDecoration(
                     color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                ),
-                title: Text(
-                  cancion["titulo"]!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(18),
+                    onTap: () {
+                      // Aquí luego abriremos la pantalla del artista
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(18),
+                          ),
+                          child: Image.asset(
+                            artista.imagen,
+                            height: 120,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) {
+                              return Container(
+                                height: 120,
+                                color: Colors.grey.shade300,
+                                child: const Icon(
+                                  Icons.music_note,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                artista.artista,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                artista.apodo,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontSize: 13,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                "${artista.estado}, ${artista.pais}",
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "${artista.canciones.length} canciones",
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                subtitle: Text(cancion["artista"]!),
-                trailing: const Icon(
-                  Icons.play_circle_fill,
-                  color: Colors.green,
-                  size: 35,
-                ),
-                onTap: () {},
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

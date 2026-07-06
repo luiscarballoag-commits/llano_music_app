@@ -118,7 +118,6 @@ final List<ClasicoLlano> clasicosLlano = [
     ],
   ),
 
-];
   ClasicoLlano(
     artista: "Ángel Custodio Loyola",
     apodo: "El Primer Cantor del Llano",
@@ -298,3 +297,4 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
     ],
   ),
+];

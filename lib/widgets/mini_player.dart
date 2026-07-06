@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../services/audio_player_service.dart';
 
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({super.key});
@@ -7,29 +6,37 @@ class MiniPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 85,
-      margin: const EdgeInsets.all(15),
+      height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1B5E20),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
+      decoration: const BoxDecoration(
+        color: Color(0xFF1E1E1E),
+        boxShadow: [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
-            offset: Offset(0, 5),
           ),
         ],
       ),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              "assets/images/artistas/roberto_carballo.jpg",
+              'assets/images/logo.png',
               width: 60,
               height: 60,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 60,
+                  height: 60,
+                  color: Colors.green,
+                  child: const Icon(
+                    Icons.music_note,
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
 
@@ -71,4 +78,23 @@ class MiniPlayer extends StatelessWidget {
           ),
 
           IconButton(
-            onPressed: () {
+            onPressed: () {},
+            icon: const Icon(
+              Icons.play_circle_fill,
+              color: Colors.green,
+              size: 42,
+            ),
+          ),
+
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.skip_next,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

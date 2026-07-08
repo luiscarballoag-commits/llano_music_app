@@ -1,35 +1,9 @@
 import 'package:flutter/material.dart';
+import '../lista_canciones.dart';
+import '../services/audio_player_service.dart';
 
 class CancionesPopulares extends StatelessWidget {
   const CancionesPopulares({super.key});
-
-  final List<Map<String, String>> canciones = const [
-    {
-      "titulo": "Mi Padre y Gran Amigo",
-      "artista": "José Ángel Cordero",
-      "imagen": "assets/images/artistas/jose_angel_cordero.jpg",
-    },
-    {
-      "titulo": "Propiedad Privada",
-      "artista": "Mary Pacheco",
-      "imagen": "assets/images/artistas/mary_pacheco.jpg",
-    },
-    {
-      "titulo": "El Maquillaje",
-      "artista": "Manuel Oliveros",
-      "imagen": "assets/images/artistas/manuel_oliveros.jpg",
-    },
-    {
-      "titulo": "Proyecto Divino",
-      "artista": "Fabiana Díaz",
-      "imagen": "assets/images/artistas/fabiana_diaz.jpg",
-    },
-    {
-      "titulo": "Tu Mirada Es Un Soga",
-      "artista": "Tatiana López",
-      "imagen": "assets/images/artistas/tatiana_lopez.jpg",
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,42 +24,40 @@ class CancionesPopulares extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: canciones.length,
+          itemCount: listaCanciones.length,
           itemBuilder: (context, index) {
-            final cancion = canciones[index];
+            final cancion = listaCanciones[index];
 
             return Card(
               margin: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 6,
               ),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
               child: ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    cancion["imagen"]!,
+                    cancion.imagen,
                     width: 55,
                     height: 55,
                     fit: BoxFit.cover,
                   ),
                 ),
-                title: Text(
-                  cancion["titulo"]!,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(cancion["artista"]!),
+                title: Text(cancion.titulo),
+                subtitle: Text(cancion.artista),
                 trailing: const Icon(
                   Icons.play_circle_fill,
                   color: Colors.green,
                   size: 35,
                 ),
-                onTap: () {},
+                onTap: () async {
+                  await AudioPlayerService.playSong(
+                    audio: cancion.audio,
+                    songTitle: cancion.titulo,
+                    songArtist: cancion.artista,
+                    songImage: cancion.imagen,
+                  );
+                },
               ),
             );
           },

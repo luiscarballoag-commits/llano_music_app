@@ -1,22 +1,39 @@
+import 'package:just_audio/just_audio.dart';
+
 class AudioPlayerService {
-  static String? currentSongId;
-  static bool isPlaying = false;
+  AudioPlayerService._();
 
-  static void play(String songId) {
-    currentSongId = songId;
-    isPlaying = true;
+  static final AudioPlayer player = AudioPlayer();
+
+  static String titulo = "";
+  static String artista = "";
+  static String imagen = "";
+
+  static Future<void> playSong({
+    required String audio,
+    required String songTitle,
+    required String songArtist,
+    required String songImage,
+  }) async {
+    titulo = songTitle;
+    artista = songArtist;
+    imagen = songImage;
+
+    await player.setAsset(audio);
+    await player.play();
   }
 
-  static void pause() {
-    isPlaying = false;
+  static Future<void> pause() async {
+    await player.pause();
   }
 
-  static void stop() {
-    currentSongId = null;
-    isPlaying = false;
+  static Future<void> resume() async {
+    await player.play();
   }
 
-  static void toggle() {
-    isPlaying = !isPlaying;
+  static Future<void> stop() async {
+    await player.stop();
   }
+
+  static bool get isPlaying => player.playing;
 }

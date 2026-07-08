@@ -1,68 +1,68 @@
 import 'package:flutter/material.dart';
+import '../services/audio_player_service.dart';
 
-class MiniPlayer extends StatelessWidget {
+class MiniPlayer extends StatefulWidget {
   const MiniPlayer({super.key});
 
   @override
+  State<MiniPlayer> createState() => _MiniPlayerState();
+}
+
+class _MiniPlayerState extends State<MiniPlayer> {
+
+  @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 80,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: const BoxDecoration(
         color: Color(0xFF1E1E1E),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10,
-          ),
-        ],
       ),
       child: Row(
         children: [
+
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              'assets/images/logo.png',
+              AudioPlayerService.imagen.isEmpty
+                  ? "assets/images/logo/logo.png"
+                  : AudioPlayerService.imagen,
               width: 60,
               height: 60,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: 60,
-                  height: 60,
-                  color: Colors.green,
-                  child: const Icon(
-                    Icons.music_note,
-                    color: Colors.white,
-                  ),
-                );
-              },
             ),
           ),
 
           const SizedBox(width: 15),
 
-          const Expanded(
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Text(
-                  "Tema Reproduciéndose",
+                  AudioPlayerService.titulo.isEmpty
+                      ? "Llano Music"
+                      : AudioPlayerService.titulo,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
                     fontSize: 17,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4),
+
+                const SizedBox(height: 4),
+
                 Text(
-                  "Roberto Carballo",
-                  style: TextStyle(
+                  AudioPlayerService.artista.isEmpty
+                      ? "Seleccione una canción"
+                      : AudioPlayerService.artista,
+                  style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 13,
                   ),
                 ),
               ],
@@ -70,31 +70,26 @@ class MiniPlayer extends StatelessWidget {
           ),
 
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.skip_previous,
-              color: Colors.white,
-            ),
-          ),
-
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.play_circle_fill,
+            icon: Icon(
+              AudioPlayerService.isPlaying
+                  ? Icons.pause_circle_filled
+                  : Icons.play_circle_fill,
               color: Colors.green,
               size: 42,
             ),
-          ),
+            onPressed: () async {
 
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.skip_next,
-              color: Colors.white,
-            ),
+              if (AudioPlayerService.isPlaying) {
+                await AudioPlayerService.pause();
+              } else {
+                await AudioPlayerService.resume();
+              }
+
+              setState(() {});
+            },
           ),
         ],
       ),
     );
   }
-}
+}       

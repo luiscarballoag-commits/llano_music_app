@@ -1,4 +1,4 @@
-import 'package:just_audio/just_audio.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class AudioPlayerService {
   AudioPlayerService._();
@@ -9,46 +9,41 @@ class AudioPlayerService {
   static String artista = "";
   static String imagen = "";
 
+  static bool reproduciendo = false;
+
   static Future<void> playSong({
     required String audio,
     required String songTitle,
     required String songArtist,
     required String songImage,
   }) async {
-    try {
-      titulo = songTitle;
-      artista = songArtist;
-      imagen = songImage;
+    titulo = songTitle;
+    artista = songArtist;
+    imagen = songImage;
 
-      print("================================");
-      print("Intentando abrir:");
-      print(audio);
+    await player.stop();
 
-      await player.setAsset(audio);
+    await player.play(
+      AssetSource(
+        audio.replaceFirst("assets/audio/", ""),
+      ),
+    );
 
-      print("Archivo cargado correctamente");
-
-      await player.play();
-
-      print("Reproduciendo...");
-      print("================================");
-    } catch (e) {
-      print("ERROR JUST AUDIO");
-      print(e);
-    }
+    reproduciendo = true;
   }
 
   static Future<void> pause() async {
     await player.pause();
+    reproduciendo = false;
   }
 
   static Future<void> resume() async {
-    await player.play();
+    await player.resume();
+    reproduciendo = true;
   }
 
   static Future<void> stop() async {
     await player.stop();
+    reproduciendo = false;
   }
-
-  static bool get isPlaying => player.playing;
 }

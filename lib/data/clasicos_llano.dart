@@ -33,7 +33,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Turpial de Guardatinajas",
     estado: "Guárico",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/santiago_rojas.jpg",
+    imagen: "assets/images/clasicos/Santiago_Rojas.png",
     canciones: [
       CancionClasica(
         titulo: "La Viuda Millonaria",
@@ -51,7 +51,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Rey del Pasaje",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/jesus_moreno.jpg",
+    imagen: "assets/images/clasicos/Jesus_Moreno.png",
     canciones: [
       CancionClasica(
         titulo: "Amiga, Novia y Amante",
@@ -69,7 +69,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Tigre de Payara",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/francisco_montoya.jpg",
+    imagen: "assets/images/clasicos/Francisco Montoya.png",
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
@@ -87,7 +87,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El General del Pasaje",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/eneas_perdomo.jpg",
+    imagen: "assets/images/clasicos/Eneas_Perdomo.png",
     canciones: [
       CancionClasica(
         titulo: "Fiesta en Elorza",
@@ -105,7 +105,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Ruiseñor de Venezuela",
     estado: "Cojedes",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/teo_galindez.jpg",
+    imagen: "assets/images/clasicos/Teo_Galindez.png",
     canciones: [
       CancionClasica(
         titulo: "Para Toda La Vida",
@@ -117,13 +117,12 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
     ],
   ),
-
   ClasicoLlano(
     artista: "Ángel Custodio Loyola",
     apodo: "El Primer Cantor del Llano",
     estado: "Guárico",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/angel_custodio_loyola.jpg",
+    imagen: "assets/images/clasicos/Angel_Custodio_Loyola.png",
     canciones: [
       CancionClasica(
         titulo: "El Gavilán",
@@ -141,7 +140,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Carrao de Palmarito",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/el_carrao_de_palmarito.jpg",
+    imagen: "assets/images/clasicos/Juan_De_Los_Santos.png",
     canciones: [
       CancionClasica(
         titulo: "Llanura, Yo Soy Tu Hijo",
@@ -159,7 +158,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Cubiro",
     estado: "Barinas",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/luis_lozada.jpg",
+    imagen: "assets/images/clasicos/Luis Lozada.png",
     canciones: [
       CancionClasica(
         titulo: "La Boda del Gabán",
@@ -177,7 +176,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Coplero Coleador",
     estado: "Portuguesa",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/cheo_hernandez_prisco.jpg",
+    imagen: "assets/images/clasicos/Cheo_Hernandez_Prisco.png",
     canciones: [
       CancionClasica(
         titulo: "A Quién No Le Va a Gustar",
@@ -195,7 +194,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Coplero Sentimental",
     estado: "Arauca",
     pais: "Colombia",
-    imagen: "assets/images/clasicos/juan_farfan.jpg",
+    imagen: "assets/images/clasicos/Juan_Farfan.png",
     canciones: [
       CancionClasica(
         titulo: "La Camisa Conuquera",
@@ -213,7 +212,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "La Reina de la Canción Criolla",
     estado: "Aragua",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/reyna_lucero.jpg",
+    imagen: "assets/images/clasicos/Reina_Lucero.png",
     canciones: [
       CancionClasica(
         titulo: "Carrao Carrao",
@@ -231,7 +230,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "La Vecina",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/cristina_maica.jpg",
+    imagen: "assets/images/clasicos/La Vecina_20260709_102854_0000.png",
     canciones: [
       CancionClasica(
         titulo: "La Vecina",
@@ -249,7 +248,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "La Veguera",
     estado: "Barinas",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/elisa_guerrero.jpg",
+    imagen: "assets/images/clasicos/Elisa_Guerrero.png",
     canciones: [
       CancionClasica(
         titulo: "Un Guayabo Motolito",
@@ -267,7 +266,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Cardenal Sabanero",
     estado: "Guárico",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/reynaldo_armas.jpg",
+    imagen: "assets/images/clasicos/Reynaldo_Armas.png",
     canciones: [
       CancionClasica(
         titulo: "A Usted",
@@ -285,7 +284,7 @@ final List<ClasicoLlano> clasicosLlano = [
     apodo: "El Guerrero del Folklore",
     estado: "Apure",
     pais: "Venezuela",
-    imagen: "assets/images/clasicos/jorge_guerrero.jpg",
+    imagen: "assets/images/clasicos/Jorge_Guerrero.png",
     canciones: [
       CancionClasica(
         titulo: "Añoranzas",

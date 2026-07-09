@@ -9,6 +9,9 @@ class MiniPlayer extends StatefulWidget {
 }
 
 class _MiniPlayerState extends State<MiniPlayer> {
+
+  bool reproduciendo = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,6 +22,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
       ),
       child: Row(
         children: [
+
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
@@ -38,6 +42,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Text(
                   AudioPlayerService.titulo.isEmpty
                       ? "Llano Music"
@@ -59,7 +64,6 @@ class _MiniPlayerState extends State<MiniPlayer> {
                       : AudioPlayerService.artista,
                   style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 14,
                   ),
                 ),
               ],
@@ -68,22 +72,23 @@ class _MiniPlayerState extends State<MiniPlayer> {
 
           IconButton(
             icon: Icon(
-              AudioPlayerService.reproduciendo
+              reproduciendo
                   ? Icons.pause_circle_filled
                   : Icons.play_circle_fill,
               color: Colors.green,
               size: 42,
             ),
             onPressed: () async {
-              if (AudioPlayerService.reproduciendo) {
+
+              if (reproduciendo) {
                 await AudioPlayerService.pause();
+                reproduciendo = false;
               } else {
                 await AudioPlayerService.resume();
+                reproduciendo = true;
               }
 
-              if (mounted) {
-                setState(() {});
-              }
+              setState(() {});
             },
           ),
         ],

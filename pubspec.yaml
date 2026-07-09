@@ -14,9 +14,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  # Reproductor de audio
-  just_audio: ^0.10.5
-  audio_session: ^0.2.2
+  # Nuevo reproductor de audio
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:

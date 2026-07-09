@@ -15,12 +15,27 @@ class AudioPlayerService {
     required String songArtist,
     required String songImage,
   }) async {
-    titulo = songTitle;
-    artista = songArtist;
-    imagen = songImage;
+    try {
+      titulo = songTitle;
+      artista = songArtist;
+      imagen = songImage;
 
-    await player.setAsset(audio);
-    await player.play();
+      print("================================");
+      print("Intentando abrir:");
+      print(audio);
+
+      await player.setAsset(audio);
+
+      print("Archivo cargado correctamente");
+
+      await player.play();
+
+      print("Reproduciendo...");
+      print("================================");
+    } catch (e) {
+      print("ERROR JUST AUDIO");
+      print(e);
+    }
   }
 
   static Future<void> pause() async {

@@ -17,33 +17,55 @@ class AudioPlayerService {
     required String songArtist,
     required String songImage,
   }) async {
-    titulo = songTitle;
-    artista = songArtist;
-    imagen = songImage;
+    try {
+      titulo = songTitle;
+      artista = songArtist;
+      imagen = songImage;
 
-    await player.stop();
+      print("==========================================");
+      print("LLANO MUSIC");
+      print("Intentando reproducir:");
+      print(audio);
+      print("==========================================");
 
-    await player.play(
-      AssetSource(
+      await player.stop();
+
+      final fuente = AssetSource(
         audio.replaceFirst("assets/audio/", ""),
-      ),
-    );
+      );
 
-    reproduciendo = true;
+      print("AssetSource:");
+      print(audio.replaceFirst("assets/audio/", ""));
+
+      await player.play(fuente);
+
+      reproduciendo = true;
+
+      print("✅ Reproducción iniciada correctamente");
+    } catch (e, s) {
+      reproduciendo = false;
+
+      print("❌ ERROR EN AUDIOPLAYER");
+      print(e);
+      print(s);
+    }
   }
 
   static Future<void> pause() async {
     await player.pause();
     reproduciendo = false;
+    print("⏸ Audio en pausa");
   }
 
   static Future<void> resume() async {
     await player.resume();
     reproduciendo = true;
+    print("▶ Audio reanudado");
   }
 
   static Future<void> stop() async {
     await player.stop();
     reproduciendo = false;
+    print("⏹ Audio detenido");
   }
 }

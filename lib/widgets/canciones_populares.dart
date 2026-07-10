@@ -58,37 +58,30 @@ class CancionesPopulares extends StatelessWidget {
                   size: 35,
                 ),
                 onTap: () async {
+                  await AudioPlayerService.playSong(
+                    audio: cancion.audio,
+                    songTitle: cancion.titulo,
+                    songArtist: cancion.artista,
+                    songImage: cancion.imagen,
+                  );
+
+                  if (!context.mounted) return;
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      duration: const Duration(seconds: 3),
-                      content: Text(
-                        "Intentando reproducir:\n${cancion.audio}",
+                      duration: const Duration(seconds: 6),
+                      content: SingleChildScrollView(
+                        child: Text(
+                          "Canción:\n"
+                          "${cancion.audio}\n\n"
+                          "Estado:\n"
+                          "${AudioPlayerService.ultimoEstado}\n\n"
+                          "Error:\n"
+                          "${AudioPlayerService.ultimoError.isEmpty ? "Sin error" : AudioPlayerService.ultimoError}",
+                        ),
                       ),
                     ),
                   );
-
-                  try {
-                    await AudioPlayerService.playSong(
-                      audio: cancion.audio,
-                      songTitle: cancion.titulo,
-                      songArtist: cancion.artista,
-                      songImage: cancion.imagen,
-                    );
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        duration: Duration(seconds: 2),
-                        content: Text("✅ playSong() ejecutado"),
-                      ),
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: const Duration(seconds: 5),
-                        content: Text("❌ Error:\n$e"),
-                      ),
-                    );
-                  }
                 },
               ),
             );

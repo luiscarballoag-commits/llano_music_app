@@ -11,6 +11,10 @@ class AudioPlayerService {
 
   static bool reproduciendo = false;
 
+  // Diagnóstico
+  static String ultimoEstado = "";
+  static String ultimoError = "";
+
   static Future<void> playSong({
     required String audio,
     required String songTitle,
@@ -21,6 +25,9 @@ class AudioPlayerService {
       titulo = songTitle;
       artista = songArtist;
       imagen = songImage;
+
+      ultimoEstado = "Intentando reproducir...";
+      ultimoError = "";
 
       print("==========================================");
       print("LLANO MUSIC");
@@ -40,10 +47,14 @@ class AudioPlayerService {
       await player.play(fuente);
 
       reproduciendo = true;
+      ultimoEstado = "✅ Reproducción iniciada correctamente";
 
       print("✅ Reproducción iniciada correctamente");
     } catch (e, s) {
       reproduciendo = false;
+
+      ultimoEstado = "❌ Error al reproducir";
+      ultimoError = e.toString();
 
       print("❌ ERROR EN AUDIOPLAYER");
       print(e);

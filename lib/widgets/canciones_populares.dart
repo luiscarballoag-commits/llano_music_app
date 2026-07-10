@@ -41,6 +41,13 @@ class CancionesPopulares extends StatelessWidget {
                     width: 55,
                     height: 55,
                     fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) {
+                      return const Icon(
+                        Icons.music_note,
+                        size: 55,
+                        color: Colors.green,
+                      );
+                    },
                   ),
                 ),
                 title: Text(cancion.titulo),
@@ -51,12 +58,37 @@ class CancionesPopulares extends StatelessWidget {
                   size: 35,
                 ),
                 onTap: () async {
-                  await AudioPlayerService.playSong(
-                    audio: cancion.audio,
-                    songTitle: cancion.titulo,
-                    songArtist: cancion.artista,
-                    songImage: cancion.imagen,
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(seconds: 3),
+                      content: Text(
+                        "Intentando reproducir:\n${cancion.audio}",
+                      ),
+                    ),
                   );
+
+                  try {
+                    await AudioPlayerService.playSong(
+                      audio: cancion.audio,
+                      songTitle: cancion.titulo,
+                      songArtist: cancion.artista,
+                      songImage: cancion.imagen,
+                    );
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        duration: Duration(seconds: 2),
+                        content: Text("✅ playSong() ejecutado"),
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 5),
+                        content: Text("❌ Error:\n$e"),
+                      ),
+                    );
+                  }
                 },
               ),
             );

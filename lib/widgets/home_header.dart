@@ -10,30 +10,32 @@ class HomeHeader extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color(0xFF1B5E20),
-            Color(0xFF2E7D32),
+            Color(0xFF0B5D3B),
+            Color(0xFF2E8B57),
+            Color(0xFF66BB6A),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/images/logo/Logo_Oficial.png",
-            width: 55,
-            height: 55,
+            "assets/images/logo/logo_llano_music.png",
+            width: 60,
+            height: 60,
           ),
 
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
 
           const Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "LLANO MUSIC",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -42,13 +44,26 @@ class HomeHeader extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 4),
+                SizedBox(height: 3),
+
+                Text(
+                  "Producciones Lcarballog",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+
+                SizedBox(height: 3),
 
                 Text(
                   "El sonido auténtico del llano venezolano",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,
-                    fontSize: 13,
+                    fontSize: 12,
                   ),
                 ),
               ],

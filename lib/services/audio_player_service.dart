@@ -5,78 +5,46 @@ class AudioPlayerService {
 
   static final AudioPlayer player = AudioPlayer();
 
+  static bool reproduciendo = false;
+
   static String titulo = "";
   static String artista = "";
   static String imagen = "";
+  static String audioActual = "";
 
-  static bool reproduciendo = false;
-
-  // Diagnóstico
-  static String ultimoEstado = "";
-  static String ultimoError = "";
-
-  static Future<void> playSong({
+  static Future<void> play({
     required String audio,
-    required String songTitle,
-    required String songArtist,
-    required String songImage,
+    required String tituloCancion,
+    required String artistaCancion,
+    required String imagenCancion,
   }) async {
-    try {
-      titulo = songTitle;
-      artista = songArtist;
-      imagen = songImage;
+    titulo = tituloCancion;
+    artista = artistaCancion;
+    imagen = imagenCancion;
+    audioActual = audio;
 
-      ultimoEstado = "Intentando reproducir...";
-      ultimoError = "";
+    await player.stop();
 
-      print("==========================================");
-      print("LLANO MUSIC");
-      print("Intentando reproducir:");
-      print(audio);
-      print("==========================================");
+    await player.play(
+      AssetSource(audio.replaceFirst("assets/", "")),
+    );
 
-      await player.stop();
-
-      final fuente = AssetSource(
-        audio.replaceFirst("assets/audio/", ""),
-      );
-
-      print("AssetSource:");
-      print(audio.replaceFirst("assets/audio/", ""));
-
-      await player.play(fuente);
-
-      reproduciendo = true;
-      ultimoEstado = "✅ Reproducción iniciada correctamente";
-
-      print("✅ Reproducción iniciada correctamente");
-    } catch (e, s) {
-      reproduciendo = false;
-
-      ultimoEstado = "❌ Error al reproducir";
-      ultimoError = e.toString();
-
-      print("❌ ERROR EN AUDIOPLAYER");
-      print(e);
-      print(s);
-    }
+    reproduciendo = true;
   }
 
   static Future<void> pause() async {
     await player.pause();
     reproduciendo = false;
-    print("⏸ Audio en pausa");
   }
 
   static Future<void> resume() async {
     await player.resume();
     reproduciendo = true;
-    print("▶ Audio reanudado");
   }
 
   static Future<void> stop() async {
     await player.stop();
     reproduciendo = false;
-    print("⏹ Audio detenido");
   }
 }
+

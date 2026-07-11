@@ -10,83 +10,110 @@ class MiniPlayer extends StatefulWidget {
 
 class _MiniPlayerState extends State<MiniPlayer> {
   @override
+  void initState() {
+    super.initState();
+
+    Future.doWhile(() async {
+      if (!mounted) return false;
+
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (mounted) {
+        setState(() {});
+      }
+
+      return mounted;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      decoration: const BoxDecoration(
-        color: Color(0xFF1E1E1E),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              AudioPlayerService.imagen.isEmpty
-                  ? "assets/images/logo/logo.png"
-                  : AudioPlayerService.imagen,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          const SizedBox(width: 15),
-
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AudioPlayerService.titulo.isEmpty
-                      ? "Llano Music"
-                      : AudioPlayerService.titulo,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+    return Material(
+      elevation: 12,
+      child: Container(
+        height: 82,
+        padding: const EdgeInsets.symmetric(horizontal: 14),
+        color: const Color(0xFF1E1E1E),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                AudioPlayerService.imagen.isEmpty
+                    ? "assets/images/logo/logo_llano_music.png"
+                    : AudioPlayerService.imagen,
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) {
+                  return const Icon(
+                    Icons.music_note,
                     color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 4),
-
-                Text(
-                  AudioPlayerService.artista.isEmpty
-                      ? "Seleccione una canción"
-                      : AudioPlayerService.artista,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
+                    size: 55,
+                  );
+                },
+              ),
             ),
-          ),
 
-          IconButton(
-            icon: Icon(
-              AudioPlayerService.reproduciendo
-                  ? Icons.pause_circle_filled
-                  : Icons.play_circle_fill,
+            const SizedBox(width: 12),
+
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AudioPlayerService.titulo.isEmpty
+                        ? "Llano Music"
+                        : AudioPlayerService.titulo,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Text(
+                    AudioPlayerService.artista.isEmpty
+                        ? "Seleccione una canción"
+                        : AudioPlayerService.artista,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            IconButton(
+              iconSize: 42,
               color: Colors.green,
-              size: 42,
-            ),
-            onPressed: () async {
-              if (AudioPlayerService.reproduciendo) {
-                await AudioPlayerService.pause();
-              } else {
-                await AudioPlayerService.resume();
-              }
+              icon: Icon(
+                AudioPlayerService.reproduciendo
+                    ? Icons.pause_circle_filled
+                    : Icons.play_circle_fill,
+              ),
+              onPressed: () async {
+                if (AudioPlayerService.reproduciendo) {
+                  await AudioPlayerService.pause();
+                } else {
+                  await AudioPlayerService.resume();
+                }
 
-              if (mounted) {
-                setState(() {});
-              }
-            },
-          ),
-        ],
+                if (mounted) {
+                  setState(() {});
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

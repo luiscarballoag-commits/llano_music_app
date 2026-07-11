@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../lista_canciones.dart';
+import '../player_page.dart';
 import '../services/audio_player_service.dart';
 
 class CancionesPopulares extends StatelessWidget {
@@ -20,7 +22,9 @@ class CancionesPopulares extends StatelessWidget {
             ),
           ),
         ),
+
         const SizedBox(height: 10),
+
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -50,36 +54,31 @@ class CancionesPopulares extends StatelessWidget {
                     },
                   ),
                 ),
+
                 title: Text(cancion.titulo),
+
                 subtitle: Text(cancion.artista),
+
                 trailing: const Icon(
                   Icons.play_circle_fill,
                   color: Colors.green,
                   size: 35,
                 ),
+
                 onTap: () async {
-                  await AudioPlayerService.playSong(
+                  await AudioPlayerService.play(
                     audio: cancion.audio,
-                    songTitle: cancion.titulo,
-                    songArtist: cancion.artista,
-                    songImage: cancion.imagen,
+                    tituloCancion: cancion.titulo,
+                    artistaCancion: cancion.artista,
+                    imagenCancion: cancion.imagen,
                   );
 
                   if (!context.mounted) return;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 6),
-                      content: SingleChildScrollView(
-                        child: Text(
-                          "Canción:\n"
-                          "${cancion.audio}\n\n"
-                          "Estado:\n"
-                          "${AudioPlayerService.ultimoEstado}\n\n"
-                          "Error:\n"
-                          "${AudioPlayerService.ultimoError.isEmpty ? "Sin error" : AudioPlayerService.ultimoError}",
-                        ),
-                      ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PlayerPage(),
                     ),
                   );
                 },

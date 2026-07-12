@@ -1,50 +1,35 @@
-import 'package:audioplayers/audioplayers.dart';
 
-class AudioPlayerService {
-  AudioPlayerService._();
+static Future<void> play({
+  required String audio,
+  required String tituloCancion,
+  required String artistaCancion,
+  required String imagenCancion,
+}) async {
+  titulo = tituloCancion;
+  artista = artistaCancion;
+  imagen = imagenCancion;
+  audioActual = audio;
 
-  static final AudioPlayer player = AudioPlayer();
+  final ruta = audio.replaceFirst("assets/", "");
 
-  static bool reproduciendo = false;
+  print("=== LLANO MUSIC ===");
+  print("Ruta original: $audio");
+  print("Ruta asset: $ruta");
 
-  static String titulo = "";
-  static String artista = "";
-  static String imagen = "";
-  static String audioActual = "";
-
-  static Future<void> play({
-    required String audio,
-    required String tituloCancion,
-    required String artistaCancion,
-    required String imagenCancion,
-  }) async {
-    titulo = tituloCancion;
-    artista = artistaCancion;
-    imagen = imagenCancion;
-    audioActual = audio;
-
+  try {
     await player.stop();
 
-    await player.play(
-      AssetSource(audio.replaceFirst("assets/", "")),
+    final resultado = await player.play(
+      AssetSource(ruta),
     );
 
+    print("Resultado: $resultado");
+
     reproduciendo = true;
-  }
-
-  static Future<void> pause() async {
-    await player.pause();
+  } catch (e, s) {
     reproduciendo = false;
-  }
 
-  static Future<void> resume() async {
-    await player.resume();
-    reproduciendo = true;
-  }
-
-  static Future<void> stop() async {
-    await player.stop();
-    reproduciendo = false;
+    print("ERROR: $e");
+    print(s);
   }
 }
-

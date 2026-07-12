@@ -1,35 +1,67 @@
+import 'package:audioplayers/audioplayers.dart';
 
-static Future<void> play({
-  required String audio,
-  required String tituloCancion,
-  required String artistaCancion,
-  required String imagenCancion,
-}) async {
-  titulo = tituloCancion;
-  artista = artistaCancion;
-  imagen = imagenCancion;
-  audioActual = audio;
+class AudioPlayerService {
+  AudioPlayerService._();
 
-  final ruta = audio.replaceFirst("assets/", "");
+  static final AudioPlayer player = AudioPlayer();
 
-  print("=== LLANO MUSIC ===");
-  print("Ruta original: $audio");
-  print("Ruta asset: $ruta");
+  static bool reproduciendo = false;
 
-  try {
+  static String titulo = "";
+  static String artista = "";
+  static String imagen = "";
+  static String audioActual = "";
+
+  static Future<void> play({
+    required String audio,
+    required String tituloCancion,
+    required String artistaCancion,
+    required String imagenCancion,
+  }) async {
+    titulo = tituloCancion;
+    artista = artistaCancion;
+    imagen = imagenCancion;
+    audioActual = audio;
+
+    final ruta = audio.replaceFirst("assets/", "");
+
+    print("==================================");
+    print("LLANO MUSIC");
+    print("Título: $tituloCancion");
+    print("Artista: $artistaCancion");
+    print("Asset: $ruta");
+    print("==================================");
+
     await player.stop();
 
-    final resultado = await player.play(
-      AssetSource(ruta),
-    );
+    try {
+      await player.play(
+        AssetSource(ruta),
+      );
 
-    print("Resultado: $resultado");
+      reproduciendo = true;
 
-    reproduciendo = true;
-  } catch (e, s) {
+      print("Reproducción iniciada.");
+    } catch (e) {
+      reproduciendo = false;
+
+      print("ERROR AL REPRODUCIR");
+      print(e);
+    }
+  }
+
+  static Future<void> pause() async {
+    await player.pause();
     reproduciendo = false;
+  }
 
-    print("ERROR: $e");
-    print(s);
+  static Future<void> resume() async {
+    await player.resume();
+    reproduciendo = true;
+  }
+
+  static Future<void> stop() async {
+    await player.stop();
+    reproduciendo = false;
   }
 }

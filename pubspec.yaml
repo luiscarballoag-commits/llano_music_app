@@ -13,8 +13,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-
-  # Nuevo reproductor de audio
   audioplayers: ^6.1.0
 
 dev_dependencies:
@@ -27,8 +25,24 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/audio/
+    # Audios
+    - assets/audio/roberto_carballo/
+    - assets/audio/edwin_trosel/
+    - assets/audio/francisco_camacho/
+    - assets/audio/omar_garcia/
+    - assets/audio/nicolas_castillo/
+    - assets/audio/enrique_de_la_vega/
+    - assets/audio/jose_angel_cordero/
+    - assets/audio/mary_pacheco/
+    - assets/audio/manuel_oliveros/
+    - assets/audio/fabiana_diaz/
+    - assets/audio/tatiana_lopez/
+    - assets/audio/clasicos/
+
+    # Banners
     - assets/banners/
+
+    # Imágenes
     - assets/images/artistas/
     - assets/images/clasicos/
     - assets/images/logo/

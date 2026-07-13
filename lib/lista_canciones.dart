@@ -24,18 +24,18 @@ List<Cancion> listaCanciones = [
     audio: "assets/audio/roberto_carballo/no_soy_dueno_de_esa_flor.mp3",
   ),
 
-  // Edwin Trosel
+  // Edwin Trocel
   Cancion(
-    artista: "Edwin Trosel",
+    artista: "Edwin Trocel",
     titulo: "Himno de Victoria",
     imagen: "assets/images/artistas/edwin_trosel.jpg",
     audio: "assets/audio/edwin_trosel/himno_de_victoria.mp3",
   ),
 
   Cancion(
-    artista: "Edwin Trosel",
+    artista: "Edwin Trocel",
     titulo: "Luna Confidente",
-    imagen: "assets/images/artistas/edwin_trosel.jpg",
+    imagen: "assets/images/Luna_Confidente_Edwin_ Trocel.jpg",
     audio: "assets/audio/edwin_trosel/luna_confidente.mp3",
   ),
 
@@ -58,7 +58,7 @@ List<Cancion> listaCanciones = [
   Cancion(
     artista: "Omar García",
     titulo: "Soy De Cojedes",
-    imagen: "assets/images/artistas/omar_garcia.jpg",
+    imagen: "assets/images/Soy_De_Cojedes_Omar_Garcia.jpg",
     audio: "assets/audio/omar_garcia/soy_de_cojedes.mp3",
   ),
 

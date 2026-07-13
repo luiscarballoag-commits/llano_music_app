@@ -37,11 +37,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Viuda Millonaria",
-        audio: "assets/audio/clasicos/santiago_rojas/la_viuda_millonaria.mp3",
+        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
       ),
       CancionClasica(
         titulo: "Cuando Me Robé El Cochino",
-        audio: "assets/audio/clasicos/santiago_rojas/cuando_me_robe_el_cochino.mp3",
+        audio: "assets/audio/clasicos/02_Santiago_Rojas_El_Turpial_de_Guardatinajas_Cuando_Me_Robe_el.mp3",
       ),
     ],
   ),
@@ -55,11 +55,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Amiga, Novia y Amante",
-        audio: "assets/audio/clasicos/jesus_moreno/amiga_novia_y_amante.mp3",
+        audio: "assets/audio/clasicos/04_Jesus_Moreno,_Humberto_Salas,_Humberto_Salas_Amiga,_Novia_y_Amante.mp3",
       ),
       CancionClasica(
         titulo: "Que Te Perdone El Diablo",
-        audio: "assets/audio/clasicos/jesus_moreno/que_te_perdone_el_diablo.mp3",
+        audio: "assets/audio/clasicos/03_Jesus_Moreno,_Miguel_Tovar,_Saverio_Graterol,_Miguel_Tovar,_Saverio.mp3",
       ),
     ],
   ),
@@ -73,11 +73,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
-        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
+        audio: "assets/audio/clasicos/05_Apure_En_Un_Viaje_Genaro_Prieto_Francisco_Montoya.mp3",
       ),
       CancionClasica(
         titulo: "Sentimiento Apureño",
-        audio: "assets/audio/clasicos/francisco_montoya/sentimiento_apureno.mp3",
+        audio: "assets/audio/clasicos/06_Sentimiento Apureño - Benito Romero y Francisco Montoya.mp3",
       ),
     ],
   ),
@@ -91,11 +91,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Fiesta en Elorza",
-        audio: "assets/audio/clasicos/eneas_perdomo/fiesta_en_elorza.mp3",
+        audio: "assets/audio/clasicos/07_Eneas Perdomo_Fiesta en Elorza.mp3",
       ),
       CancionClasica(
         titulo: "Adiós Barrancas de Arauca",
-        audio: "assets/audio/clasicos/eneas_perdomo/adios_barrancas_de_arauca.mp3",
+        audio: "assets/audio/clasicos/08_Eneas Perdomo_ Adiós Barrancas de Arauca.mp3",
       ),
     ],
   ),
@@ -109,11 +109,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Para Toda La Vida",
-        audio: "assets/audio/clasicos/teo_galindez/para_toda_la_vida.mp3",
+        audio: "assets/audio/clasicos/10 Para Toda La Vida  -  Teo Galíndez  Video Lyric.mp3",
       ),
       CancionClasica(
         titulo: "Dos Mujeres En Mi Vida",
-        audio: "assets/audio/clasicos/teo_galindez/dos_mujeres_en_mi_vida.mp3",
+        audio: "assets/audio/clasicos/09_Teo Galindez_Dos Mujeres en Mi Vida.mp3",
       ),
     ],
   ),
@@ -126,11 +126,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "El Gavilán",
-        audio: "assets/audio/clasicos/angel_custodio_loyola/el_gavilan.mp3",
+        audio: "assets/audio/clasicos/El Gavilan_Angel_Custodio_Loyola.mp3",
       ),
       CancionClasica(
         titulo: "Cajón de Arauca Apureño",
-        audio: "assets/audio/clasicos/angel_custodio_loyola/cajon_de_arauca_apureno.mp3",
+        audio: "assets/audio/clasicos/11_ Angel Custodio Loyola - Cajón De Arauca Apureno (128).mp3",
       ),
     ],
   ),
@@ -143,12 +143,12 @@ final List<ClasicoLlano> clasicosLlano = [
     imagen: "assets/images/clasicos/Juan_De_Los_Santos.png",
     canciones: [
       CancionClasica(
-        titulo: "Llanura, Yo Soy Tu Hijo",
-        audio: "assets/audio/clasicos/el_carrao_de_palmarito/llanura_yo_soy_tu_hijo.mp3",
+        titulo: "Llanura Yo Soy Tu Hijo",
+        audio: "assets/audio/clasicos/14_Llanura_Yo_Soy_Tu_Hijo_El_Carrao_De_Palmarito,_Juan_De_Los_Santos.mp3",
       ),
       CancionClasica(
         titulo: "Furia",
-        audio: "assets/audio/clasicos/el_carrao_de_palmarito/furia.mp3",
+        audio: "assets/audio/clasicos/13_Furia_El_Carrao_De_Palmarito_Chucho_Torres.mp3",
       ),
     ],
   ),
@@ -162,11 +162,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Boda del Gabán",
-        audio: "assets/audio/clasicos/luis_lozada/la_boda_del_gaban.mp3",
+        audio: "assets/audio/clasicos/16_La Boda_del_Gaban_Luis Lozada_El Cubiro.mp3",
       ),
       CancionClasica(
         titulo: "El Hijo de Florentino",
-        audio: "assets/audio/clasicos/luis_lozada/el_hijo_de_florentino.mp3",
+        audio: "assets/audio/clasicos/15_Luis Lozada El Cubiro - El Hijo de Florentino.mp3",
       ),
     ],
   ),
@@ -180,11 +180,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "A Quién No Le Va a Gustar",
-        audio: "assets/audio/clasicos/cheo_hernandez_prisco/a_quien_no_le_va_a_gustar.mp3",
+        audio: "assets/audio/clasicos/18_Cheo Hernandez Prisco - A Quien No Le Va a Gustar.mp3",
       ),
       CancionClasica(
         titulo: "Sin Ella No Vivo",
-        audio: "assets/audio/clasicos/cheo_hernandez_prisco/sin_ella_no_vivo.mp3",
+        audio: "assets/audio/clasicos/17_Cheo_Hernandez_Prisco,_Rigoberto_Ramirez_Sin_Ella_No_Vivo.mp3",
       ),
     ],
   ),
@@ -198,15 +198,14 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Camisa Conuquera",
-        audio: "assets/audio/clasicos/juan_farfan/la_camisa_conuquera.mp3",
+        audio: "assets/audio/clasicos/Juan_Farfan_La_Camisa_Conuquera.mp3",
       ),
       CancionClasica(
         titulo: "Maté el Guayabo",
-        audio: "assets/audio/clasicos/juan_farfan/mate_el_guayabo.mp3",
+        audio: "assets/audio/clasicos/19 Mate el Guayabo - Juan Farfán.mp3",
       ),
     ],
   ),
-
   ClasicoLlano(
     artista: "Reyna Lucero",
     apodo: "La Reina de la Canción Criolla",
@@ -216,11 +215,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Carrao Carrao",
-        audio: "assets/audio/clasicos/reyna_lucero/carrao_carrao.mp3",
+        audio: "assets/audio/clasicos/1 - Reyna Lucero - Carrao Carrao.mp3",
       ),
       CancionClasica(
         titulo: "Son Mentiras",
-        audio: "assets/audio/clasicos/reyna_lucero/son_mentiras.mp3",
+        audio: "assets/audio/clasicos/21- Reyna Lucero - Son Mentiras.mp3",
       ),
     ],
   ),
@@ -234,11 +233,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Vecina",
-        audio: "assets/audio/clasicos/cristina_maica/la_vecina.mp3",
+        audio: "assets/audio/clasicos/21 Cristina Maica - La Vecina.mp3",
       ),
       CancionClasica(
         titulo: "Soy Apureña de Raza",
-        audio: "assets/audio/clasicos/cristina_maica/soy_apurena_de_raza.mp3",
+        audio: "assets/audio/clasicos/22 Sangre Apureña - Cristina Maica.mp3",
       ),
     ],
   ),
@@ -252,11 +251,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Un Guayabo Motolito",
-        audio: "assets/audio/clasicos/elisa_guerrero/un_guayabo_motolito.mp3",
+        audio: "assets/audio/clasicos/25 Elisa Guerrero - Un guayabo motolito.mp3",
       ),
       CancionClasica(
         titulo: "Juro Que Te Gusto",
-        audio: "assets/audio/clasicos/elisa_guerrero/juro_que_te_gusto.mp3",
+        audio: "assets/audio/clasicos/26 - Elisa Guerrero - Juro que te gusto.mp3",
       ),
     ],
   ),
@@ -270,11 +269,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "A Usted",
-        audio: "assets/audio/clasicos/reynaldo_armas/a_usted.mp3",
+        audio: "assets/audio/clasicos/27 Reynaldo Armas - A Usted.mp3",
       ),
       CancionClasica(
         titulo: "Laguna Vieja",
-        audio: "assets/audio/clasicos/reynaldo_armas/laguna_vieja.mp3",
+        audio: "assets/audio/clasicos/28 Reynaldo Armas - Laguna Vieja.mp3",
       ),
     ],
   ),
@@ -288,11 +287,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Añoranzas",
-        audio: "assets/audio/clasicos/jorge_guerrero/anoranzas.mp3",
+        audio: "assets/audio/clasicos/29_Añoranzas_Jorge Guerrero.mp3",
       ),
       CancionClasica(
         titulo: "Guayabo de Mes y Pico",
-        audio: "assets/audio/clasicos/jorge_guerrero/guayabo_de_mes_y_pico.mp3",
+        audio: "assets/audio/clasicos/30_Guayabo de Mes y Pico - Jorge Guerrero.mp3",
       ),
     ],
   ),

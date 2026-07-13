@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../data/clasicos_llano.dart';
+import '../player_page.dart';
+import '../services/audio_player_service.dart';
 
 class ClasicosLlano extends StatelessWidget {
   const ClasicosLlano({super.key});
@@ -43,8 +46,24 @@ class ClasicosLlano extends StatelessWidget {
                   ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(18),
-                    onTap: () {
-                      // Aquí luego abriremos la pantalla del artista
+                    onTap: () async {
+                      final cancion = artista.canciones.first;
+
+                      await AudioPlayerService.instance.play(
+                        audio: cancion.audio,
+                        tituloCancion: cancion.titulo,
+                        artistaCancion: artista.artista,
+                        imagenCancion: artista.imagen,
+                      );
+
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const PlayerPage(),
+                          ),
+                        );
+                      }
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

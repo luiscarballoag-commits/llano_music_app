@@ -1,18 +1,21 @@
+	import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class AudioPlayerService {
+class AudioPlayerService extends ChangeNotifier {
   AudioPlayerService._();
 
-  static final AudioPlayer player = AudioPlayer();
+  static final AudioPlayerService instance = AudioPlayerService._();
 
-  static bool reproduciendo = false;
+  final AudioPlayer player = AudioPlayer();
 
-  static String titulo = "";
-  static String artista = "";
-  static String imagen = "";
-  static String audioActual = "";
+  bool reproduciendo = false;
 
-  static Future<void> play({
+  String titulo = "";
+  String artista = "";
+  String imagen = "";
+  String audioActual = "";
+
+  Future<void> play({
     required String audio,
     required String tituloCancion,
     required String artistaCancion,
@@ -40,28 +43,33 @@ class AudioPlayerService {
       );
 
       reproduciendo = true;
+      notifyListeners();
 
       print("Reproducción iniciada.");
     } catch (e) {
       reproduciendo = false;
+      notifyListeners();
 
       print("ERROR AL REPRODUCIR");
       print(e);
     }
   }
 
-  static Future<void> pause() async {
+  Future<void> pause() async {
     await player.pause();
     reproduciendo = false;
+    notifyListeners();
   }
 
-  static Future<void> resume() async {
+  Future<void> resume() async {
     await player.resume();
     reproduciendo = true;
+    notifyListeners();
   }
 
-  static Future<void> stop() async {
+  Future<void> stop() async {
     await player.stop();
     reproduciendo = false;
+    notifyListeners();
   }
 }

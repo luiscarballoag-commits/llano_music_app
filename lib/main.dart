@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
-import 'audio_test.dart';
+import 'home_page.dart';
+import 'theme/app_theme.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(
+  runApp(const LlanoMusicApp());
+}
+
+class LlanoMusicApp extends StatelessWidget {
+  const LlanoMusicApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AudioTest(),
-    ),
-  );
+      title: 'Llano Music',
+      theme: AppTheme.lightTheme,
+      home: const HomePage(),
+    );
+  }
 }

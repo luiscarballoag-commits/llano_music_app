@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../cancion.dart';
 import '../data/clasicos_llano.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
@@ -21,7 +22,9 @@ class ClasicosLlano extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+
           const SizedBox(height: 15),
+
           SizedBox(
             height: 230,
             child: ListView.builder(
@@ -47,13 +50,26 @@ class ClasicosLlano extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(18),
                     onTap: () async {
-                      final cancion = artista.canciones.first;
+                      final cola = artista.canciones
+                          .map(
+                            (c) => Cancion(
+                              artista: artista.artista,
+                              titulo: c.titulo,
+                              imagen: artista.imagen,
+                              audio: c.audio,
+                            ),
+                          )
+                          .toList();
+
+                      AudioPlayerService.instance.cargarCola(cola, 0);
+
+                      final cancion = cola.first;
 
                       await AudioPlayerService.instance.play(
                         audio: cancion.audio,
                         tituloCancion: cancion.titulo,
-                        artistaCancion: artista.artista,
-                        imagenCancion: artista.imagen,
+                        artistaCancion: cancion.artista,
+                        imagenCancion: cancion.imagen,
                       );
 
                       if (context.mounted) {
@@ -90,6 +106,7 @@ class ClasicosLlano extends StatelessWidget {
                             },
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Column(
@@ -104,7 +121,9 @@ class ClasicosLlano extends StatelessWidget {
                                   fontSize: 16,
                                 ),
                               ),
+
                               const SizedBox(height: 4),
+
                               Text(
                                 artista.apodo,
                                 maxLines: 1,
@@ -114,7 +133,9 @@ class ClasicosLlano extends StatelessWidget {
                                   fontSize: 13,
                                 ),
                               ),
+
                               const SizedBox(height: 6),
+
                               Text(
                                 "${artista.estado}, ${artista.pais}",
                                 style: const TextStyle(
@@ -122,7 +143,9 @@ class ClasicosLlano extends StatelessWidget {
                                   color: Colors.black54,
                                 ),
                               ),
+
                               const SizedBox(height: 8),
+
                               Text(
                                 "${artista.canciones.length} canciones",
                                 style: const TextStyle(

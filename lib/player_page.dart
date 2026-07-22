@@ -4,6 +4,12 @@ import 'services/audio_player_service.dart';
 class PlayerPage extends StatelessWidget {
   const PlayerPage({super.key});
 
+  String _format(Duration d) {
+    final minutos = d.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final segundos = d.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return "$minutos:$segundos";
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -71,14 +77,54 @@ class PlayerPage extends StatelessWidget {
                   ),
                 ),
 
+                const SizedBox(height: 25),
+
+                Slider(
+                  activeColor: Colors.green,
+                  inactiveColor: Colors.grey.shade300,
+                  min: 0,
+                  max: player.duracion.inMilliseconds == 0
+                      ? 1
+                      : player.duracion.inMilliseconds.toDouble(),
+                  value: player.posicion.inMilliseconds
+                      .clamp(
+                        0,
+                        player.duracion.inMilliseconds == 0
+                            ? 1
+                            : player.duracion.inMilliseconds,
+                      )
+                      .toDouble(),
+                  onChanged: (value) async {
+                    await player.seek(
+                      Duration(milliseconds: value.toInt()),
+                    );
+                  },
+                ),
+
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(_format(player.posicion)),
+                      Text(_format(player.duracion)),
+                    ],
+                  ),
+                ),
+
                 const Spacer(),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment:
+                      MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       iconSize: 45,
-                      onPressed: () {},
+                      onPressed: () async {
+                        await player.anterior();
+                      },
                       icon: const Icon(Icons.skip_previous),
                     ),
                     IconButton(
@@ -99,7 +145,9 @@ class PlayerPage extends StatelessWidget {
                     ),
                     IconButton(
                       iconSize: 45,
-                      onPressed: () {},
+                      onPressed: () async {
+                        await player.siguiente();
+                      },
                       icon: const Icon(Icons.skip_next),
                     ),
                   ],

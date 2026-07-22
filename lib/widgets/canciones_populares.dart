@@ -66,6 +66,8 @@ class CancionesPopulares extends StatelessWidget {
                 ),
 
                 onTap: () async {
+                  AudioPlayerService.instance.cargarCola(listaCanciones, index);
+
                   await AudioPlayerService.instance.play(
                     audio: cancion.audio,
                     tituloCancion: cancion.titulo,

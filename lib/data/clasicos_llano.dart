@@ -73,11 +73,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
-        audio: "assets/audio/clasicos/05_Apure_En_Un_Viaje_Genaro_Prieto_Francisco_Montoya.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
         titulo: "Sentimiento Apureño",
-        audio: "assets/audio/clasicos/06_Sentimiento Apureño - Benito Romero y Francisco Montoya.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/sentimiento_apureno.mp3",
       ),
     ],
   ),
@@ -144,11 +144,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Llanura Yo Soy Tu Hijo",
-        audio: "assets/audio/clasicos/14_Llanura_Yo_Soy_Tu_Hijo_El_Carrao_De_Palmarito,_Juan_De_Los_Santos.mp3",
+        audio: "assets/audio/clasicos/el_carrao_de_palmarito/llanura_yo_soy_tu_hijo.mp3",
       ),
       CancionClasica(
         titulo: "Furia",
-        audio: "assets/audio/clasicos/13_Furia_El_Carrao_De_Palmarito_Chucho_Torres.mp3",
+        audio: "assets/audio/clasicos/el_carrao_de_palmarito/furia.mp3",
       ),
     ],
   ),
@@ -162,11 +162,11 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Boda del Gabán",
-        audio: "assets/audio/clasicos/16_La Boda_del_Gaban_Luis Lozada_El Cubiro.mp3",
+        audio: "assets/audio/clasicos/luis_lozada/la_boda_del_gaban.mp3",
       ),
       CancionClasica(
         titulo: "El Hijo de Florentino",
-        audio: "assets/audio/clasicos/15_Luis Lozada El Cubiro - El Hijo de Florentino.mp3",
+        audio: "assets/audio/clasicos/luis_lozada/el_hijo_de_florentino.mp3",
       ),
     ],
   ),

@@ -165,8 +165,8 @@ final List<ClasicoLlano> clasicosLlano = [
         audio: "assets/audio/clasicos/luis_lozada/la_boda_del_gaban.mp3",
       ),
       CancionClasica(
-        titulo: "El Hijo de Florentino",
-        audio: "assets/audio/clasicos/luis_lozada/el_hijo_de_florentino.mp3",
+        titulo: "Malaya un Camino Largo",
+        audio: "assets/audio/clasicos/luis_lozada/malaya_un_camino_largo.mp3",
       ),
     ],
   ),

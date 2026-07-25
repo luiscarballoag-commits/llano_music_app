@@ -35,7 +35,7 @@ List<Cancion> listaCanciones = [
   Cancion(
     artista: "Edwin Trocel",
     titulo: "Luna Confidente",
-    imagen: "assets/images/Luna_Confidente_Edwin_ Trocel.jpg",
+    imagen: "assets/images/artistas/Luna_Confidente_Edwin_ Trocel.jpg",
     audio: "assets/audio/edwin_trosel/luna_confidente.mp3",
   ),
 
@@ -58,7 +58,7 @@ List<Cancion> listaCanciones = [
   Cancion(
     artista: "Omar García",
     titulo: "Soy De Cojedes",
-    imagen: "assets/images/Soy_De_Cojedes_Omar_Garcia.jpg",
+    imagen: "assets/images/artistas/Soy_De_Cojedes_Omar_Garcia.jpg",
     audio: "assets/audio/omar_garcia/soy_de_cojedes.mp3",
   ),
 

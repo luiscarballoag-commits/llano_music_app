@@ -73,7 +73,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
-        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
+        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
       ),
       CancionClasica(
         titulo: "Sentimiento Apureño",

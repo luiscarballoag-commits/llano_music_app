@@ -348,4 +348,57 @@ ClasicoLlano(
     ),
   ],
 ),
+ClasicoLlano(
+  artista: "Nelson Morales",
+  apodo: "El Auténtico Llanero",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Nelson_Morales.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Cándida Rosa",
+      audio: "assets/audio/clasicos/nelson_morales/candida_rosa.mp3",
+    ),
+    CancionClasica(
+      titulo: "El Auténtico Llanero",
+      audio: "assets/audio/clasicos/nelson_morales/el_autentico_llanero.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Cristóbal Jiménez",
+  apodo: "El Coplero de Apure",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Cristobal_Jimenez.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Soy un Trovador",
+      audio: "assets/audio/clasicos/cristobal_jimenez/soy_un_trovador.mp3",
+    ),
+    CancionClasica(
+      titulo: "Alma Apureña",
+      audio: "assets/audio/clasicos/cristobal_jimenez/alma_apurena.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Dámaso Figueredo",
+  apodo: "El Cantor del Llano",
+  estado: "Guárico",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Damaso_Figueredo.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Lo Que Yo Le Pida Deme",
+      audio: "assets/audio/clasicos/damaso_figueredo/lo_que_yo_le_pida_deme.mp3",
+    ),
+    CancionClasica(
+      titulo: "He Perdido en Poco Tiempo",
+      audio: "assets/audio/clasicos/damaso_figueredo/he_perdido_en_poco_tiempo.mp3",
+    ),
+  ],
+),
 ];

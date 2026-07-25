@@ -25,7 +25,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    # Audios
+    # Audios principales
     - assets/audio/roberto_carballo/
     - assets/audio/edwin_trosel/
     - assets/audio/francisco_camacho/
@@ -37,7 +37,21 @@ flutter:
     - assets/audio/manuel_oliveros/
     - assets/audio/fabiana_diaz/
     - assets/audio/tatiana_lopez/
+
+    # Grandes Voces del Llano
     - assets/audio/clasicos/
+    - assets/audio/clasicos/francisco_montoya/
+    - assets/audio/clasicos/el_carrao_de_palmarito/
+    - assets/audio/clasicos/luis_lozada/
+    - assets/audio/clasicos/julio_miranda/
+    - assets/audio/clasicos/freddy_salcedo/
+    - assets/audio/clasicos/sexagesimo/
+    - assets/audio/clasicos/nelson_morales/
+    - assets/audio/clasicos/cristobal_jimenez/
+    - assets/audio/clasicos/damaso_figueredo/
+    - assets/audio/clasicos/jose_ali_nieves/
+    - assets/audio/clasicos/julio_pantoja/
+    - assets/audio/clasicos/jose_jimenez/
 
     # Banners
     - assets/banners/

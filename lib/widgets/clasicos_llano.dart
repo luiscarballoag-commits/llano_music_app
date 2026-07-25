@@ -16,7 +16,7 @@ class ClasicosLlano extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Clásicos del Llano",
+            "Grandes Voces del Llano",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,

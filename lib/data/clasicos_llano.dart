@@ -37,7 +37,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Viuda Millonaria",
-        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
         titulo: "Cuando Me Robé El Cochino",
@@ -73,7 +73,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
-        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
         titulo: "Sentimiento Apureño",
@@ -295,4 +295,57 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
     ],
   ),
+ClasicoLlano(
+  artista: "Julio Miranda",
+  apodo: "El Coplero de Sucre",
+  estado: "Sucre",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Julio_Miranda.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Egoísmo",
+      audio: "assets/audio/clasicos/julio_miranda/egoismo.mp3",
+    ),
+    CancionClasica(
+      titulo: "Los Años Pegan",
+      audio: "assets/audio/clasicos/julio_miranda/los_anos_pegan.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Freddy Salcedo",
+  apodo: "El Coplero de Portuguesa",
+  estado: "Portuguesa",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Freddy_Salcedo.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Viejo Soguero",
+      audio: "assets/audio/clasicos/freddy_salcedo/viejo_soguero.mp3",
+    ),
+    CancionClasica(
+      titulo: "La Fundadora",
+      audio: "assets/audio/clasicos/freddy_salcedo/la_fundadora.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Sexagésimo",
+  apodo: "Cantautor Llanero",
+  estado: "Portuguesa",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Sexagesimo.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Vagabundo Enamorado",
+      audio: "assets/audio/clasicos/sexagesimo/vagabundo_enamorado.mp3",
+    ),
+    CancionClasica(
+      titulo: "Déjame Nacer",
+      audio: "assets/audio/clasicos/sexagesimo/dejame_nacer.mp3",
+    ),
+  ],
+),
 ];

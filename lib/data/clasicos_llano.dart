@@ -297,7 +297,7 @@ final List<ClasicoLlano> clasicosLlano = [
   ),
 ClasicoLlano(
   artista: "Julio Miranda",
-  apodo: "El Coplero de Sucre",
+  apodo: "El Cantautor del Amor",
   estado: "Sucre",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Julio_Miranda.png",
@@ -315,7 +315,7 @@ ClasicoLlano(
 
 ClasicoLlano(
   artista: "Freddy Salcedo",
-  apodo: "El Coplero de Portuguesa",
+  apodo: "Su Majestad del Llano",
   estado: "Portuguesa",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Freddy_Salcedo.png",
@@ -333,7 +333,7 @@ ClasicoLlano(
 
 ClasicoLlano(
   artista: "Sexagésimo",
-  apodo: "Cantautor Llanero",
+  apodo: "El Tenor del Llano",
   estado: "Portuguesa",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Sexagesimo.png",
@@ -350,7 +350,7 @@ ClasicoLlano(
 ),
 ClasicoLlano(
   artista: "Nelson Morales",
-  apodo: "El Auténtico Llanero",
+  apodo: "El Ruiseñor de Atamaica",
   estado: "Apure",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Nelson_Morales.png",
@@ -368,7 +368,7 @@ ClasicoLlano(
 
 ClasicoLlano(
   artista: "Cristóbal Jiménez",
-  apodo: "El Coplero de Apure",
+  apodo: "El Coplero de Oro",
   estado: "Apure",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Cristobal_Jimenez.png",
@@ -386,7 +386,7 @@ ClasicoLlano(
 
 ClasicoLlano(
   artista: "Dámaso Figueredo",
-  apodo: "El Cantor del Llano",
+  apodo: "El Llanero Completo",
   estado: "Guárico",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Damaso_Figueredo.png",
@@ -398,6 +398,126 @@ ClasicoLlano(
     CancionClasica(
       titulo: "He Perdido en Poco Tiempo",
       audio: "assets/audio/clasicos/damaso_figueredo/he_perdido_en_poco_tiempo.mp3",
+    ),
+  ],
+),
+ClasicoLlano(
+  artista: "José Alí Nieves",
+  apodo: "El Pico de Oro",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Jose_Ali_Nieves.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Pescador del Río Apure",
+      audio: "assets/audio/clasicos/jose_ali_nieves/pescador_del_rio_apure.mp3",
+    ),
+    CancionClasica(
+      titulo: "Rumbo al Jagüey",
+      audio: "assets/audio/clasicos/jose_ali_nieves/rumbo_al_jaguey.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Julio Pantoja",
+  apodo: "El Hijo de Monasterios",
+  estado: "Guárico",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Julio_Pantoja.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Chungo Amarillo Jovero",
+      audio: "assets/audio/clasicos/julio_pantoja/chungo_amarillo_jovero.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "José Jiménez",
+  apodo: "El Pollo de Orichuna",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Jose_Jimenez.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Muchacha Flor de mi Llano",
+      audio: "assets/audio/clasicos/jose_jimenez/muchacha_flor_de_mi_llano.mp3",
+    ),
+    CancionClasica(
+      titulo: "Tengo el Corazón Enfermo",
+      audio: "assets/audio/clasicos/jose_jimenez/tengo_el_corazon_enfermo.mp3",
+    ),
+  ],
+),
+ClasicoLlano(
+  artista: "Humberto Salas",
+  apodo: "El Tigre de Guayabal",
+  estado: "Barinas",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Humberto_Salas.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Dame Tu Amor",
+      audio: "assets/audio/clasicos/humberto_salas/dame_tu_amor.mp3",
+    ),
+    CancionClasica(
+      titulo: "Déjame Amarte",
+      audio: "assets/audio/clasicos/humberto_salas/dejame_amarte.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Jesús Quintero",
+  apodo: "El Tigre de Matanegra",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Jesus_Quintero.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Autor que Canta y Escribe",
+      audio: "assets/audio/clasicos/jesus_quintero/autor_que_canta_y_escribe.mp3",
+    ),
+    CancionClasica(
+      titulo: "Un Llanero Enamorado",
+      audio: "assets/audio/clasicos/jesus_quintero/un_llanero_enamorado.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Ramón Blanco",
+  apodo: "El Coplero",
+  estado: "Apure",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Ramon_Blanco.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Resignación",
+      audio: "assets/audio/clasicos/ramon_blanco/resignacion.mp3",
+    ),
+    CancionClasica(
+      titulo: "Te Rogué que No te Fueras",
+      audio: "assets/audio/clasicos/ramon_blanco/te_rogue_que_no_te_fueras.mp3",
+    ),
+  ],
+),
+
+ClasicoLlano(
+  artista: "Rafael Alvarado",
+  apodo: "El Gallo de Tinaquillo",
+  estado: "Cojedes",
+  pais: "Venezuela",
+  imagen: "assets/images/clasicos/Rafael_Alvarado.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Lamento de Amor",
+      audio: "assets/audio/clasicos/rafael_alvarado/lamento_de_amor.mp3",
+    ),
+    CancionClasica(
+      titulo: "Recuerdo de Dos Pasajes",
+      audio: "assets/audio/clasicos/rafael_alvarado/recuerdo_de_dos_pasajes.mp3",
     ),
   ],
 ),

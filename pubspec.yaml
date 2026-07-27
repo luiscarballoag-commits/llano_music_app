@@ -25,32 +25,69 @@ flutter:
   uses-material-design: true
 
   assets:
-      - assets/images/logo/logo_llano_music.png
 
-      # Audios principales
-      - assets/audio/
+    # Logo
+    - assets/images/logo/logo_llano_music.png
 
-      # Audios clásicos
-      - assets/audio/clasicos/luis_lozada/
-      - assets/audio/clasicos/julio_miranda/
-      - assets/audio/clasicos/freddy_salcedo/
-      - assets/audio/clasicos/sexagesimo/
-      - assets/audio/clasicos/nelson_morales/
-      - assets/audio/clasicos/cristobal_jimenez/
-      - assets/audio/clasicos/damaso_figueredo/
-      - assets/audio/clasicos/jose_ali_nieves/
-      - assets/audio/clasicos/julio_pantoja/
-      - assets/audio/clasicos/jose_jimenez/
-      - assets/audio/clasicos/humberto_salas/
-      - assets/audio/clasicos/jesus_quintero/
-      - assets/audio/clasicos/ramon_blanco/
-      - assets/audio/clasicos/rafael_alvarado/
+    # ===========================
+    # AUDIOS CLÁSICOS (MP3 SUELTOS)
+    # ===========================
+    - assets/audio/clasicos/
 
-      # Banners
-      - assets/banners/
+    # ===========================
+    # GRANDES VOCES DEL LLANO
+    # ===========================
+    - assets/audio/clasicos/cristobal_jimenez/
+    - assets/audio/clasicos/damaso_figueredo/
+    - assets/audio/clasicos/el_carrao_de_palmarito/
+    - assets/audio/clasicos/francisco_montoya/
+    - assets/audio/clasicos/freddy_salcedo/
+    - assets/audio/clasicos/humberto_salas/
+    - assets/audio/clasicos/jesus_quintero/
+    - assets/audio/clasicos/jose_ali_nieves/
+    - assets/audio/clasicos/jose_jimenez/
+    - assets/audio/clasicos/julio_miranda/
+    - assets/audio/clasicos/julio_pantoja/
+    - assets/audio/clasicos/luis_lozada/
+    - assets/audio/clasicos/nelson_morales/
+    - assets/audio/clasicos/rafael_alvarado/
+    - assets/audio/clasicos/ramon_blanco/
+    - assets/audio/clasicos/sexagesimo/
 
-      # Imágenes
-      - assets/images/artistas/
-      - assets/images/clasicos/
-      - assets/images/logo/
-      - assets/images/icons/
+    # ===========================
+    # CANCIONES POPULARES
+    # ===========================
+    - assets/audio/edwin_trosel/
+    - assets/audio/enrique_de_la_vega/
+    - assets/audio/fabiana_diaz/
+    - assets/audio/francisco_camacho/
+    - assets/audio/itsia_bastidas/
+    - assets/audio/jesus_alejandro/
+    - assets/audio/jose_angel_cordero/
+    - assets/audio/jose_mendoza/
+    - assets/audio/jose_perez/
+    - assets/audio/juan_herrera/
+    - assets/audio/juan_mendoza/
+    - assets/audio/luis_omar_escalona/
+    - assets/audio/manuel_oliveros/
+    - assets/audio/mary_pacheco/
+    - assets/audio/mercedes_guevara/
+    - assets/audio/miguelito_diaz/
+    - assets/audio/nicolas_castillo/
+    - assets/audio/omar_garcia/
+    - assets/audio/rafael_cordero/
+    - assets/audio/rafael_perez/
+    - assets/audio/roberto_carballo/
+    - assets/audio/tatiana_lopez/
+    - assets/audio/wilmer_tovar/
+    - assets/audio/yaneth_de_venezuela/
+    - assets/audio/yohan_casadiego/
+
+    # Banners
+    - assets/banners/
+
+    # Imágenes
+    - assets/images/artistas/
+    - assets/images/clasicos/
+    - assets/images/logo/
+    - assets/images/icons/

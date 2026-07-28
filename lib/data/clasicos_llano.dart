@@ -528,7 +528,7 @@ ClasicoLlano(
 ),
 ClasicoLlano(
   artista: "Yaneth de Venezuela",
-  apodo: "La Voz Criolla de Cojedes",
+  apodo: "",
   estado: "Cojedes",
   pais: "Venezuela",
   imagen: "assets/images/artistas/Tardes_Cojedeñas_Yaneth_de_Venezuela.png",

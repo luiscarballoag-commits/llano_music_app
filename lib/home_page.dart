@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/explorar_screen.dart';
+import 'screens/favoritos_screen.dart';
 import 'player_page.dart';
 
 import 'widgets/home_header.dart';
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       _inicio(),
       const ExplorarScreen(),
       const PlayerPage(),
-      const Center(child: Text("Favoritos")),
+      const FavoritosScreen(),
       const Center(child: Text("Perfil")),
     ];
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'services/audio_player_service.dart';
+import 'services/favorites_service.dart';
 
 class PlayerPage extends StatelessWidget {
   const PlayerPage({super.key});
@@ -62,13 +63,16 @@ class PlayerPage extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         IconButton(
-                          icon: const Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
+                          icon: Icon(
+                            FavoritesService.instance.esFavorito(player.audioActual)
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: Colors.red,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            FavoritesService.instance.toggleFavorito(player.audioActual);
+                          },
                         ),
                       ],
                     ),
@@ -244,7 +248,7 @@ class PlayerPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 100),
                   ],
                 ),
               ),

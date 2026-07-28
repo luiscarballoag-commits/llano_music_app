@@ -114,7 +114,7 @@ class PlayerPage extends StatelessWidget {
                   ),
                 ),
 
-                const Spacer(),
+                const SizedBox(height: 20),
 
                 Row(
                   mainAxisAlignment:
@@ -153,7 +153,7 @@ class PlayerPage extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
               ],
             ),
           ),

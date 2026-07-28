@@ -250,7 +250,7 @@ class PlayerPage extends StatelessWidget {
               ),
             ),
           ),
-        );
+          );
       },
     );
   }

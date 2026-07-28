@@ -37,7 +37,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Viuda Millonaria",
-        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
         titulo: "Cuando Me Robé El Cochino",
@@ -73,7 +73,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Apure en un Viaje",
-        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
+        audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
         titulo: "Sentimiento Apureño",
@@ -526,4 +526,18 @@ ClasicoLlano(
     ),
   ],
 ),
+ClasicoLlano(
+  artista: "Yaneth de Venezuela",
+  apodo: "La Voz Criolla de Cojedes",
+  estado: "Cojedes",
+  pais: "Venezuela",
+  imagen: "assets/images/artistas/Tardes_Cojedeñas_Yaneth_de_Venezuela.png",
+  canciones: [
+    CancionClasica(
+      titulo: "Tardes Cojedeñas",
+      audio: "assets/audio/yaneth_de_venezuela/tardes_cojedenas.mp3",
+    ),
+  ],
+),
+
 ];

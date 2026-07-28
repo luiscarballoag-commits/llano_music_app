@@ -341,11 +341,4 @@ List<Cancion> listaCanciones = [
     audio: "assets/audio/milena_benitez/si_me_cumple_nos_casamos.mp3",
   ),
 
-  // Yaneth de Venezuela
-  Cancion(
-    artista: "Yaneth de Venezuela",
-    titulo: "Tardes Cojedeñas",
-    imagen: "assets/images/artistas/Tardes_Cojedeñas_Yaneth_de_Venezuela.png",
-    audio: "assets/audio/yaneth_de_venezuela/tardes_cojedenas.mp3",
-  ),
 ];

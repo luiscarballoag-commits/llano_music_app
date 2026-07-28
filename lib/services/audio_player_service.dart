@@ -15,7 +15,32 @@ class AudioPlayerService extends ChangeNotifier {
     });
 
     player.onPlayerComplete.listen((_) async {
-      await siguiente();
+      if (repeatMode == 1) {
+        await play(
+          audio: cola[indiceActual].audio,
+          tituloCancion: cola[indiceActual].titulo,
+          artistaCancion: cola[indiceActual].artista,
+          imagenCancion: cola[indiceActual].imagen,
+        );
+      } else if (shuffle && cola.isNotEmpty) {
+        indiceActual = (indiceActual + 1) % cola.length;
+        await play(
+          audio: cola[indiceActual].audio,
+          tituloCancion: cola[indiceActual].titulo,
+          artistaCancion: cola[indiceActual].artista,
+          imagenCancion: cola[indiceActual].imagen,
+        );
+      } else if (repeatMode == 2 && indiceActual >= cola.length - 1) {
+        indiceActual = 0;
+        await play(
+          audio: cola[indiceActual].audio,
+          tituloCancion: cola[indiceActual].titulo,
+          artistaCancion: cola[indiceActual].artista,
+          imagenCancion: cola[indiceActual].imagen,
+        );
+      } else {
+        await siguiente();
+      }
     });
   }
 
@@ -24,6 +49,13 @@ class AudioPlayerService extends ChangeNotifier {
   final AudioPlayer player = AudioPlayer();
 
   bool reproduciendo = false;
+
+  bool shuffle = false;
+
+  // 0 = sin repetir
+  // 1 = repetir canción
+  // 2 = repetir toda la lista
+  int repeatMode = 0;
 
   String titulo = "";
   String artista = "";
@@ -124,4 +156,18 @@ class AudioPlayerService extends ChangeNotifier {
     reproduciendo = false;
     notifyListeners();
   }
+
+  void toggleShuffle() {
+    shuffle = !shuffle;
+    notifyListeners();
+  }
+
+  void toggleRepeat() {
+    repeatMode++;
+    if (repeatMode > 2) {
+      repeatMode = 0;
+    }
+    notifyListeners();
+  }
+
 }

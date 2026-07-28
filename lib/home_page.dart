@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'screens/explorar_screen.dart';
+import 'player_page.dart';
 
 import 'widgets/home_header.dart';
 import 'widgets/banner_principal.dart';
 import 'widgets/buscador.dart';
 import 'widgets/artistas_destacados.dart';
-import 'widgets/clasicos_llano.dart';
 import 'widgets/canciones_populares.dart';
 import 'widgets/mini_player.dart';
 
@@ -36,8 +36,6 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 20),
                   ArtistasDestacados(),
                   SizedBox(height: 25),
-                  ClasicosLlano(),
-                  SizedBox(height: 25),
                   CancionesPopulares(),
                   SizedBox(height: 120),
                 ],
@@ -56,7 +54,7 @@ class _HomePageState extends State<HomePage> {
     final paginas = [
       _inicio(),
       const ExplorarScreen(),
-      const Center(child: Text("Play")),
+      const PlayerPage(),
       const Center(child: Text("Favoritos")),
       const Center(child: Text("Perfil")),
     ];

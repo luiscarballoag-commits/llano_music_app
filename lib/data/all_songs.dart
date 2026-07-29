@@ -1,5 +1,6 @@
 import '../cancion.dart';
 import 'clasicos_llano.dart';
+import '../lista_canciones.dart';
 
 final List<Cancion> allSongs = [
   for (final artista in clasicosLlano)
@@ -10,4 +11,5 @@ final List<Cancion> allSongs = [
         imagen: artista.imagen,
         audio: cancion.audio,
       ),
+  ...listaCanciones,
 ];

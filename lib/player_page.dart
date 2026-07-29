@@ -39,6 +39,7 @@ class PlayerPage extends StatelessWidget {
                 child: Column(
                   children: [
 
+
                     Row(
                       children: [
 
@@ -77,6 +78,8 @@ class PlayerPage extends StatelessWidget {
                       ],
                     ),
 
+                    const SizedBox(height: 20),
+
                     const SizedBox(height: 25),
 
                     Material(
@@ -88,13 +91,13 @@ class PlayerPage extends StatelessWidget {
                           player.imagen.isEmpty
                               ? "assets/images/logo/logo_llano_music.png"
                               : player.imagen,
-                          width: 320,
-                          height: 320,
+                          width: 220,
+                          height: 220,
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) {
                             return Container(
-                              width: 320,
-                              height: 320,
+                              width: 220,
+                              height: 220,
                               color: Colors.white,
                               child: const Icon(
                                 Icons.music_note,
@@ -107,7 +110,9 @@ class PlayerPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 15),
 
                     Text(
                       player.titulo.isEmpty
@@ -120,6 +125,8 @@ class PlayerPage extends StatelessWidget {
                       ),
                     ),
 
+                    const SizedBox(height: 20),
+
                     const SizedBox(height: 10),
 
                     Text(
@@ -131,7 +138,9 @@ class PlayerPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 10),
 
                     Slider(
                       activeColor: Colors.green,
@@ -157,14 +166,15 @@ class PlayerPage extends StatelessWidget {
                         );
                       },
                     ),
+                    const SizedBox(height: 20),
 
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
                       ),
+
                       child: Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(_format(player.posicion)),
                           Text(_format(player.duracion)),
@@ -172,9 +182,11 @@ class PlayerPage extends StatelessWidget {
                       ),
                     ),
 
-                    const Spacer(),                    Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
+                    const SizedBox(height: 20),
+
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
 
                         IconButton(
@@ -248,7 +260,9 @@ class PlayerPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 100),
+                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 5),
                   ],
                 ),
               ),

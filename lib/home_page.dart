@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'screens/explorar_screen.dart';
 import 'screens/favoritos_screen.dart';
-import 'player_page.dart';
+import 'screens/radio_screen.dart';
+import 'screens/perfil_screen.dart';
 
 import 'widgets/home_header.dart';
 import 'widgets/banner_principal.dart';
@@ -55,9 +56,9 @@ class _HomePageState extends State<HomePage> {
     final paginas = [
       _inicio(),
       const ExplorarScreen(),
-      const PlayerPage(),
+      const RadioScreen(),
       const FavoritosScreen(),
-      const Center(child: Text("Perfil")),
+      const PerfilScreen(),
     ];
 
     return Scaffold(
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.play_circle_fill, size: 38),
-            label: "Play",
+            label: "Radio",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),

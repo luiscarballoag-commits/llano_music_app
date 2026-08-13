@@ -18,6 +18,7 @@ dependencies:
   hive_flutter: ^1.1.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
   flutter_test:
     sdk: flutter
 
@@ -30,6 +31,7 @@ flutter:
 
     # Logo
     - assets/images/logo/logo_llano_music.png
+    - assets/images/radios/radio_dinamita.jpg
 
     # ===========================
     # AUDIOS CLÁSICOS (MP3 SUELTOS)
@@ -94,3 +96,10 @@ flutter:
     - assets/images/clasicos/
     - assets/images/logo/
     - assets/images/icons/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/logo/logo_llano_music.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/logo/logo_llano_music.png"

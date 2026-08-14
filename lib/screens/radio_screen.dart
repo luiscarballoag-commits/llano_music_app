@@ -32,7 +32,7 @@ class _RadioScreenState extends State<RadioScreen> {
     } else {
       try {
         await _player.play(
-          UrlSource(_radioUrl),
+          UrlSource(_radioUrl, mimeType: 'audio/mpeg'),
         );
 
         setState(() {

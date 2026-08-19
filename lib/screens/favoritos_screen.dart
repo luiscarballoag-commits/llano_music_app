@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import '../cancion.dart';
 import '../data/all_songs.dart';
+import '../player_page.dart';
+import '../services/audio_player_service.dart';
 import '../services/favorites_service.dart';
 
 class FavoritosScreen extends StatefulWidget {
@@ -10,9 +14,39 @@ class FavoritosScreen extends StatefulWidget {
 }
 
 class _FavoritosScreenState extends State<FavoritosScreen> {
+  Future<void> _reproducir(
+    BuildContext context,
+    int index,
+    List<Cancion> canciones,
+  ) async {
+    final cancion = canciones[index];
+
+    AudioPlayerService.instance.cargarCola(
+      canciones,
+      index,
+    );
+
+    await AudioPlayerService.instance.play(
+      audio: cancion.audio,
+      tituloCancion: cancion.titulo,
+      artistaCancion: cancion.artista,
+      imagenCancion: cancion.imagen,
+    );
+
+    if (!context.mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const PlayerPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final favoritos = FavoritesService.instance.obtenerFavoritos();
+    final favoritos =
+        FavoritesService.instance.obtenerFavoritos();
 
     final canciones = allSongs
         .where((c) => favoritos.contains(c.audio))
@@ -61,26 +95,38 @@ class _FavoritosScreenState extends State<FavoritosScreen> {
           : ListView.builder(
               itemCount: canciones.length,
               itemBuilder: (context, index) {
-                final c = canciones[index];
+                final cancion = canciones[index];
 
                 return Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   child: ListTile(
                     leading: const Icon(
                       Icons.favorite,
                       color: Colors.red,
                     ),
-                    title: Text(c.titulo),
-                    subtitle: Text(c.artista),
-                    trailing: const Icon(Icons.play_arrow),
+                    title: Text(
+                      cancion.titulo,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      cancion.artista,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: const Icon(
+                      Icons.play_circle_fill,
+                      color: Colors.green,
+                      size: 32,
+                    ),
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "Reproducir: ${c.titulo}",
-                          ),
-                        ),
+                      _reproducir(
+                        context,
+                        index,
+                        canciones,
                       );
                     },
                   ),

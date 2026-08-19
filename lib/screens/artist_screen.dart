@@ -4,7 +4,7 @@ import '../cancion.dart';
 import '../models/artist.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
-import '../services/music_service.dart';
+import '../data/all_songs.dart';
 
 class ArtistScreen extends StatelessWidget {
   final Artist artist;
@@ -45,17 +45,9 @@ class ArtistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cancionesArtista =
-        MusicService.getSongsByArtist(artist.id);
-
-    final canciones = cancionesArtista.map((cancion) {
-      return Cancion(
-        artista: artist.nombre,
-        titulo: cancion.titulo,
-        imagen: artist.imagen,
-        audio: cancion.audio,
-      );
-    }).toList();
+    final canciones = allSongs
+        .where((cancion) => cancion.artista == artist.nombre)
+        .toList();
 
     return Scaffold(
       appBar: AppBar(

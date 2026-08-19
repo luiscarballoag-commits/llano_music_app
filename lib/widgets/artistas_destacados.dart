@@ -1,33 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../data/artists.dart';
+import '../screens/artist_screen.dart';
+
 class ArtistasDestacados extends StatelessWidget {
   const ArtistasDestacados({super.key});
 
-  final List<Map<String, String>> artistas = const [
-    {
-      "nombre": "Roberto Carballo",
-      "imagen": "assets/images/artistas/roberto_carballo.jpg",
-    },
-    {
-      "nombre": "Mary Pacheco",
-      "imagen": "assets/images/artistas/mary_pacheco.jpg",
-    },
-    {
-      "nombre": "Francisco Camacho",
-      "imagen": "assets/images/artistas/francisco_camacho.jpg",
-    },
-    {
-      "nombre": "José Ángel Cordero",
-      "imagen": "assets/images/artistas/jose_angel_cordero.jpg",
-    },
-    {
-      "nombre": "Omar García",
-      "imagen": "assets/images/artistas/omar_garcia.jpg",
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final destacados =
+        artists.where((artista) => artista.destacado).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,37 +26,62 @@ class ArtistasDestacados extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         SizedBox(
-          height: 180,
+          height: 190,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: artistas.length,
+            itemCount: destacados.length,
             itemBuilder: (context, index) {
-              final artista = artistas[index];
+              final artista = destacados[index];
 
-              return Container(
-                width: 140,
-                margin: const EdgeInsets.only(left: 20),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-                      child: Image.asset(
-                        artista["imagen"]!,
-                        width: 140,
-                        height: 140,
-                        fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ArtistScreen(
+                        artist: artista,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      artista["nombre"]!,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                  );
+                },
+                child: Container(
+                  width: 140,
+                  margin: const EdgeInsets.only(left: 20),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(18),
+                        child: Image.asset(
+                          artista.imagen,
+                          width: 140,
+                          height: 140,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) {
+                            return Container(
+                              width: 140,
+                              height: 140,
+                              color: Colors.grey.shade300,
+                              child: const Icon(
+                                Icons.person,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 10),
+                      Text(
+                        artista.nombre,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

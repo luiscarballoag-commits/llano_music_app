@@ -28,7 +28,7 @@ class CancionesPopulares extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: listaCanciones.length,
+          itemCount: listaCanciones.length > 8 ? 8 : listaCanciones.length,
           itemBuilder: (context, index) {
             final cancion = listaCanciones[index];
 

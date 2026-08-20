@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/favorites_service.dart';
+import 'playlists_screen.dart';
 
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({super.key});
@@ -68,26 +69,34 @@ class PerfilScreen extends StatelessWidget {
             Card(
               child: ListTile(
                 leading: const Icon(
-                  Icons.history,
+                  Icons.queue_music,
                   color: Color(0xFF2E7D32),
                 ),
-                title: const Text("Historial"),
+                title: const Text("Mis Playlists"),
                 subtitle: const Text(
-                  "Próximamente",
+                  "Organiza tus canciones",
                 ),
                 trailing: const Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const PlaylistsScreen(),
+                    ),
+                  );
+                },
               ),
             ),
 
             Card(
               child: ListTile(
                 leading: const Icon(
-                  Icons.settings,
-                  color: Colors.grey,
+                  Icons.history,
+                  color: Color(0xFF2E7D32),
                 ),
-                title: const Text("Configuración"),
+                title: const Text("Historial"),
                 subtitle: const Text(
-                  "Opciones de la aplicación",
+                  "Próximamente",
                 ),
                 trailing: const Icon(Icons.chevron_right),
               ),

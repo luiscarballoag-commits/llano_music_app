@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../cancion.dart';
 import '../data/clasicos_llano.dart';
 import '../player_page.dart';
+import 'playlists_screen.dart';
 import '../services/audio_player_service.dart';
 
 class ExplorarScreen extends StatefulWidget {
@@ -91,57 +92,85 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
               horizontal: 16,
               vertical: 8,
             ),
-            child: SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.play_arrow),
-                label: const Text(
-                  "Reproducir todo",
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: OutlinedButton.icon(
+                    icon: const Icon(Icons.queue_music),
+                    label: const Text(
+                      "Mis Playlists",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const PlaylistsScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ),
-                onPressed: () async {
-                  final cola = <Cancion>[];
 
-                  for (final artista in clasicosLlano) {
-                    cola.addAll(
-                      artista.canciones.map(
-                        (c) => Cancion(
-                          artista: artista.artista,
-                          titulo: c.titulo,
-                          imagen: artista.imagen,
-                          audio: c.audio,
-                        ),
+                const SizedBox(height: 10),
+
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    icon: const Icon(Icons.play_arrow),
+                    label: const Text(
+                      "Reproducir todo",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
                       ),
-                    );
-                  }
-
-                  AudioPlayerService.instance
-                      .cargarCola(cola, 0);
-
-                  final primera = cola.first;
-
-                  await AudioPlayerService.instance.play(
-                    audio: primera.audio,
-                    tituloCancion: primera.titulo,
-                    artistaCancion: primera.artista,
-                    imagenCancion: primera.imagen,
-                  );
-
-                  if (!context.mounted) return;
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          const PlayerPage(),
                     ),
-                  );
-                },
-              ),
+                    onPressed: () async {
+                      final cola = <Cancion>[];
+
+                      for (final artista in clasicosLlano) {
+                        cola.addAll(
+                          artista.canciones.map(
+                            (c) => Cancion(
+                              artista: artista.artista,
+                              titulo: c.titulo,
+                              imagen: artista.imagen,
+                              audio: c.audio,
+                            ),
+                          ),
+                        );
+                      }
+
+                      AudioPlayerService.instance
+                          .cargarCola(cola, 0);
+
+                      final primera = cola.first;
+
+                      await AudioPlayerService.instance.play(
+                        audio: primera.audio,
+                        tituloCancion: primera.titulo,
+                        artistaCancion: primera.artista,
+                        imagenCancion: primera.imagen,
+                      );
+
+                      if (!context.mounted) return;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const PlayerPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
 

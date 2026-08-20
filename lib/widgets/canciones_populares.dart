@@ -4,11 +4,22 @@ import '../lista_canciones.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 
-class CancionesPopulares extends StatelessWidget {
+class CancionesPopulares extends StatefulWidget {
   const CancionesPopulares({super.key});
 
   @override
+  State<CancionesPopulares> createState() => _CancionesPopularesState();
+}
+
+class _CancionesPopularesState extends State<CancionesPopulares> {
+  bool mostrarTodas = false;
+
+  @override
   Widget build(BuildContext context) {
+    final cantidad = mostrarTodas
+        ? listaCanciones.length
+        : (listaCanciones.length > 8 ? 8 : listaCanciones.length);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +39,7 @@ class CancionesPopulares extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: listaCanciones.length > 8 ? 8 : listaCanciones.length,
+          itemCount: cantidad,
           itemBuilder: (context, index) {
             final cancion = listaCanciones[index];
 
@@ -54,19 +65,18 @@ class CancionesPopulares extends StatelessWidget {
                     },
                   ),
                 ),
-
                 title: Text(cancion.titulo),
-
                 subtitle: Text(cancion.artista),
-
                 trailing: const Icon(
                   Icons.play_circle_fill,
                   color: Colors.green,
                   size: 35,
                 ),
-
                 onTap: () async {
-                  AudioPlayerService.instance.cargarCola(listaCanciones, index);
+                  AudioPlayerService.instance.cargarCola(
+                    listaCanciones,
+                    index,
+                  );
 
                   await AudioPlayerService.instance.play(
                     audio: cancion.audio,
@@ -88,6 +98,25 @@ class CancionesPopulares extends StatelessWidget {
             );
           },
         ),
+
+        if (listaCanciones.length > 8)
+          Center(
+            child: TextButton.icon(
+              onPressed: () {
+                setState(() {
+                  mostrarTodas = !mostrarTodas;
+                });
+              },
+              icon: Icon(
+                mostrarTodas
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+              ),
+              label: Text(
+                mostrarTodas ? "Ver menos" : "Ver más",
+              ),
+            ),
+          ),
       ],
     );
   }

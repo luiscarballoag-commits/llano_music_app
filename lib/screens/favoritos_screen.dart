@@ -5,15 +5,18 @@ import '../data/all_songs.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import '../services/favorites_service.dart';
+import '../widgets/agregar_a_playlist_dialog.dart';
 
 class FavoritosScreen extends StatefulWidget {
   const FavoritosScreen({super.key});
 
   @override
-  State<FavoritosScreen> createState() => _FavoritosScreenState();
+  State<FavoritosScreen> createState() =>
+      _FavoritosScreenState();
 }
 
-class _FavoritosScreenState extends State<FavoritosScreen> {
+class _FavoritosScreenState
+    extends State<FavoritosScreen> {
   Future<void> _reproducir(
     BuildContext context,
     int index,
@@ -63,7 +66,8 @@ class _FavoritosScreenState extends State<FavoritosScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
                   children: const [
                     Icon(
                       Icons.favorite,
@@ -93,6 +97,10 @@ class _FavoritosScreenState extends State<FavoritosScreen> {
               ),
             )
           : ListView.builder(
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 20,
+              ),
               itemCount: canciones.length,
               itemBuilder: (context, index) {
                 final cancion = canciones[index];
@@ -111,16 +119,39 @@ class _FavoritosScreenState extends State<FavoritosScreen> {
                       cancion.titulo,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     subtitle: Text(
                       cancion.artista,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    trailing: const Icon(
-                      Icons.play_circle_fill,
-                      color: Colors.green,
-                      size: 32,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          tooltip: 'Agregar a playlist',
+                          icon: const Icon(
+                            Icons.playlist_add,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            mostrarAgregarAPlaylistDialog(
+                              context: context,
+                              audio: cancion.audio,
+                              tituloCancion: cancion.titulo,
+                            );
+                          },
+                        ),
+                        const Icon(
+                          Icons.play_circle_fill,
+                          color: Colors.green,
+                          size: 32,
+                        ),
+                      ],
                     ),
                     onTap: () {
                       _reproducir(

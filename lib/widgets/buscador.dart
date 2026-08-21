@@ -4,6 +4,7 @@ import '../cancion.dart';
 import '../data/all_songs.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
+import 'agregar_a_playlist_dialog.dart';
 
 class Buscador extends StatefulWidget {
   const Buscador({super.key});
@@ -13,7 +14,8 @@ class Buscador extends StatefulWidget {
 }
 
 class _BuscadorState extends State<Buscador> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller =
+      TextEditingController();
 
   List<Cancion> resultados = [];
 
@@ -27,14 +29,21 @@ class _BuscadorState extends State<Buscador> {
       }
 
       resultados = allSongs.where((cancion) {
-        return cancion.titulo.toLowerCase().contains(busqueda) ||
-            cancion.artista.toLowerCase().contains(busqueda);
+        return cancion.titulo
+                .toLowerCase()
+                .contains(busqueda) ||
+            cancion.artista
+                .toLowerCase()
+                .contains(busqueda);
       }).take(10).toList();
     });
   }
 
   Future<void> reproducir(Cancion cancion) async {
-    AudioPlayerService.instance.cargarCola([cancion], 0);
+    AudioPlayerService.instance.cargarCola(
+      [cancion],
+      0,
+    );
 
     await AudioPlayerService.instance.play(
       audio: cancion.audio,
@@ -72,7 +81,8 @@ class _BuscadorState extends State<Buscador> {
             controller: _controller,
             onChanged: buscar,
             decoration: InputDecoration(
-              hintText: "Buscar artistas o canciones...",
+              hintText:
+                  "Buscar artistas o canciones...",
               hintStyle: const TextStyle(
                 color: Colors.grey,
               ),
@@ -82,11 +92,13 @@ class _BuscadorState extends State<Buscador> {
               ),
               filled: true,
               fillColor: const Color(0xFFF5F5F5),
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding:
+                  const EdgeInsets.symmetric(
                 vertical: 18,
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius:
+                    BorderRadius.circular(30),
                 borderSide: BorderSide.none,
               ),
             ),
@@ -101,30 +113,60 @@ class _BuscadorState extends State<Buscador> {
             child: Column(
               children: resultados.map((cancion) {
                 return Card(
-                  margin: const EdgeInsets.only(bottom: 6),
+                  margin:
+                      const EdgeInsets.only(bottom: 6),
                   child: ListTile(
                     leading: const Icon(
                       Icons.music_note,
                       color: Colors.green,
                     ),
+
                     title: Text(
                       cancion.titulo,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      overflow:
+                          TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
                     subtitle: Text(
                       cancion.artista,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      overflow:
+                          TextOverflow.ellipsis,
                     ),
-                    trailing: const Icon(
-                      Icons.play_circle_fill,
-                      color: Colors.green,
+
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          tooltip:
+                              'Agregar a playlist',
+                          icon: const Icon(
+                            Icons.playlist_add,
+                            color: Colors.green,
+                          ),
+                          onPressed: () {
+                            mostrarAgregarAPlaylistDialog(
+                              context: context,
+                              audio: cancion.audio,
+                              tituloCancion:
+                                  cancion.titulo,
+                            );
+                          },
+                        ),
+
+                        const Icon(
+                          Icons.play_circle_fill,
+                          color: Colors.green,
+                        ),
+                      ],
                     ),
-                    onTap: () => reproducir(cancion),
+
+                    onTap: () =>
+                        reproducir(cancion),
                   ),
                 );
               }).toList(),

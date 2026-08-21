@@ -3,22 +3,27 @@ import 'package:flutter/material.dart';
 import '../lista_canciones.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
+import 'agregar_a_playlist_dialog.dart';
 
 class CancionesPopulares extends StatefulWidget {
   const CancionesPopulares({super.key});
 
   @override
-  State<CancionesPopulares> createState() => _CancionesPopularesState();
+  State<CancionesPopulares> createState() =>
+      _CancionesPopularesState();
 }
 
-class _CancionesPopularesState extends State<CancionesPopulares> {
+class _CancionesPopularesState
+    extends State<CancionesPopulares> {
   bool mostrarTodas = false;
 
   @override
   Widget build(BuildContext context) {
     final cantidad = mostrarTodas
         ? listaCanciones.length
-        : (listaCanciones.length > 8 ? 8 : listaCanciones.length);
+        : (listaCanciones.length > 8
+            ? 8
+            : listaCanciones.length);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,13 +70,46 @@ class _CancionesPopularesState extends State<CancionesPopulares> {
                     },
                   ),
                 ),
-                title: Text(cancion.titulo),
-                subtitle: Text(cancion.artista),
-                trailing: const Icon(
-                  Icons.play_circle_fill,
-                  color: Colors.green,
-                  size: 35,
+
+                title: Text(
+                  cancion.titulo,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
+
+                subtitle: Text(
+                  cancion.artista,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      tooltip: 'Agregar a playlist',
+                      icon: const Icon(
+                        Icons.playlist_add,
+                        color: Colors.green,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        mostrarAgregarAPlaylistDialog(
+                          context: context,
+                          audio: cancion.audio,
+                          tituloCancion: cancion.titulo,
+                        );
+                      },
+                    ),
+
+                    const Icon(
+                      Icons.play_circle_fill,
+                      color: Colors.green,
+                      size: 35,
+                    ),
+                  ],
+                ),
+
                 onTap: () async {
                   AudioPlayerService.instance.cargarCola(
                     listaCanciones,

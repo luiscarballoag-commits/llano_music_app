@@ -5,6 +5,7 @@ import '../models/artist.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import '../data/all_songs.dart';
+import '../widgets/agregar_a_playlist_dialog.dart';
 
 class ArtistScreen extends StatelessWidget {
   final Artist artist;
@@ -46,10 +47,13 @@ class ArtistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final canciones = allSongs
-        .where((cancion) => cancion.artista == artist.nombre)
+        .where(
+          (cancion) => cancion.artista == artist.nombre,
+        )
         .toList();
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF3F5F7),
       appBar: AppBar(
         title: Text(artist.nombre),
       ),
@@ -58,15 +62,13 @@ class ArtistScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            // FOTO + INFORMACIÓN + CANCIONES
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
               children: [
-
-                // FOTO DEL ARTISTA
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius:
+                      BorderRadius.circular(16),
                   child: Container(
                     width: 145,
                     height: 145,
@@ -87,12 +89,11 @@ class ArtistScreen extends StatelessWidget {
 
                 const SizedBox(width: 16),
 
-                // INFORMACIÓN Y CANCIONES
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
-
                       Text(
                         artist.nombre,
                         style: const TextStyle(
@@ -132,13 +133,25 @@ class ArtistScreen extends StatelessWidget {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              '${artist.estado}, ${artist.pais}',
+                              '${artist.estado}, '
+                              '${artist.pais}',
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
                             ),
                           ),
                         ],
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      Text(
+                        '${canciones.length} '
+                        '${canciones.length == 1 ? 'canción' : 'canciones'}',
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -148,7 +161,6 @@ class ArtistScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // CANCIONES
             const Text(
               'Canciones',
               style: TextStyle(
@@ -161,9 +173,11 @@ class ArtistScreen extends StatelessWidget {
 
             if (canciones.isEmpty)
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding:
+                    EdgeInsets.symmetric(vertical: 20),
                 child: Text(
-                  'Este artista todavía no tiene canciones disponibles.',
+                  'Este artista todavía no tiene '
+                  'canciones disponibles.',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black54,
@@ -171,56 +185,100 @@ class ArtistScreen extends StatelessWidget {
                 ),
               )
             else
-              ...canciones.asMap().entries.map((entrada) {
-                final indice = entrada.key;
-                final cancion = entrada.value;
+              ...canciones.asMap().entries.map(
+                (entrada) {
+                  final indice = entrada.key;
+                  final cancion = entrada.value;
 
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  elevation: 2,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.green.shade100,
-                      child: Text(
-                        '${indice + 1}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                  return Card(
+                    margin: const EdgeInsets.only(
+                      bottom: 8,
+                    ),
+                    elevation: 2,
+                    child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius:
+                            BorderRadius.circular(10),
+                        child: Image.asset(
+                          cancion.imagen,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) {
+                            return Container(
+                              width: 50,
+                              height: 50,
+                              color: Colors.green.shade100,
+                              child: const Icon(
+                                Icons.music_note,
+                                color: Colors.green,
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    ),
-                    title: Text(
-                      cancion.titulo,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+
+                      title: Text(
+                        cancion.titulo,
+                        maxLines: 1,
+                        overflow:
+                            TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+
+                      subtitle: Text(
+                        artist.nombre,
+                        maxLines: 1,
+                        overflow:
+                            TextOverflow.ellipsis,
+                      ),
+
+                      trailing: Row(
+                        mainAxisSize:
+                            MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            tooltip:
+                                'Agregar a playlist',
+                            icon: const Icon(
+                              Icons.playlist_add,
+                              color: Colors.green,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              mostrarAgregarAPlaylistDialog(
+                                context: context,
+                                audio: cancion.audio,
+                                tituloCancion:
+                                    cancion.titulo,
+                              );
+                            },
+                          ),
+
+                          const Icon(
+                            Icons.play_circle_fill,
+                            color: Colors.green,
+                            size: 32,
+                          ),
+                        ],
+                      ),
+
+                      onTap: () {
+                        _reproducirCancion(
+                          context,
+                          canciones,
+                          indice,
+                        );
+                      },
                     ),
-                    subtitle: Text(
-                      artist.nombre,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: const Icon(
-                      Icons.play_circle_fill,
-                      color: Colors.green,
-                      size: 32,
-                    ),
-                    onTap: () {
-                      _reproducirCancion(
-                        context,
-                        canciones,
-                        indice,
-                      );
-                    },
-                  ),
-                );
-              }),
+                  );
+                },
+              ),
 
             const SizedBox(height: 24),
 
-            // BIOGRAFÍA
             const Text(
               'Biografía',
               style: TextStyle(

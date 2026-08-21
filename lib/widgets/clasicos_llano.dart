@@ -9,68 +9,75 @@ class ClasicosLlano extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Grandes Voces del Llano',
+            "Grandes Voces del Llano",
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 15),
 
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: clasicosLlano.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 8),
-            itemBuilder: (context, index) {
-              final artista = clasicosLlano[index];
+          SizedBox(
+            height: 105,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: clasicosLlano.length,
+              itemBuilder: (context, index) {
+                final artista = clasicosLlano[index];
 
-              return Card(
-                elevation: 2,
-                margin: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(14),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ClasicoLlanoScreen(
-                          artista: artista,
-                        ),
+                return Container(
+                  width: 300,
+                  margin: const EdgeInsets.only(right: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 3),
                       ),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 8,
-                    ),
+                    ],
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(18),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ClasicoLlanoScreen(
+                            artista: artista,
+                          ),
+                        ),
+                      );
+                    },
                     child: Row(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(18),
+                            bottomLeft: Radius.circular(18),
+                          ),
                           child: Image.asset(
                             artista.imagen,
-                            width: 58,
-                            height: 58,
+                            width: 95,
+                            height: 105,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) {
                               return Container(
-                                width: 58,
-                                height: 58,
-                                color: Colors.grey.shade200,
+                                width: 95,
+                                height: 105,
+                                color: Colors.grey.shade300,
                                 child: const Icon(
                                   Icons.music_note,
-                                  color: Colors.green,
+                                  size: 45,
+                                  color: Colors.grey,
                                 ),
                               );
                             },
@@ -81,11 +88,12 @@ class ClasicosLlano extends StatelessWidget {
 
                         Expanded(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 artista.artista,
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 16,
@@ -93,57 +101,35 @@ class ClasicosLlano extends StatelessWidget {
                                 ),
                               ),
 
-                              const SizedBox(height: 3),
+                              const SizedBox(height: 5),
 
                               Text(
                                 artista.apodo,
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.grey.shade700,
                                 ),
                               ),
-
-                              const SizedBox(height: 3),
-
-                              Text(
-                                '${artista.estado}, ${artista.pais}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54,
-                                ),
-                              ),
-
-                              const SizedBox(height: 3),
-
-                              Text(
-                                '${artista.canciones.length} canciones',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
                             ],
                           ),
                         ),
 
-                        const SizedBox(width: 8),
-
-                        const Icon(
-                          Icons.chevron_right,
-                          color: Colors.grey,
-                          size: 28,
+                        const Padding(
+                          padding: EdgeInsets.only(right: 12),
+                          child: Icon(
+                            Icons.chevron_right,
+                            color: Colors.green,
+                            size: 30,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ],
       ),

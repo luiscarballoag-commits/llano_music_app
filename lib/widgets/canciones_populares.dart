@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../lista_canciones.dart';
+import '../viewmodels/home_view_model.dart';
+import '../models/artist.dart';
+import '../screens/artist_screen.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import 'agregar_a_playlist_dialog.dart';
@@ -16,6 +19,18 @@ class CancionesPopulares extends StatefulWidget {
 class _CancionesPopularesState
     extends State<CancionesPopulares> {
   bool mostrarTodas = false;
+
+  List<Artist> get artistasAdicionales {
+    final artistasPopulares =
+        listaCanciones.map((c) => c.artista).toSet();
+
+    final viewModel = HomeViewModel();
+
+    return viewModel.artists.where((artist) {
+      return artistasPopulares.contains(artist.nombre) &&
+          !artist.destacado;
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +170,90 @@ class _CancionesPopularesState
               ),
             ),
           ),
+
+        if (artistasAdicionales.isNotEmpty) ...[
+          const SizedBox(height: 20),
+
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text(
+              "Artistas",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 12),
+
+          SizedBox(
+            height: 155,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              itemCount: artistasAdicionales.length,
+              itemBuilder: (context, index) {
+                final artist = artistasAdicionales[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ArtistScreen(
+                          artist: artist,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 125,
+                    margin: const EdgeInsets.only(right: 14),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            artist.imagen,
+                            width: 110,
+                            height: 110,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) {
+                              return Container(
+                                width: 110,
+                                height: 110,
+                                color: Colors.green.shade100,
+                                child: const Icon(
+                                  Icons.person,
+                                  size: 45,
+                                  color: Colors.green,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
+                        const SizedBox(height: 7),
+
+                        Text(
+                          artist.nombre,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ],
     );
   }

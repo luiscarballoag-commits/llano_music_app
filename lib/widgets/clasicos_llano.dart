@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../cancion.dart';
 import '../data/clasicos_llano.dart';
-import '../player_page.dart';
-import '../services/audio_player_service.dart';
+import '../screens/clasico_llano_screen.dart';
 
 class ClasicosLlano extends StatelessWidget {
   const ClasicosLlano({super.key});
@@ -11,121 +9,77 @@ class ClasicosLlano extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Grandes Voces del Llano",
+            'Grandes Voces del Llano',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 15),
+          const SizedBox(height: 12),
 
-          SizedBox(
-            height: 230,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: clasicosLlano.length,
-              itemBuilder: (context, index) {
-                final artista = clasicosLlano[index];
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: clasicosLlano.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 8),
+            itemBuilder: (context, index) {
+              final artista = clasicosLlano[index];
 
-                return Container(
-                  width: 170,
-                  margin: const EdgeInsets.only(right: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 6,
-                        offset: Offset(0, 3),
+              return Card(
+                elevation: 2,
+                margin: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(14),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ClasicoLlanoScreen(
+                          artista: artista,
+                        ),
                       ),
-                    ],
-                  ),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(18),
-                    onTap: () async {
-                      final cola = <Cancion>[];
-
-                      for (final a in clasicosLlano) {
-                        for (final c in a.canciones) {
-                          cola.add(
-                            Cancion(
-                              artista: a.artista,
-                              titulo: c.titulo,
-                              imagen: a.imagen,
-                              audio: c.audio,
-                            ),
-                          );
-                        }
-                      }
-
-                      int indiceInicial = cola.indexWhere(
-                        (c) =>
-                            c.artista == artista.artista &&
-                            c.titulo == artista.canciones.first.titulo,
-                      );
-
-                      if (indiceInicial == -1) {
-                        indiceInicial = 0;
-                      }
-
-                      AudioPlayerService.instance.cargarCola(
-                        cola,
-                        indiceInicial,
-                      );
-
-                      final cancion = cola[indiceInicial];
-
-                      await AudioPlayerService.instance.play(
-                        audio: cancion.audio,
-                        tituloCancion: cancion.titulo,
-                        artistaCancion: cancion.artista,
-                        imagenCancion: cancion.imagen,
-                      );
-
-                      if (context.mounted) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const PlayerPage(),
-                          ),
-                        );
-                      }
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
+                    child: Row(
                       children: [
                         ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(18),
-                          ),
+                          borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
                             artista.imagen,
-                            height: 120,
-                            width: double.infinity,
+                            width: 58,
+                            height: 58,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) {
                               return Container(
-                                height: 120,
-                                color: Colors.grey.shade300,
+                                width: 58,
+                                height: 58,
+                                color: Colors.grey.shade200,
                                 child: const Icon(
                                   Icons.music_note,
-                                  size: 50,
-                                  color: Colors.grey,
+                                  color: Colors.green,
                                 ),
                               );
                             },
                           ),
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(10),
+                        const SizedBox(width: 12),
+
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -134,52 +88,62 @@ class ClasicosLlano extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
                                   fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
 
-                              const SizedBox(height: 4),
+                              const SizedBox(height: 3),
 
                               Text(
                                 artista.apodo,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  color: Colors.grey.shade700,
                                   fontSize: 13,
+                                  color: Colors.grey.shade700,
                                 ),
                               ),
 
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 3),
 
                               Text(
-                                "${artista.estado}, ${artista.pais}",
+                                '${artista.estado}, ${artista.pais}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.black54,
                                 ),
                               ),
 
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 3),
 
                               Text(
-                                "${artista.canciones.length} canciones",
+                                '${artista.canciones.length} canciones',
                                 style: const TextStyle(
+                                  fontSize: 12,
                                   color: Colors.green,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 12,
                                 ),
                               ),
                             ],
                           ),
                         ),
+
+                        const SizedBox(width: 8),
+
+                        const Icon(
+                          Icons.chevron_right,
+                          color: Colors.grey,
+                          size: 28,
+                        ),
                       ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),

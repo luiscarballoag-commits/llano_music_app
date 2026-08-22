@@ -218,32 +218,10 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                       ),
                     ),
 
-                    subtitle: Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-                      children: [
-                        Text(artista.apodo),
-
-                        const SizedBox(height: 4),
-
-                        Text(
-                          "${artista.estado}, ${artista.pais}",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-
-                        const SizedBox(height: 4),
-
-                        Text(
-                          "${artista.canciones.length} canciones",
-                          style: const TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                    subtitle: Text(
+                      artista.apodo,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
 
                     trailing: const Icon(

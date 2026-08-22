@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../services/favorites_service.dart';
 import 'playlists_screen.dart';
 
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({super.key});
+
+  Future<void> _abrirYouTube() async {
+    final url = Uri.parse('https://youtube.com/@lcarballog');
+    await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
+  Future<void> _abrirTikTok() async {
+    final url = Uri.parse('https://www.tiktok.com/@produccioneslcarballog');
+    await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +130,47 @@ class PerfilScreen extends StatelessWidget {
                   "Música y cultura de nuestro llano",
                 ),
                 trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Producciones Lcarballog",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Card(
+              child: ListTile(
+                leading: Icon(
+                  Icons.play_circle_fill,
+                  color: Colors.red,
+                  size: 32,
+                ),
+                title: Text("YouTube"),
+                trailing: Icon(Icons.chevron_right),
+                onTap: _abrirYouTube,
+              ),
+            ),
+
+            Card(
+              child: ListTile(
+                leading: Icon(
+                  Icons.music_note,
+                  color: Colors.black,
+                  size: 30,
+                ),
+                title: Text("TikTok"),
+                trailing: Icon(Icons.chevron_right),
+                onTap: _abrirTikTok,
               ),
             ),
 

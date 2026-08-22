@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../cancion.dart';
 import '../data/clasicos_llano.dart';
 import '../player_page.dart';
-import 'playlists_screen.dart';
 import '../services/audio_player_service.dart';
+import 'clasico_llano_screen.dart';
+import 'playlists_screen.dart';
 
 class ExplorarScreen extends StatefulWidget {
   const ExplorarScreen({super.key});
@@ -31,18 +32,85 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
         artistas = List.from(clasicosLlano);
       } else {
         artistas = clasicosLlano.where((artista) {
+          final busqueda = texto.toLowerCase();
+
           return artista.artista
                   .toLowerCase()
-                  .contains(texto.toLowerCase()) ||
+                  .contains(busqueda) ||
               artista.apodo
                   .toLowerCase()
-                  .contains(texto.toLowerCase()) ||
+                  .contains(busqueda) ||
               artista.estado
                   .toLowerCase()
-                  .contains(texto.toLowerCase());
+                  .contains(busqueda);
         }).toList();
       }
     });
+  }
+
+  Future<void> reproducirArtista(
+    BuildContext context,
+    ClasicoLlano artista,
+  ) async {
+    final cola = <Cancion>[];
+
+    final indiceOriginal = clasicosLlano.indexOf(artista);
+
+    for (int i = indiceOriginal;
+        i < clasicosLlano.length;
+        i++) {
+      final a = clasicosLlano[i];
+
+      cola.addAll(
+        a.canciones.map(
+          (c) => Cancion(
+            artista: a.artista,
+            titulo: c.titulo,
+            imagen: a.imagen,
+            audio: c.audio,
+          ),
+        ),
+      );
+    }
+
+    if (cola.isEmpty) return;
+
+    AudioPlayerService.instance.cargarCola(
+      cola,
+      0,
+    );
+
+    final primera = cola.first;
+
+    await AudioPlayerService.instance.play(
+      audio: primera.audio,
+      tituloCancion: primera.titulo,
+      artistaCancion: primera.artista,
+      imagenCancion: primera.imagen,
+    );
+
+    if (!context.mounted) return;
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const PlayerPage(),
+      ),
+    );
+  }
+
+  void abrirArtista(
+    BuildContext context,
+    ClasicoLlano artista,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ClasicoLlanoScreen(
+          artista: artista,
+        ),
+      ),
+    );
   }
 
   @override
@@ -62,7 +130,6 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
 
       body: Column(
         children: [
-
           Padding(
             padding: const EdgeInsets.fromLTRB(
               16,
@@ -79,8 +146,7 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
                 ),
               ),
@@ -147,6 +213,8 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                         );
                       }
 
+                      if (cola.isEmpty) return;
+
                       AudioPlayerService.instance
                           .cargarCola(cola, 0);
 
@@ -176,11 +244,14 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
 
           Expanded(
             child: ListView.builder(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
               itemCount: artistas.length,
               itemBuilder: (context, index) {
-                final artista = artistas[index];                return Card(
+                final artista = artistas[index];
+
+                return Card(
                   elevation: 3,
                   margin: const EdgeInsets.only(bottom: 12),
                   shape: RoundedRectangleBorder(
@@ -224,55 +295,24 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
 
-                    trailing: const Icon(
-                      Icons.play_circle_fill,
-                      color: Colors.green,
-                      size: 42,
+                    trailing: IconButton(
+                      icon: const Icon(
+                        Icons.play_circle_fill,
+                        color: Colors.green,
+                        size: 42,
+                      ),
+                      onPressed: () {
+                        reproducirArtista(
+                          context,
+                          artista,
+                        );
+                      },
                     ),
 
-                    onTap: () async {
-                      final cola = <Cancion>[];
-
-                      final indiceOriginal =
-                          clasicosLlano.indexOf(artista);
-
-                      for (int i = indiceOriginal;
-                          i < clasicosLlano.length;
-                          i++) {
-                        final a = clasicosLlano[i];
-
-                        cola.addAll(
-                          a.canciones.map(
-                            (c) => Cancion(
-                              artista: a.artista,
-                              titulo: c.titulo,
-                              imagen: a.imagen,
-                              audio: c.audio,
-                            ),
-                          ),
-                        );
-                      }
-
-                      AudioPlayerService.instance
-                          .cargarCola(cola, 0);
-
-                      final primera = cola.first;
-
-                      await AudioPlayerService.instance.play(
-                        audio: primera.audio,
-                        tituloCancion: primera.titulo,
-                        artistaCancion: primera.artista,
-                        imagenCancion: primera.imagen,
-                      );
-
-                      if (!context.mounted) return;
-
-                      Navigator.push(
+                    onTap: () {
+                      abrirArtista(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const PlayerPage(),
-                        ),
+                        artista,
                       );
                     },
                   ),

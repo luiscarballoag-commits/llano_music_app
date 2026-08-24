@@ -34,9 +34,9 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
+            keyAlias = "llano_music"
             keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
+            storeFile = file("llano_music_release.jks")
             storePassword = keystoreProperties["storePassword"] as String
         }
     }

@@ -96,7 +96,6 @@ flutter:
     - assets/images/artistas/
     - assets/images/clasicos/
     - assets/images/logo/
-    - assets/images/icons/
 
 flutter_launcher_icons:
   android: true

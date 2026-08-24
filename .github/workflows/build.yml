@@ -30,14 +30,13 @@ jobs:
           KEYSTORE_BASE64: ${{ secrets.LLANO_MUSIC_KEYSTORE_BASE64 }}
           STORE_PASSWORD: ${{ secrets.LLANO_MUSIC_STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.LLANO_MUSIC_KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.LLANO_MUSIC_KEY_ALIAS }}
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/llano_music_release.jks
 
           cat > android/key.properties <<EOF
           storePassword=$STORE_PASSWORD
           keyPassword=$KEY_PASSWORD
-          keyAlias=$KEY_ALIAS
+          keyAlias=llano_music
           storeFile=app/llano_music_release.jks
           EOF
 

@@ -5,4 +5,5 @@
 build/
 # Firma privada de Llano Music
 android/app/llano_music_release.jks
+android/app/llano_music_release.p12
 android/key.properties

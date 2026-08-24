@@ -36,7 +36,8 @@ android {
         create("release") {
             keyAlias = "llano_music"
             keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file("llano_music_release.jks")
+            storeFile = file("llano_music_release.p12")
+            storeType = "PKCS12"
             storePassword = keystoreProperties["storePassword"] as String
         }
     }

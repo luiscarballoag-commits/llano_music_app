@@ -32,6 +32,8 @@ jobs:
           KEY_PASSWORD: ${{ secrets.LLANO_MUSIC_KEY_PASSWORD }}
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/llano_music_release.p12
+          test -n "$STORE_PASSWORD" || { echo "ERROR: LLANO_MUSIC_STORE_PASSWORD vacío"; exit 1; }
+          test -n "$KEY_PASSWORD" || { echo "ERROR: LLANO_MUSIC_KEY_PASSWORD vacío"; exit 1; }
 
           printf "storePassword=%s\nkeyPassword=%s\nkeyAlias=llano_music\nstoreFile=app/llano_music_release.p12\n" "$STORE_PASSWORD" "$KEY_PASSWORD" > android/key.properties
 

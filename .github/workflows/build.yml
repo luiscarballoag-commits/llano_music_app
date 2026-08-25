@@ -33,12 +33,7 @@ jobs:
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/llano_music_release.p12
 
-          cat > android/key.properties <<EOF
-          storePassword=$STORE_PASSWORD
-          keyPassword=$KEY_PASSWORD
-          keyAlias=llano_music
-          storeFile=app/llano_music_release.p12
-          EOF
+          printf "storePassword=%s\nkeyPassword=%s\nkeyAlias=llano_music\nstoreFile=app/llano_music_release.p12\n" "$STORE_PASSWORD" "$KEY_PASSWORD" > android/key.properties
 
       - name: Obtener dependencias
         run: flutter pub get

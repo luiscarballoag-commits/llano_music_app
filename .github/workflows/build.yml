@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - prueba-96kbps
+  workflow_dispatch:
 
 jobs:
   build:

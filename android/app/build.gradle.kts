@@ -34,13 +34,15 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = "llano_music"
-            keyPassword = System.getenv("LLANO_MUSIC_KEY_PASSWORD")
-                ?: error("Falta LLANO_MUSIC_KEY_PASSWORD")
+            keyAlias = keystoreProperties.getProperty("keyAlias") ?: "llano_music"
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+                ?: System.getenv("LLANO_MUSIC_KEY_PASSWORD")
+                ?: error("Falta keyPassword para la firma Release")
             storeFile = file("llano_music_release.p12")
             storeType = "PKCS12"
-            storePassword = System.getenv("LLANO_MUSIC_STORE_PASSWORD")
-                ?: error("Falta LLANO_MUSIC_STORE_PASSWORD")
+            storePassword = keystoreProperties.getProperty("storePassword")
+                ?: System.getenv("LLANO_MUSIC_STORE_PASSWORD")
+                ?: error("Falta storePassword para la firma Release")
         }
     }
 

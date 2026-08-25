@@ -188,7 +188,7 @@ class _CancionesPopularesState
           const SizedBox(height: 12),
 
           SizedBox(
-            height: 155,
+            height: 190,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -208,21 +208,21 @@ class _CancionesPopularesState
                     );
                   },
                   child: Container(
-                    width: 125,
+                    width: 140,
                     margin: const EdgeInsets.only(right: 14),
                     child: Column(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(18),
                           child: Image.asset(
                             artist.imagen,
-                            width: 110,
-                            height: 110,
+                            width: 140,
+                            height: 140,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) {
                               return Container(
-                                width: 110,
-                                height: 110,
+                                width: 140,
+                                height: 140,
                                 color: Colors.green.shade100,
                                 child: const Icon(
                                   Icons.person,

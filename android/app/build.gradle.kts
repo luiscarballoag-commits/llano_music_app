@@ -35,10 +35,10 @@ android {
     signingConfigs {
         create("release") {
             keyAlias = "llano_music"
-            keyPassword = keystoreProperties["keyPassword"] as String
+            keyPassword = keystoreProperties.getProperty("keyPassword") ?: error("Falta keyPassword en key.properties")
             storeFile = file("llano_music_release.p12")
             storeType = "PKCS12"
-            storePassword = keystoreProperties["storePassword"] as String
+            storePassword = keystoreProperties.getProperty("storePassword") ?: error("Falta storePassword en key.properties")
         }
     }
 

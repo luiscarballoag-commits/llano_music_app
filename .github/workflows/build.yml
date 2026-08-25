@@ -45,6 +45,19 @@ jobs:
       - name: Analizar proyecto
         run: flutter analyze
 
+      - name: Verificar key.properties antes de Gradle
+        run: |
+          echo "Contenido seguro de key.properties:"
+          test -f android/key.properties || { echo "ERROR: key.properties NO existe"; exit 1; }
+          sed -E 's/=.*/=<OK>/' android/key.properties
+
+          echo "Claves detectadas:"
+          grep -E '^(storePassword|keyPassword|keyAlias|storeFile)=' android/key.properties | cut -d= -f1
+
+          echo "Verificando keystore:"
+          test -f android/app/llano_music_release.p12 || { echo "ERROR: keystore NO existe"; exit 1; }
+          ls -lh android/app/llano_music_release.p12
+
       - name: Compilar APK Release
         run: flutter build apk --release
 

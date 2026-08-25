@@ -37,7 +37,15 @@ jobs:
 
           printf "storePassword=%s\nkeyPassword=%s\nkeyAlias=llano_music\nstoreFile=app/llano_music_release.p12\n" "$STORE_PASSWORD" "$KEY_PASSWORD" > android/key.properties
           echo "Propiedades generadas:"
-          grep -E "^(storePassword|keyPassword|keyAlias|storeFile)=" android/key.properties | sed -E "s/=.*$/=<OK>/"
+          test -f android/key.properties || { echo "ERROR: NO se creó key.properties"; exit 1; }
+
+          echo "storePassword: $(grep -c "^storePassword=" android/key.properties)"
+          echo "keyPassword:   $(grep -c "^keyPassword=" android/key.properties)"
+          echo "keyAlias:      $(grep -c "^keyAlias=" android/key.properties)"
+          echo "storeFile:     $(grep -c "^storeFile=" android/key.properties)"
+
+          echo "Longitud segura de valores:"
+          awk -F= '/^(storePassword|keyPassword|keyAlias|storeFile)=/ {printf "%s=%d caracteres\\n", $1, length($2)}' android/key.properties
 
       - name: Obtener dependencias
         run: flutter pub get
@@ -59,6 +67,9 @@ jobs:
           ls -lh android/app/llano_music_release.p12
 
       - name: Compilar APK Release
+        env:
+          LLANO_MUSIC_STORE_PASSWORD: ${{ secrets.LLANO_MUSIC_STORE_PASSWORD }}
+          LLANO_MUSIC_KEY_PASSWORD: ${{ secrets.LLANO_MUSIC_KEY_PASSWORD }}
         run: flutter build apk --release
 
       - name: Subir APK

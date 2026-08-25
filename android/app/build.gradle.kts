@@ -35,10 +35,12 @@ android {
     signingConfigs {
         create("release") {
             keyAlias = "llano_music"
-            keyPassword = keystoreProperties.getProperty("keyPassword") ?: error("Falta keyPassword en key.properties")
+            keyPassword = System.getenv("LLANO_MUSIC_KEY_PASSWORD")
+                ?: error("Falta LLANO_MUSIC_KEY_PASSWORD")
             storeFile = file("llano_music_release.p12")
             storeType = "PKCS12"
-            storePassword = keystoreProperties.getProperty("storePassword") ?: error("Falta storePassword en key.properties")
+            storePassword = System.getenv("LLANO_MUSIC_STORE_PASSWORD")
+                ?: error("Falta LLANO_MUSIC_STORE_PASSWORD")
         }
     }
 

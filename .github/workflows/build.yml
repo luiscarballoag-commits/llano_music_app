@@ -36,6 +36,8 @@ jobs:
           test -n "$KEY_PASSWORD" || { echo "ERROR: LLANO_MUSIC_KEY_PASSWORD vacío"; exit 1; }
 
           printf "storePassword=%s\nkeyPassword=%s\nkeyAlias=llano_music\nstoreFile=app/llano_music_release.p12\n" "$STORE_PASSWORD" "$KEY_PASSWORD" > android/key.properties
+          echo "Propiedades generadas:"
+          grep -E "^(storePassword|keyPassword|keyAlias|storeFile)=" android/key.properties | sed -E "s/=.*$/=<OK>/"
 
       - name: Obtener dependencias
         run: flutter pub get

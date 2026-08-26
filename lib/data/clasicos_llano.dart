@@ -55,7 +55,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Amiga, Novia y Amante",
-        audio: "assets/audio/clasicos/04_Jesus_Moreno,_Humberto_Salas,_Humberto_Salas_Amiga,_Novia_y_Amante.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1ylIGEHGqquLkpCkdp7dG-W97GZlDHhHK",
       ),
       CancionClasica(
         titulo: "Que Te Perdone El Diablo",

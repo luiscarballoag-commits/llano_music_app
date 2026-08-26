@@ -86,12 +86,15 @@ class AudioPlayerService extends ChangeNotifier {
     audioActual = audio;
 
     final ruta = audio.replaceFirst("assets/", "");
+    final source = audio.startsWith("http://") || audio.startsWith("https://")
+        ? UrlSource(audio)
+        : AssetSource(ruta);
 
     await player.stop();
 
     try {
       await player.play(
-        AssetSource(ruta),
+        source,
       );
 
       reproduciendo = true;

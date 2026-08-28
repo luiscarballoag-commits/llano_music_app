@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../lista_canciones.dart';
+import '../cancion.dart';
 import '../viewmodels/home_view_model.dart';
 import '../models/artist.dart';
 import '../screens/artist_screen.dart';
@@ -20,6 +21,20 @@ class _CancionesPopularesState
     extends State<CancionesPopulares> {
   bool mostrarTodas = false;
 
+  List<Cancion> get cancionesParaMostrar {
+    final resultado = <Cancion>[];
+    final roberto = listaCanciones
+        .where((c) => c.artista == "Roberto Carballo")
+        .where((c) => c.titulo == "Aquí Está Roberto El Zorro" || c.titulo == "Bonita")
+        .toList();
+
+    resultado.addAll(
+      listaCanciones.where((c) => c.artista != "Roberto Carballo"),
+    );
+    resultado.addAll(roberto);
+    return resultado;
+  }
+
   List<Artist> get artistasAdicionales {
     final artistasPopulares =
         listaCanciones.map((c) => c.artista).toSet();
@@ -35,10 +50,10 @@ class _CancionesPopularesState
   @override
   Widget build(BuildContext context) {
     final cantidad = mostrarTodas
-        ? listaCanciones.length
-        : (listaCanciones.length > 8
+        ? cancionesParaMostrar.length
+        : (cancionesParaMostrar.length > 8
             ? 8
-            : listaCanciones.length);
+            : cancionesParaMostrar.length);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +76,7 @@ class _CancionesPopularesState
           physics: const NeverScrollableScrollPhysics(),
           itemCount: cantidad,
           itemBuilder: (context, index) {
-            final cancion = listaCanciones[index];
+            final cancion = cancionesParaMostrar[index];
 
             return Card(
               margin: const EdgeInsets.symmetric(
@@ -127,7 +142,7 @@ class _CancionesPopularesState
 
                 onTap: () async {
                   AudioPlayerService.instance.cargarCola(
-                    listaCanciones,
+                    cancionesParaMostrar,
                     index,
                   );
 
@@ -152,7 +167,7 @@ class _CancionesPopularesState
           },
         ),
 
-        if (listaCanciones.length > 8)
+        if (cancionesParaMostrar.length > 8)
           Center(
             child: TextButton.icon(
               onPressed: () {

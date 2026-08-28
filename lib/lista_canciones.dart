@@ -24,6 +24,28 @@ List<Cancion> listaCanciones = [
     audio: "assets/audio/roberto_carballo/no_soy_dueno_de_esa_flor.mp3",
   ),
 
+  // Roberto Carballo - canciones desde Google Drive
+  Cancion(
+    artista: "Roberto Carballo",
+    titulo: "Bonita",
+    imagen: "assets/images/artistas/roberto_carballo.jpg",
+    audio: "https://drive.google.com/uc?export=download&id=14DNTT9-BZrDserszUXe1HftssObS637g",
+  ),
+
+  Cancion(
+    artista: "Roberto Carballo",
+    titulo: "Mi corazón Te prefiere",
+    imagen: "assets/images/artistas/roberto_carballo.jpg",
+    audio: "https://drive.google.com/uc?export=download&id=1xNcd0vc4X11B60lErk4hjsjsirB1ach2",
+  ),
+
+  Cancion(
+    artista: "Roberto Carballo",
+    titulo: "Tu fiel pretendiente",
+    imagen: "assets/images/artistas/roberto_carballo.jpg",
+    audio: "https://drive.google.com/uc?export=download&id=1qDCyWP7IcfFmTsESucTLWFj9sHzIHQWV",
+  ),
+
   // Edwin Trocel
   Cancion(
     artista: "Edwin Trocel",

@@ -61,6 +61,18 @@ final List<ClasicoLlano> clasicosLlano = [
         titulo: "Que Te Perdone El Diablo",
         audio: "assets/audio/clasicos/03_Jesus_Moreno,_Miguel_Tovar,_Saverio_Graterol,_Miguel_Tovar,_Saverio.mp3",
       ),
+      CancionClasica(
+        titulo: "Punto Final",
+        audio: "https://drive.google.com/uc?export=download&id=1XxKjTlrafx9Cs27YD3EzEmzDwyseZLtS",
+      ),
+      CancionClasica(
+        titulo: "Ámame Siempre",
+        audio: "https://drive.google.com/uc?export=download&id=1XBuQrinj7QXfxURSiytQFOhDkMK_iN9f",
+      ),
+      CancionClasica(
+        titulo: "Seamos Sinceros",
+        audio: "https://drive.google.com/uc?export=download&id=1E6JUOlLDrPWUMF-kZ0rR0fXOaI_q96xx",
+      ),
     ],
   ),
 

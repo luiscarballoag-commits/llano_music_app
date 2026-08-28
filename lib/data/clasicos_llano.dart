@@ -43,6 +43,18 @@ final List<ClasicoLlano> clasicosLlano = [
         titulo: "Cuando Me Robé El Cochino",
         audio: "assets/audio/clasicos/02_Santiago_Rojas_El_Turpial_de_Guardatinajas_Cuando_Me_Robe_el.mp3",
       ),
+      CancionClasica(
+        titulo: "El Juego del Araguato",
+        audio: "https://drive.google.com/uc?export=download&id=11bwWciy-iuBK4oQ5HTtrYZfPIc5jL9Qy",
+      ),
+      CancionClasica(
+        titulo: "La Culebra Bejuca",
+        audio: "https://drive.google.com/uc?export=download&id=1QtYUAxcJ2eAiyrvNk3Wxk471GADM8c3h",
+      ),
+      CancionClasica(
+        titulo: "La Tuerta Carmen Dolores",
+        audio: "https://drive.google.com/uc?export=download&id=1tSo7u8CRXh-ifeuvezG7X0qzcTM09-6T",
+      ),
     ],
   ),
 
@@ -90,6 +102,18 @@ final List<ClasicoLlano> clasicosLlano = [
       CancionClasica(
         titulo: "Sentimiento Apureño",
         audio: "assets/audio/clasicos/francisco_montoya/sentimiento_apureno.mp3",
+      ),
+      CancionClasica(
+        titulo: "La Tristeza del Corral",
+        audio: "https://drive.google.com/uc?export=download&id=19S3X9y86_-R0dkZOpS8YPMpddyhryJKO",
+      ),
+      CancionClasica(
+        titulo: "Brisas De Achaguas",
+        audio: "https://drive.google.com/uc?export=download&id=1hsUM7BtZkjUPW5am5aKGq9sCynJJ_Ifq",
+      ),
+      CancionClasica(
+        titulo: "Cucarachero Araucano",
+        audio: "https://drive.google.com/uc?export=download&id=1FoCKAYD0i4snS720zrpcQTl8NCfS7sOG",
       ),
     ],
   ),
@@ -374,6 +398,18 @@ ClasicoLlano(
     CancionClasica(
       titulo: "El Auténtico Llanero",
       audio: "assets/audio/clasicos/nelson_morales/el_autentico_llanero.mp3",
+    ),
+    CancionClasica(
+      titulo: "Las Inquietudes de Kirpa",
+      audio: "https://drive.google.com/uc?export=download&id=1JKdGvOGWy9MvgpjzMGMe5me7Kt04EH_R",
+    ),
+    CancionClasica(
+      titulo: "Dos Copleros De Mi Tierra",
+      audio: "https://drive.google.com/uc?export=download&id=1fBfbIVccHrsBRg2Yw4oo_AnMYE7fTb9m",
+    ),
+    CancionClasica(
+      titulo: "Dos Apureños Completos",
+      audio: "https://drive.google.com/uc?export=download&id=1src9nIYay_8sImFk-52JY8kboRdV7rLX",
     ),
   ],
 ),

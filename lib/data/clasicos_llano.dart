@@ -105,15 +105,15 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "La Tristeza del Corral",
-        audio: "https://drive.google.com/uc?export=download&id=19S3X9y86_-R0dkZOpS8YPMpddyhryJKO",
+        audio: "https://drive.google.com/uc?export=download&id=1w4Q7-vjCQzcuRBYhnPfmiytTFRwAWCN3",
       ),
       CancionClasica(
         titulo: "Brisas De Achaguas",
-        audio: "https://drive.google.com/uc?export=download&id=1hsUM7BtZkjUPW5am5aKGq9sCynJJ_Ifq",
+        audio: "https://drive.google.com/uc?export=download&id=1xDVAUY9Zp3RAvHWRv6dUNnvcq46qixJ4",
       ),
       CancionClasica(
         titulo: "Cucarachero Araucano",
-        audio: "https://drive.google.com/uc?export=download&id=1FoCKAYD0i4snS720zrpcQTl8NCfS7sOG",
+        audio: "https://drive.google.com/uc?export=download&id=1Nw2RE-LnGTmpnoEwHys0_Cxpr1w0Cuul",
       ),
     ],
   ),

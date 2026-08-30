@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../cancion.dart';
 import '../data/clasicos_llano.dart';
+import '../repositories/catalogo_music_repository.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/agregar_a_playlist_dialog.dart';
@@ -15,16 +16,48 @@ class ClasicoLlanoScreen extends StatelessWidget {
   });
 
   List<Cancion> get canciones {
-    return artista.canciones
-        .map(
-          (c) => Cancion(
+    final resultado = <Cancion>[];
+
+    // Canciones locales del artista
+    for (final c in artista.canciones) {
+      resultado.add(
+        Cancion(
+          artista: artista.artista,
+          titulo: c.titulo,
+          imagen: artista.imagen,
+          audio: c.audio,
+        ),
+      );
+    }
+
+    // Canciones del catálogo remoto pertenecientes al artista
+    final remotas = CatalogoMusicRepository.instance.canciones
+        .where(
+          (c) =>
+              c.artista.trim().toLowerCase() ==
+              artista.artista.trim().toLowerCase(),
+        );
+
+    for (final cancion in remotas) {
+      final existe = resultado.any(
+        (c) =>
+            c.titulo.trim().toLowerCase() ==
+            cancion.titulo.trim().toLowerCase(),
+      );
+
+      if (!existe) {
+        resultado.add(
+          Cancion(
             artista: artista.artista,
-            titulo: c.titulo,
+            titulo: cancion.titulo,
             imagen: artista.imagen,
-            audio: c.audio,
+            audio: cancion.audio,
           ),
-        )
-        .toList();
+        );
+      }
+    }
+
+    return resultado;
   }
 
   Future<void> reproducir(

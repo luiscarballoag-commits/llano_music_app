@@ -293,6 +293,18 @@ final List<ClasicoLlano> clasicosLlano = [
         titulo: "Juro Que Te Gusto",
         audio: "assets/audio/clasicos/26 - Elisa Guerrero - Juro que te gusto.mp3",
       ),
+      CancionClasica(
+        titulo: "Loco De Amor",
+        audio: "https://drive.google.com/uc?export=download&id=1Qor8QNGY6-p8eOeRyBGtcIfUtB3Nt0YN",
+      ),
+      CancionClasica(
+        titulo: "Enguayaba y Barrigona",
+        audio: "https://drive.google.com/uc?export=download&id=1cn6Vq_7XBEHZEwRRtQRjrSVnr0A2q8_C",
+      ),
+      CancionClasica(
+        titulo: "El Guayabo de Elisa",
+        audio: "https://drive.google.com/uc?export=download&id=1osh5WqtlOpmDdefa3IPbKxS_osQPr82H",
+      ),
     ],
   ),
 

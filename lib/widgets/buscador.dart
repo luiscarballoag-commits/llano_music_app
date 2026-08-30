@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../cancion.dart';
-import '../data/all_songs.dart';
+import '../repositories/catalogo_music_repository.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import 'agregar_a_playlist_dialog.dart';
@@ -28,7 +28,7 @@ class _BuscadorState extends State<Buscador> {
         return;
       }
 
-      resultados = allSongs.where((cancion) {
+      resultados = CatalogoMusicRepository.instance.canciones.where((cancion) {
         return cancion.titulo
                 .toLowerCase()
                 .contains(busqueda) ||

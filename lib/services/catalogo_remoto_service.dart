@@ -11,7 +11,7 @@ class CatalogoRemotoService {
   static const String catalogoUrl =
       'https://raw.githubusercontent.com/luiscarballoag-commits/llano_music_catalogo/master/catalogo.json';
 
-  Future<List<Map<String, dynamic>>> cargarCatalogo() async {
+  Future<Map<String, dynamic>> cargarCatalogoCompleto() async {
     try {
       final respuesta = await http
           .get(Uri.parse(catalogoUrl))
@@ -32,92 +32,138 @@ class CatalogoRemotoService {
         );
       }
 
-      final List<Map<String, dynamic>> resultado = [];
+      return datos;
+    } catch (e) {
+      throw Exception(
+        'Error cargando catálogo remoto: $e',
+      );
+    }
+  }
 
-      // ===========================
-      // ÁLBUMES
-      // ===========================
-      final dynamic albumes = datos['albumes'];
+  Future<List<Map<String, dynamic>>> cargarCatalogo() async {
+    final datos = await cargarCatalogoCompleto();
 
-      if (albumes is List) {
-        for (final album in albumes) {
-          if (album is! Map) continue;
+    final List<Map<String, dynamic>> resultado = [];
 
-          final artista = album['artista']?.toString().trim() ?? '';
-          final imagen = album['imagen']?.toString().trim() ?? '';
-          final tituloAlbum =
-              album['titulo']?.toString().trim() ?? '';
+    // ===========================
+    // ÁLBUMES
+    // ===========================
 
-          final dynamic canciones = album['canciones'];
+    final dynamic albumes = datos['albumes'];
 
-          if (canciones is! List) continue;
+    if (albumes is List) {
+      for (final album in albumes) {
+        if (album is! Map) continue;
 
-          for (final cancion in canciones) {
-            if (cancion is! Map) continue;
+        final artista =
+            album['artista']?.toString().trim() ?? '';
 
-            final titulo =
-                cancion['titulo']?.toString().trim() ?? '';
-            final audio =
-                cancion['audio']?.toString().trim() ?? '';
+        final imagen =
+            album['imagen']?.toString().trim() ?? '';
 
-            if (titulo.isEmpty || audio.isEmpty) continue;
+        final tituloAlbum =
+            album['titulo']?.toString().trim() ?? '';
 
-            resultado.add({
-              'id': cancion['id'],
-              'titulo': titulo,
-              'artista': artista,
-              'audio': audio,
-              'imagen': imagen,
-              'album': tituloAlbum,
-              'duracion': cancion['duracion'],
-              'numero': cancion['numero'],
-              'tipo': 'album',
-            });
-          }
-        }
-      }
+        final idAlbum =
+            album['id']?.toString().trim() ?? '';
 
-      // ===========================
-      // SENCILLOS
-      // ===========================
-      final dynamic sencillos = datos['sencillos'];
+        final descripcion =
+            album['descripcion']?.toString().trim() ?? '';
 
-      if (sencillos is List) {
-        for (final sencillo in sencillos) {
-          if (sencillo is! Map) continue;
+        final genero =
+            album['genero']?.toString().trim() ?? '';
+
+        final anio = album['anio'];
+
+        final dynamic canciones =
+            album['canciones'];
+
+        if (canciones is! List) continue;
+
+        for (final cancion in canciones) {
+          if (cancion is! Map) continue;
 
           final titulo =
-              sencillo['titulo']?.toString().trim() ?? '';
-          final artista =
-              sencillo['artista']?.toString().trim() ?? '';
-          final audio =
-              sencillo['audio']?.toString().trim() ?? '';
-          final imagen =
-              sencillo['imagen']?.toString().trim() ?? '';
+              cancion['titulo']?.toString().trim() ?? '';
 
-          if (titulo.isEmpty ||
-              artista.isEmpty ||
-              audio.isEmpty) {
+          final audio =
+              cancion['audio']?.toString().trim() ?? '';
+
+          final idCancion =
+              cancion['id']?.toString().trim() ?? '';
+
+          if (titulo.isEmpty || audio.isEmpty) {
             continue;
           }
 
           resultado.add({
-            'id': sencillo['id'],
+            'id': idCancion,
             'titulo': titulo,
             'artista': artista,
             'audio': audio,
             'imagen': imagen,
-            'album': null,
-            'duracion': sencillo['duracion'],
-            'numero': null,
-            'tipo': 'sencillo',
+            'album': tituloAlbum,
+            'albumId': idAlbum,
+            'descripcionAlbum': descripcion,
+            'genero': genero,
+            'anio': anio,
+            'duracion': cancion['duracion'],
+            'numero': cancion['numero'],
+            'tipo': 'album',
           });
         }
       }
-
-      return resultado;
-    } catch (e) {
-      throw Exception('Error cargando catálogo remoto: $e');
     }
+
+    // ===========================
+    // SENCILLOS
+    // ===========================
+
+    final dynamic sencillos = datos['sencillos'];
+
+    if (sencillos is List) {
+      for (final sencillo in sencillos) {
+        if (sencillo is! Map) continue;
+
+        final titulo =
+            sencillo['titulo']?.toString().trim() ?? '';
+
+        final artista =
+            sencillo['artista']?.toString().trim() ?? '';
+
+        final audio =
+            sencillo['audio']?.toString().trim() ?? '';
+
+        final imagen =
+            sencillo['imagen']?.toString().trim() ?? '';
+
+        final id =
+            sencillo['id']?.toString().trim() ?? '';
+
+        if (titulo.isEmpty ||
+            artista.isEmpty ||
+            audio.isEmpty) {
+          continue;
+        }
+
+        resultado.add({
+          'id': id,
+          'titulo': titulo,
+          'artista': artista,
+          'audio': audio,
+          'imagen': imagen,
+          'album': null,
+          'albumId': null,
+          'descripcionAlbum': null,
+          'genero': sencillo['genero'],
+          'anio': sencillo['anio'],
+          'duracion': sencillo['duracion'],
+          'numero': null,
+          'tipo': 'sencillo',
+        });
+      }
+    }
+
+    return resultado;
   }
 }

@@ -1,6 +1,7 @@
 import '../cancion.dart';
 import '../data/all_songs.dart';
 import '../services/catalogo_remoto_service.dart';
+import '../services/novedades_service.dart';
 
 class CatalogoMusicRepository {
   CatalogoMusicRepository._();
@@ -8,24 +9,33 @@ class CatalogoMusicRepository {
   static final CatalogoMusicRepository instance =
       CatalogoMusicRepository._();
 
-  final List<Cancion> _canciones = List<Cancion>.from(allSongs);
+  final List<Cancion> _canciones =
+      List<Cancion>.from(allSongs);
 
-  List<Cancion> get canciones => List.unmodifiable(_canciones);
+  List<Cancion> get canciones =>
+      List.unmodifiable(_canciones);
 
   Future<void> cargarCatalogoRemoto() async {
     try {
       final remotas =
-          await CatalogoRemotoService.instance.cargarCatalogo();
+          await CatalogoRemotoService.instance
+              .cargarCatalogo();
 
       final existentes = <String>{
         for (final cancion in _canciones)
-          '${cancion.artista.toLowerCase()}|${cancion.titulo.toLowerCase()}',
+          '${cancion.artista.toLowerCase()}|'
+          '${cancion.titulo.toLowerCase()}',
       };
 
       for (final item in remotas) {
-        final titulo = item['titulo']?.toString().trim();
-        final artista = item['artista']?.toString().trim();
-        final audio = item['audio']?.toString().trim();
+        final titulo =
+            item['titulo']?.toString().trim();
+
+        final artista =
+            item['artista']?.toString().trim();
+
+        final audio =
+            item['audio']?.toString().trim();
 
         if (titulo == null ||
             titulo.isEmpty ||
@@ -37,7 +47,8 @@ class CatalogoMusicRepository {
         }
 
         final clave =
-            '${artista.toLowerCase()}|${titulo.toLowerCase()}';
+            '${artista.toLowerCase()}|'
+            '${titulo.toLowerCase()}';
 
         if (existentes.contains(clave)) {
           continue;
@@ -53,15 +64,34 @@ class CatalogoMusicRepository {
         );
 
         existentes.add(clave);
+
+        // ===========================
+        // REGISTRAR NOVEDAD
+        // ===========================
+
+        final id =
+            item['id']?.toString().trim();
+
+        if (id != null && id.isNotEmpty) {
+          await NovedadesService.instance.agregar(
+            id: id,
+            tipo: item['tipo']?.toString() ?? 'sencillo',
+            titulo: titulo,
+            artista: artista,
+            album: item['album']?.toString(),
+          );
+        }
       }
     } catch (_) {
-      // Si falla Internet, se conserva el catálogo local.
+      // Si falla Internet, se conserva
+      // el catálogo local.
     }
   }
 
   String _buscarImagenArtista(String artista) {
     for (final cancion in allSongs) {
-      if (cancion.artista.toLowerCase() == artista.toLowerCase()) {
+      if (cancion.artista.toLowerCase() ==
+          artista.toLowerCase()) {
         return cancion.imagen;
       }
     }

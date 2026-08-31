@@ -518,7 +518,7 @@ ClasicoLlano(
 ClasicoLlano(
   artista: "Humberto Salas",
   apodo: "El Tigre de Guayabal",
-  estado: "Barinas",
+  estado: "Cojedes",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Humberto_Salas.png",
   canciones: [
@@ -536,7 +536,7 @@ ClasicoLlano(
 ClasicoLlano(
   artista: "Jesús Quintero",
   apodo: "El Tigre de Matanegra",
-  estado: "Apure",
+  estado: "Barinas",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Jesus_Quintero.png",
   canciones: [
@@ -554,7 +554,7 @@ ClasicoLlano(
 ClasicoLlano(
   artista: "Ramón Blanco",
   apodo: "El Coplero",
-  estado: "Apure",
+  estado: "Cojedes",
   pais: "Venezuela",
   imagen: "assets/images/clasicos/Ramon_Blanco.png",
   canciones: [

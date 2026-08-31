@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../cancion.dart';
 import '../data/all_songs.dart';
 import '../player_page.dart';
+import '../repositories/catalogo_music_repository.dart';
 import '../services/audio_player_service.dart';
 import '../services/playlist_service.dart';
 
@@ -34,12 +35,27 @@ class _PlaylistDetailScreenState
   }
 
   void _actualizarLista() {
-    lista = allSongs
-        .where(
-          (cancion) =>
-              widget.canciones.contains(cancion.audio),
-        )
-        .toList();
+    final todasLasCanciones = <Cancion>[
+      ...allSongs,
+      ...CatalogoMusicRepository.instance.canciones,
+    ];
+
+    final agregadas = <String>{};
+
+    lista = [];
+
+    for (final cancion in todasLasCanciones) {
+      if (!widget.canciones.contains(cancion.audio)) {
+        continue;
+      }
+
+      if (agregadas.contains(cancion.audio)) {
+        continue;
+      }
+
+      lista.add(cancion);
+      agregadas.add(cancion.audio);
+    }
   }
 
   Future<void> _reproducirCancion(int index) async {

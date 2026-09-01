@@ -58,7 +58,10 @@ class CatalogoMusicRepository {
           Cancion(
             artista: artista,
             titulo: titulo,
-            imagen: _buscarImagenArtista(artista),
+            imagen: _obtenerImagen(
+              item,
+              artista,
+            ),
             audio: audio,
           ),
         );
@@ -75,7 +78,9 @@ class CatalogoMusicRepository {
         if (id != null && id.isNotEmpty) {
           await NovedadesService.instance.agregar(
             id: id,
-            tipo: item['tipo']?.toString() ?? 'sencillo',
+            tipo:
+                item['tipo']?.toString() ??
+                'sencillo',
             titulo: titulo,
             artista: artista,
             album: item['album']?.toString(),
@@ -86,6 +91,21 @@ class CatalogoMusicRepository {
       // Si falla Internet, se conserva
       // el catálogo local.
     }
+  }
+
+  String _obtenerImagen(
+    Map<String, dynamic> item,
+    String artista,
+  ) {
+    final imagenRemota =
+        item['imagen']?.toString().trim();
+
+    if (imagenRemota != null &&
+        imagenRemota.isNotEmpty) {
+      return imagenRemota;
+    }
+
+    return _buscarImagenArtista(artista);
   }
 
   String _buscarImagenArtista(String artista) {

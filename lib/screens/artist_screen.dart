@@ -44,6 +44,92 @@ class ArtistScreen extends StatelessWidget {
     );
   }
 
+  Widget _imagenArtista({
+    required String imagen,
+    required double width,
+    required double height,
+  }) {
+    final esRemota =
+        imagen.startsWith('http://') ||
+        imagen.startsWith('https://');
+
+    if (esRemota) {
+      return Image.network(
+        imagen,
+        width: width,
+        height: height,
+        fit: BoxFit.contain,
+        errorBuilder: (_, __, ___) {
+          return const Icon(
+            Icons.person,
+            size: 80,
+            color: Colors.grey,
+          );
+        },
+      );
+    }
+
+    return Image.asset(
+      imagen,
+      width: width,
+      height: height,
+      fit: BoxFit.contain,
+      errorBuilder: (_, __, ___) {
+        return const Icon(
+          Icons.person,
+          size: 80,
+          color: Colors.grey,
+        );
+      },
+    );
+  }
+
+  Widget _imagenCancion({
+    required String imagen,
+  }) {
+    final esRemota =
+        imagen.startsWith('http://') ||
+        imagen.startsWith('https://');
+
+    if (esRemota) {
+      return Image.network(
+        imagen,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) {
+          return Container(
+            width: 50,
+            height: 50,
+            color: Colors.green.shade100,
+            child: const Icon(
+              Icons.music_note,
+              color: Colors.green,
+            ),
+          );
+        },
+      );
+    }
+
+    return Image.asset(
+      imagen,
+      width: 50,
+      height: 50,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) {
+        return Container(
+          width: 50,
+          height: 50,
+          color: Colors.green.shade100,
+          child: const Icon(
+            Icons.music_note,
+            color: Colors.green,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final canciones = allSongs
@@ -73,16 +159,10 @@ class ArtistScreen extends StatelessWidget {
                     width: 145,
                     height: 145,
                     color: Colors.white,
-                    child: Image.asset(
-                      artist.imagen,
-                      fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) {
-                        return const Icon(
-                          Icons.person,
-                          size: 80,
-                          color: Colors.grey,
-                        );
-                      },
+                    child: _imagenArtista(
+                      imagen: artist.imagen,
+                      width: 145,
+                      height: 145,
                     ),
                   ),
                 ),
@@ -199,22 +279,8 @@ class ArtistScreen extends StatelessWidget {
                       leading: ClipRRect(
                         borderRadius:
                             BorderRadius.circular(10),
-                        child: Image.asset(
-                          cancion.imagen,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) {
-                            return Container(
-                              width: 50,
-                              height: 50,
-                              color: Colors.green.shade100,
-                              child: const Icon(
-                                Icons.music_note,
-                                color: Colors.green,
-                              ),
-                            );
-                          },
+                        child: _imagenCancion(
+                          imagen: cancion.imagen,
                         ),
                       ),
 

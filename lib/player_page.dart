@@ -13,6 +13,51 @@ class PlayerPage extends StatelessWidget {
     return "$minutos:$segundos";
   }
 
+  Widget _imagenPlayer(String imagen) {
+    final imagenFinal = imagen.isEmpty
+        ? "assets/images/logo/logo_llano_music.png"
+        : imagen;
+
+    final esRemota =
+        imagenFinal.startsWith('http://') ||
+        imagenFinal.startsWith('https://');
+
+    if (esRemota) {
+      return Image.network(
+        imagenFinal,
+        width: 220,
+        height: 220,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) {
+          return _imagenRespaldo();
+        },
+      );
+    }
+
+    return Image.asset(
+      imagenFinal,
+      width: 220,
+      height: 220,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) {
+        return _imagenRespaldo();
+      },
+    );
+  }
+
+  Widget _imagenRespaldo() {
+    return Container(
+      width: 220,
+      height: 220,
+      color: Colors.white,
+      child: const Icon(
+        Icons.music_note,
+        size: 120,
+        color: Colors.green,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -38,11 +83,8 @@ class PlayerPage extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-
-
                     Row(
                       children: [
-
                         IconButton(
                           icon: const Icon(
                             Icons.arrow_back,
@@ -64,15 +106,22 @@ class PlayerPage extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         IconButton(
                           icon: Icon(
-                            FavoritesService.instance.esFavorito(player.audioActual)
+                            FavoritesService.instance
+                                    .esFavorito(
+                                  player.audioActual,
+                                )
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             color: Colors.red,
                           ),
                           onPressed: () {
-                            FavoritesService.instance.toggleFavorito(player.audioActual);
+                            FavoritesService.instance
+                                .toggleFavorito(
+                              player.audioActual,
+                            );
                           },
                         ),
                       ],
@@ -84,28 +133,13 @@ class PlayerPage extends StatelessWidget {
 
                     Material(
                       elevation: 10,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius:
+                          BorderRadius.circular(24),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(24),
-                        child: Image.asset(
-                          player.imagen.isEmpty
-                              ? "assets/images/logo/logo_llano_music.png"
-                              : player.imagen,
-                          width: 220,
-                          height: 220,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) {
-                            return Container(
-                              width: 220,
-                              height: 220,
-                              color: Colors.white,
-                              child: const Icon(
-                                Icons.music_note,
-                                size: 120,
-                                color: Colors.green,
-                              ),
-                            );
-                          },
+                        borderRadius:
+                            BorderRadius.circular(24),
+                        child: _imagenPlayer(
+                          player.imagen,
                         ),
                       ),
                     ),
@@ -144,18 +178,26 @@ class PlayerPage extends StatelessWidget {
 
                     Slider(
                       activeColor: Colors.green,
-                      inactiveColor: Colors.grey.shade300,
+                      inactiveColor:
+                          Colors.grey.shade300,
                       min: 0,
-                      max: player.duracion.inMilliseconds == 0
+                      max: player.duracion
+                                  .inMilliseconds ==
+                              0
                           ? 1
-                          : player.duracion.inMilliseconds
+                          : player.duracion
+                              .inMilliseconds
                               .toDouble(),
-                      value: player.posicion.inMilliseconds
+                      value: player.posicion
+                          .inMilliseconds
                           .clamp(
                             0,
-                            player.duracion.inMilliseconds == 0
+                            player.duracion
+                                        .inMilliseconds ==
+                                    0
                                 ? 1
-                                : player.duracion.inMilliseconds,
+                                : player.duracion
+                                    .inMilliseconds,
                           )
                           .toDouble(),
                       onChanged: (value) async {
@@ -166,29 +208,34 @@ class PlayerPage extends StatelessWidget {
                         );
                       },
                     ),
+
                     const SizedBox(height: 20),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding:
+                          const EdgeInsets.symmetric(
                         horizontal: 8,
                       ),
-
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(_format(player.posicion)),
-                          Text(_format(player.duracion)),
+                          Text(
+                            _format(player.posicion),
+                          ),
+                          Text(
+                            _format(player.duracion),
+                          ),
                         ],
                       ),
                     ),
 
                     const SizedBox(height: 20),
 
-
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
                       children: [
-
                         IconButton(
                           icon: Icon(
                             Icons.shuffle,
@@ -203,7 +250,9 @@ class PlayerPage extends StatelessWidget {
                         ),
 
                         IconButton(
-                          icon: const Icon(Icons.skip_previous),
+                          icon: const Icon(
+                            Icons.skip_previous,
+                          ),
                           iconSize: 45,
                           onPressed: () async {
                             await player.anterior();
@@ -211,7 +260,8 @@ class PlayerPage extends StatelessWidget {
                         ),
 
                         Container(
-                          decoration: const BoxDecoration(
+                          decoration:
+                              const BoxDecoration(
                             color: Color(0xFF2E7D32),
                             shape: BoxShape.circle,
                           ),
@@ -234,7 +284,9 @@ class PlayerPage extends StatelessWidget {
                         ),
 
                         IconButton(
-                          icon: const Icon(Icons.skip_next),
+                          icon: const Icon(
+                            Icons.skip_next,
+                          ),
                           iconSize: 45,
                           onPressed: () async {
                             await player.siguiente();
@@ -268,7 +320,7 @@ class PlayerPage extends StatelessWidget {
               ),
             ),
           ),
-          );
+        );
       },
     );
   }

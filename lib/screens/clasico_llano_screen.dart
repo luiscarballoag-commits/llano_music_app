@@ -15,6 +15,53 @@ class ClasicoLlanoScreen extends StatelessWidget {
     required this.artista,
   });
 
+  Widget imagenFlexible(
+    String imagen, {
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.cover,
+    Widget Function(BuildContext, Object, StackTrace?)? errorBuilder,
+  }) {
+    final esRemota =
+        imagen.startsWith('http://') ||
+        imagen.startsWith('https://');
+
+    if (esRemota) {
+      return Image.network(
+        imagen,
+        width: width,
+        height: height,
+        fit: fit,
+        errorBuilder: errorBuilder,
+      );
+    }
+
+    return Image.asset(
+      imagen,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: errorBuilder,
+    );
+  }
+
+  String get imagenArtista {
+    final remota = CatalogoMusicRepository.instance.canciones
+        .where(
+          (c) =>
+              c.artista.trim().toLowerCase() ==
+              artista.artista.trim().toLowerCase() &&
+              c.imagen.trim().isNotEmpty,
+        )
+        .map((c) => c.imagen.trim())
+        .firstWhere(
+          (imagen) => imagen.isNotEmpty,
+          orElse: () => '',
+        );
+
+    return remota.isNotEmpty ? remota : artista.imagen;
+  }
+
   List<Cancion> get canciones {
     final resultado = <Cancion>[];
 
@@ -24,7 +71,7 @@ class ClasicoLlanoScreen extends StatelessWidget {
         Cancion(
           artista: artista.artista,
           titulo: c.titulo,
-          imagen: artista.imagen,
+          imagen: imagenArtista,
           audio: c.audio,
         ),
       );
@@ -50,7 +97,7 @@ class ClasicoLlanoScreen extends StatelessWidget {
           Cancion(
             artista: artista.artista,
             titulo: cancion.titulo,
-            imagen: artista.imagen,
+            imagen: imagenArtista,
             audio: cancion.audio,
           ),
         );
@@ -114,8 +161,8 @@ class ClasicoLlanoScreen extends StatelessWidget {
                   width: 145,
                   height: 145,
                   color: Colors.white,
-                  child: Image.asset(
-                    artista.imagen,
+                  child: imagenFlexible(
+                    imagenArtista,
                     fit: BoxFit.cover,
                     errorBuilder: (_, __, ___) {
                       return const Icon(
@@ -248,8 +295,8 @@ class ClasicoLlanoScreen extends StatelessWidget {
 
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        artista.imagen,
+                      child: imagenFlexible(
+                        imagenArtista,
                         width: 70,
                         height: 70,
                         fit: BoxFit.cover,

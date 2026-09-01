@@ -46,20 +46,19 @@ class ClasicoLlanoScreen extends StatelessWidget {
   }
 
   String get imagenArtista {
-    final remota = CatalogoMusicRepository.instance.canciones
-        .where(
-          (c) =>
-              c.artista.trim().toLowerCase() ==
-              artista.artista.trim().toLowerCase() &&
-              c.imagen.trim().isNotEmpty,
-        )
-        .map((c) => c.imagen.trim())
-        .firstWhere(
-          (imagen) => imagen.isNotEmpty,
-          orElse: () => '',
-        );
+    final nombreArtista = artista.artista.trim().toLowerCase();
 
-    return remota.isNotEmpty ? remota : artista.imagen;
+    for (final cancion in CatalogoMusicRepository.instance.canciones) {
+      if (cancion.artista.trim().toLowerCase() == nombreArtista) {
+        final imagen = cancion.imagen.trim();
+        if (imagen.startsWith("http://") ||
+            imagen.startsWith("https://")) {
+          return imagen;
+        }
+      }
+    }
+
+    return artista.imagen;
   }
 
   List<Cancion> get canciones {

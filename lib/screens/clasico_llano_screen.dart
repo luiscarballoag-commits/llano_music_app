@@ -96,7 +96,7 @@ class ClasicoLlanoScreen extends StatelessWidget {
           Cancion(
             artista: artista.artista,
             titulo: cancion.titulo,
-            imagen: imagenArtista,
+            imagen: cancion.imagen.trim().isNotEmpty ? cancion.imagen : imagenArtista,
             audio: cancion.audio,
           ),
         );

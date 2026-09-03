@@ -46,18 +46,6 @@ class ClasicoLlanoScreen extends StatelessWidget {
   }
 
   String get imagenArtista {
-    final nombreArtista = artista.artista.trim().toLowerCase();
-
-    for (final cancion in CatalogoMusicRepository.instance.canciones) {
-      if (cancion.artista.trim().toLowerCase() == nombreArtista) {
-        final imagen = cancion.imagen.trim();
-        if (imagen.startsWith("http://") ||
-            imagen.startsWith("https://")) {
-          return imagen;
-        }
-      }
-    }
-
     return artista.imagen;
   }
 

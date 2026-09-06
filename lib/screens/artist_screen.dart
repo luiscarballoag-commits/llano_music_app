@@ -5,6 +5,7 @@ import '../models/artist.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import '../data/all_songs.dart';
+import '../repositories/catalogo_music_repository.dart';
 import '../widgets/agregar_a_playlist_dialog.dart';
 
 class ArtistScreen extends StatelessWidget {
@@ -132,11 +133,40 @@ class ArtistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final canciones = allSongs
-        .where(
-          (cancion) => cancion.artista == artist.nombre,
-        )
-        .toList();
+    final canciones = <Cancion>[
+      ...allSongs.where(
+        (cancion) =>
+            cancion.artista.trim().toLowerCase() ==
+            artist.nombre.trim().toLowerCase(),
+      ),
+    ];
+
+    final remotas = CatalogoMusicRepository.instance.canciones.where(
+      (cancion) =>
+          cancion.artista.trim().toLowerCase() ==
+          artist.nombre.trim().toLowerCase(),
+    );
+
+    for (final cancion in remotas) {
+      final existe = canciones.any(
+        (local) =>
+            local.titulo.trim().toLowerCase() ==
+            cancion.titulo.trim().toLowerCase(),
+      );
+
+      if (!existe) {
+        canciones.add(
+          Cancion(
+            artista: artist.nombre,
+            titulo: cancion.titulo,
+            imagen: cancion.imagen.trim().isNotEmpty
+                ? cancion.imagen
+                : artist.imagen,
+            audio: cancion.audio,
+          ),
+        );
+      }
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F7),

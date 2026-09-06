@@ -5,6 +5,7 @@ import '../data/canciones_populares.dart';
 import '../viewmodels/home_view_model.dart';
 import '../models/artist.dart';
 import '../screens/artist_screen.dart';
+import '../screens/todos_artistas_screen.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
 import 'agregar_a_playlist_dialog.dart';
@@ -252,6 +253,23 @@ class _CancionesPopularesState
                   ),
                 );
               },
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          Center(
+            child: TextButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TodosArtistasScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.people_alt_outlined),
+              label: const Text("Ver todos los artistas"),
             ),
           ),
         ],

@@ -81,7 +81,7 @@ const List<Artist> artists = [
 
   Artist(
     id: 'edwin_trosel',
-    nombre: 'Edwin Trosel',
+    nombre: 'Edwin Trocel',
     imagen: 'assets/images/artistas/edwin_trosel.jpg',
     descripcion:
         'Cantautor cojedeño comprometido con la preservación del folclore llanero.',

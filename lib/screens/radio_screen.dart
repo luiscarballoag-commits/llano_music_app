@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import '../services/radio_service.dart';
 
 class RadioScreen extends StatefulWidget {
   const RadioScreen({super.key});
@@ -9,53 +9,54 @@ class RadioScreen extends StatefulWidget {
 }
 
 class _RadioScreenState extends State<RadioScreen> {
-  final AudioPlayer _player = AudioPlayer();
-
-  bool _reproduciendo = false;
+  final RadioService _radioService = RadioService.instance;
 
   static const String _radioUrl =
       'https://stream.zeno.fm/cc9rmsaqzsktv';
 
   @override
+  void initState() {
+    super.initState();
+    _radioService.addListener(_actualizarEstado);
+  }
+
+  @override
   void dispose() {
-    _player.dispose();
+    _radioService.removeListener(_actualizarEstado);
     super.dispose();
   }
 
+  void _actualizarEstado() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   Future<void> _alternarRadio() async {
-    if (_reproduciendo) {
-      await _player.stop();
-
-      setState(() {
-        _reproduciendo = false;
-      });
+    if (_radioService.reproduciendo) {
+      await _radioService.detener();
     } else {
-      try {
-        await _player.play(
-          UrlSource(_radioUrl, mimeType: 'audio/mpeg'),
-        );
+      await _radioService.reproducir(
+        url: _radioUrl,
+        nombre: 'Radio Dinamita',
+      );
 
-        setState(() {
-          _reproduciendo = true;
-        });
-      } catch (e) {
-        debugPrint('Error al reproducir Radio Dinamita: $e');
-
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'No se pudo conectar con Radio Dinamita',
-              ),
+      if (mounted && _radioService.ultimoError != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'No se pudo conectar con Radio Dinamita',
             ),
-          );
-        }
+          ),
+        );
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final reproduciendo = _radioService.reproduciendo;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Radio'),
@@ -107,7 +108,7 @@ class _RadioScreenState extends State<RadioScreen> {
                 iconSize: 60,
                 color: Colors.white,
                 icon: Icon(
-                  _reproduciendo
+                  reproduciendo
                       ? Icons.stop
                       : Icons.play_arrow,
                 ),
@@ -118,13 +119,13 @@ class _RadioScreenState extends State<RadioScreen> {
             const SizedBox(height: 15),
 
             Text(
-              _reproduciendo
+              reproduciendo
                   ? 'RADIO EN VIVO'
                   : 'Presiona para escuchar',
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: _reproduciendo
+                color: reproduciendo
                     ? Colors.green
                     : Colors.black54,
               ),

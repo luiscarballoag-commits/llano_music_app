@@ -26,6 +26,13 @@ class HomeScreen extends StatelessWidget {
             const Text("Llano Music"),
           ],
         ),
+        actions: [
+          IconButton(
+            tooltip: 'Transmitir',
+            icon: const Icon(Icons.cast),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),

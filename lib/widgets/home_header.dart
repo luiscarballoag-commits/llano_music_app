@@ -100,7 +100,7 @@ class HomeHeader extends StatelessWidget {
         NovedadesService.instance.cantidadNoLeidas;
 
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -116,9 +116,11 @@ class HomeHeader extends StatelessWidget {
         alignment: Alignment.center,
         clipBehavior: Clip.none,
         children: [
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 38),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
               Text(
                 "LLANO MUSIC",
                 textAlign: TextAlign.center,
@@ -140,19 +142,20 @@ class HomeHeader extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 4),
-              Text(
-                "El sonido auténtico del llano venezolano",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
+                Text(
+                  "El sonido auténtico del llano venezolano",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           Positioned(
-            top: -42,
+            top: 0,
             right: 0,
             child: Row(
               mainAxisSize: MainAxisSize.min,

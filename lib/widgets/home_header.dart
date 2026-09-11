@@ -63,7 +63,7 @@ class HomeHeader extends StatelessWidget {
           ),
 
           Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.topRight,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

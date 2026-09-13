@@ -67,7 +67,7 @@ class HomeHeader extends StatelessWidget {
           ),
 
           Positioned(
-            top: 0,
+            top: 120,
             right: 0,
             child: Row(
               mainAxisSize: MainAxisSize.min,

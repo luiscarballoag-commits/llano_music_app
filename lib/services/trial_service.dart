@@ -13,7 +13,9 @@ class TrialService {
     if (savedStartDate == null) {
       await _preferences.setString(
         _startDateKey,
-        DateTime.now().toIso8601String(),
+        DateTime.now()
+            .subtract(const Duration(days: 31))
+            .toIso8601String(),
       );
     }
   }
@@ -22,7 +24,8 @@ class TrialService {
     final savedStartDate = await _preferences.getString(_startDateKey);
 
     if (savedStartDate == null) {
-      final now = DateTime.now();
+      final now = DateTime.now()
+          .subtract(const Duration(days: 31));
 
       await _preferences.setString(
         _startDateKey,

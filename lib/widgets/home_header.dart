@@ -12,6 +12,7 @@ class HomeHeader extends StatelessWidget {
         NovedadesService.instance.cantidadNoLeidas;
 
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
       decoration: const BoxDecoration(
         gradient: LinearGradient(

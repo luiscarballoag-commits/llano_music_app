@@ -44,7 +44,9 @@ class TrialService {
   }
 
   Future<bool> isExpired() async {
-    return true;
+    final expirationDate = await getExpirationDate();
+
+    return !DateTime.now().isBefore(expirationDate);
   }
 
   Future<int> getDaysRemaining() async {

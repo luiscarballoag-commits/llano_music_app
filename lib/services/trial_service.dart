@@ -13,9 +13,7 @@ class TrialService {
     if (savedStartDate == null) {
       await _preferences.setString(
         _startDateKey,
-        DateTime.now()
-            .subtract(const Duration(days: 31))
-            .toIso8601String(),
+        DateTime.now().toIso8601String(),
       );
     }
   }
@@ -24,8 +22,7 @@ class TrialService {
     final savedStartDate = await _preferences.getString(_startDateKey);
 
     if (savedStartDate == null) {
-      final now = DateTime.now()
-          .subtract(const Duration(days: 31));
+      final now = DateTime.now();
 
       await _preferences.setString(
         _startDateKey,
@@ -47,9 +44,7 @@ class TrialService {
   }
 
   Future<bool> isExpired() async {
-    final expirationDate = await getExpirationDate();
-
-    return !DateTime.now().isBefore(expirationDate);
+    return true;
   }
 
   Future<int> getDaysRemaining() async {
@@ -64,4 +59,3 @@ class TrialService {
     return difference.inDays + 1;
   }
 }
-

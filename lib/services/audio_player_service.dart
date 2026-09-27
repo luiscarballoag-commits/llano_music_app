@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../cancion.dart';
+import 'analytics_service.dart';
 
 class AudioPlayerService extends ChangeNotifier {
   AudioPlayerService._() {
@@ -95,6 +96,11 @@ class AudioPlayerService extends ChangeNotifier {
     try {
       await player.play(
         source,
+      );
+
+      await AnalyticsService.logSongPlay(
+        songTitle: tituloCancion,
+        artist: artistaCancion,
       );
 
       reproduciendo = true;

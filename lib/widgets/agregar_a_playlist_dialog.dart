@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/playlist_service.dart';
+import '../services/analytics_service.dart';
 
 Future<void> mostrarAgregarAPlaylistDialog({
   required BuildContext context,
@@ -116,6 +117,12 @@ Future<void> mostrarAgregarAPlaylistDialog({
                           await service.agregarCancion(
                             id,
                             audio,
+                          );
+
+                          AnalyticsService.logPlaylistAddSong(
+                            playlistId: id,
+                            playlistName: nombre,
+                            audio: audio,
                           );
 
                           if (!dialogContext.mounted) {
@@ -248,9 +255,20 @@ Future<void> _crearPlaylistYAgregar({
     nombre: nombre.trim(),
   );
 
+  AnalyticsService.logPlaylistCreate(
+    playlistId: id,
+    playlistName: nombre.trim(),
+  );
+
   await PlaylistService.instance.agregarCancion(
     id,
     audio,
+  );
+
+  AnalyticsService.logPlaylistAddSong(
+    playlistId: id,
+    playlistName: nombre.trim(),
+    audio: audio,
   );
 
   if (!context.mounted) return;

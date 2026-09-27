@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'services/audio_player_service.dart';
 import 'services/favorites_service.dart';
+import 'services/analytics_service.dart';
 
 class PlayerPage extends StatelessWidget {
   const PlayerPage({super.key});
@@ -118,9 +119,18 @@ class PlayerPage extends StatelessWidget {
                             color: Colors.red,
                           ),
                           onPressed: () {
-                            FavoritesService.instance
-                                .toggleFavorito(
+                            final eraFavorito =
+                                FavoritesService.instance
+                                    .esFavorito(player.audioActual);
+
+                            FavoritesService.instance.toggleFavorito(
                               player.audioActual,
+                            );
+
+                            AnalyticsService.logFavoriteChange(
+                              songTitle: player.titulo,
+                              artist: player.artista,
+                              added: !eraFavorito,
                             );
                           },
                         ),

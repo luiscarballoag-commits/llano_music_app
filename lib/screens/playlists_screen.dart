@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/playlist_service.dart';
+import '../services/analytics_service.dart';
 import 'playlist_detail_screen.dart';
 
 class PlaylistsScreen extends StatefulWidget {
@@ -75,6 +76,11 @@ class _PlaylistsScreenState extends State<PlaylistsScreen> {
     await PlaylistService.instance.crearPlaylist(
       id: id,
       nombre: nombre.trim(),
+    );
+
+    AnalyticsService.logPlaylistCreate(
+      playlistId: id,
+      playlistName: nombre.trim(),
     );
   }
 

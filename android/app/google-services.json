@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "772687922880",
+    "project_id": "llano-music",
+    "storage_bucket": "llano-music.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772687922880:android:1a9ecc9d42ac3911d94f25",
+        "android_client_info": {
+          "package_name": "com.example.llano_music_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_6eFpJLaYY-2vzGHCqxGYGayqnSMPRBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

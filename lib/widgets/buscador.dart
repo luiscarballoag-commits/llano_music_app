@@ -4,6 +4,7 @@ import '../cancion.dart';
 import '../repositories/catalogo_music_repository.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
+import '../services/analytics_service.dart';
 import 'agregar_a_playlist_dialog.dart';
 
 class Buscador extends StatefulWidget {
@@ -36,6 +37,13 @@ class _BuscadorState extends State<Buscador> {
                 .toLowerCase()
                 .contains(busqueda);
       }).take(10).toList();
+
+      if (resultados.isNotEmpty) {
+        AnalyticsService.logSearch(
+          searchTerm: busqueda,
+          searchType: 'general',
+        );
+      }
     });
   }
 

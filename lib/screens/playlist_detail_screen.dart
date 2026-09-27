@@ -6,6 +6,7 @@ import '../player_page.dart';
 import '../repositories/catalogo_music_repository.dart';
 import '../services/audio_player_service.dart';
 import '../services/playlist_service.dart';
+import '../services/analytics_service.dart';
 
 class PlaylistDetailScreen extends StatefulWidget {
   final String playlistId;
@@ -116,6 +117,12 @@ class _PlaylistDetailScreenState
     await PlaylistService.instance.quitarCancion(
       widget.playlistId,
       cancion.audio,
+    );
+
+    AnalyticsService.logPlaylistRemoveSong(
+      playlistId: widget.playlistId,
+      playlistName: widget.nombre,
+      audio: cancion.audio,
     );
 
     if (!mounted) return;

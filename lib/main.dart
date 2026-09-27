@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_chrome_cast/cast_context.dart';
 import 'package:flutter_chrome_cast/entities.dart';
@@ -11,6 +14,7 @@ import 'theme/app_theme.dart';
 import 'services/playlist_service.dart';
 import 'services/novedades_service.dart';
 import 'repositories/catalogo_music_repository.dart';
+import 'services/analytics_service.dart';
 
 Future<void> _inicializarGoogleCast() async {
   const appId = GoogleCastDiscoveryCriteria.kDefaultApplicationId;
@@ -27,6 +31,23 @@ Future<void> _inicializarGoogleCast() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
+  FlutterError.onError =
+      FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(
+      error,
+      stack,
+      fatal: true,
+    );
+    return true;
+  };
+
+  await AnalyticsService.instance.logAppOpen();
+  await AnalyticsService.logAppVersion();
 
   await Hive.initFlutter();
 

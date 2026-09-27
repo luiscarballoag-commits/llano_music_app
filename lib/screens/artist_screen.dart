@@ -4,17 +4,33 @@ import '../cancion.dart';
 import '../models/artist.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
+import '../services/analytics_service.dart';
 import '../data/all_songs.dart';
 import '../repositories/catalogo_music_repository.dart';
 import '../widgets/agregar_a_playlist_dialog.dart';
 
-class ArtistScreen extends StatelessWidget {
+class ArtistScreen extends StatefulWidget {
   final Artist artist;
 
   const ArtistScreen({
     super.key,
     required this.artist,
   });
+
+  @override
+  State<ArtistScreen> createState() => _ArtistScreenState();
+}
+
+class _ArtistScreenState extends State<ArtistScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    AnalyticsService.logArtistView(
+      artist: widget.artist.nombre,
+    );
+  }
 
   Future<void> _reproducirCancion(
     BuildContext context,
@@ -137,14 +153,14 @@ class ArtistScreen extends StatelessWidget {
       ...allSongs.where(
         (cancion) =>
             cancion.artista.trim().toLowerCase() ==
-            artist.nombre.trim().toLowerCase(),
+            widget.artist.nombre.trim().toLowerCase(),
       ),
     ];
 
     final remotas = CatalogoMusicRepository.instance.canciones.where(
       (cancion) =>
           cancion.artista.trim().toLowerCase() ==
-          artist.nombre.trim().toLowerCase(),
+          widget.artist.nombre.trim().toLowerCase(),
     );
 
     for (final cancion in remotas) {
@@ -157,11 +173,11 @@ class ArtistScreen extends StatelessWidget {
       if (!existe) {
         canciones.add(
           Cancion(
-            artista: artist.nombre,
+            artista: widget.artist.nombre,
             titulo: cancion.titulo,
             imagen: cancion.imagen.trim().isNotEmpty
                 ? cancion.imagen
-                : artist.imagen,
+                : widget.artist.imagen,
             audio: cancion.audio,
           ),
         );
@@ -171,7 +187,7 @@ class ArtistScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F7),
       appBar: AppBar(
-        title: Text(artist.nombre),
+        title: Text(widget.artist.nombre),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -190,7 +206,7 @@ class ArtistScreen extends StatelessWidget {
                     height: 145,
                     color: Colors.white,
                     child: _imagenArtista(
-                      imagen: artist.imagen,
+                      imagen: widget.artist.imagen,
                       width: 145,
                       height: 145,
                     ),
@@ -205,7 +221,7 @@ class ArtistScreen extends StatelessWidget {
                         CrossAxisAlignment.start,
                     children: [
                       Text(
-                        artist.nombre,
+                        widget.artist.nombre,
                         style: const TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -223,7 +239,7 @@ class ArtistScreen extends StatelessWidget {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              artist.genero,
+                              widget.artist.genero,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -243,8 +259,8 @@ class ArtistScreen extends StatelessWidget {
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
-                              '${artist.estado}, '
-                              '${artist.pais}',
+                              '${widget.artist.estado}, '
+                              '${widget.artist.pais}',
                               style: const TextStyle(
                                 fontSize: 14,
                               ),
@@ -325,7 +341,7 @@ class ArtistScreen extends StatelessWidget {
                       ),
 
                       subtitle: Text(
-                        artist.nombre,
+                        widget.artist.nombre,
                         maxLines: 1,
                         overflow:
                             TextOverflow.ellipsis,
@@ -386,7 +402,7 @@ class ArtistScreen extends StatelessWidget {
             const SizedBox(height: 12),
 
             Text(
-              artist.descripcion,
+              widget.artist.descripcion,
               style: const TextStyle(
                 fontSize: 16,
                 height: 1.6,

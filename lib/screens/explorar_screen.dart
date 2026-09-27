@@ -4,6 +4,7 @@ import '../cancion.dart';
 import '../data/clasicos_llano.dart';
 import '../player_page.dart';
 import '../services/audio_player_service.dart';
+import '../services/analytics_service.dart';
 import 'clasico_llano_screen.dart';
 import 'playlists_screen.dart';
 
@@ -44,6 +45,13 @@ class _ExplorarScreenState extends State<ExplorarScreen> {
                   .toLowerCase()
                   .contains(busqueda);
         }).toList();
+
+        if (artistas.isNotEmpty) {
+          AnalyticsService.logSearch(
+            searchTerm: texto.trim(),
+            searchType: 'clasicos',
+          );
+        }
       }
     });
   }

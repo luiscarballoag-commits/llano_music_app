@@ -36,10 +36,6 @@ final List<ClasicoLlano> clasicosLlano = [
     imagen: "assets/images/clasicos/Santiago_Rojas.png",
     canciones: [
       CancionClasica(
-        titulo: "La Viuda Millonaria",
-        audio: "assets/audio/clasicos/01 Santiago_Rojas_El_Turpial_de_Guardatinajas_La_Viuda_Millonaria.mp3",
-      ),
-      CancionClasica(
         titulo: "Cuando Me Robé El Cochino",
         audio: "assets/audio/clasicos/02_Santiago_Rojas_El_Turpial_de_Guardatinajas_Cuando_Me_Robe_el.mp3",
       ),
@@ -65,10 +61,6 @@ final List<ClasicoLlano> clasicosLlano = [
     pais: "Venezuela",
     imagen: "assets/images/clasicos/Jesus_Moreno.png",
     canciones: [
-      CancionClasica(
-        titulo: "Amiga, Novia y Amante",
-        audio: "assets/audio/clasicos/04_Jesus_Moreno,_Humberto_Salas,_Humberto_Salas_Amiga,_Novia_y_Amante.mp3",
-      ),
       CancionClasica(
         titulo: "Que Te Perdone El Diablo",
         audio: "assets/audio/clasicos/03_Jesus_Moreno,_Miguel_Tovar,_Saverio_Graterol,_Miguel_Tovar,_Saverio.mp3",
@@ -100,10 +92,6 @@ final List<ClasicoLlano> clasicosLlano = [
         audio: "assets/audio/clasicos/francisco_montoya/apure_en_un_viaje.mp3",
       ),
       CancionClasica(
-        titulo: "Sentimiento Apureño",
-        audio: "assets/audio/clasicos/francisco_montoya/sentimiento_apureno.mp3",
-      ),
-      CancionClasica(
         titulo: "La Tristeza del Corral",
         audio: "https://drive.google.com/uc?export=download&id=1w4Q7-vjCQzcuRBYhnPfmiytTFRwAWCN3",
       ),
@@ -131,7 +119,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Adiós Barrancas de Arauca",
-        audio: "assets/audio/clasicos/08_Eneas Perdomo_ Adiós Barrancas de Arauca.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1lSR6nGOteKrYDRtWXqK3gZznA_Fo6Aeq",
       ),
     ],
   ),
@@ -145,7 +133,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Para Toda La Vida",
-        audio: "assets/audio/clasicos/10 Para Toda La Vida  -  Teo Galíndez  Video Lyric.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1-tOdWZxV-j21-SyuG35q3DNVWwSc31VV",
       ),
       CancionClasica(
         titulo: "Dos Mujeres En Mi Vida",
@@ -166,7 +154,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Cajón de Arauca Apureño",
-        audio: "assets/audio/clasicos/11_ Angel Custodio Loyola - Cajón De Arauca Apureno (128).mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1UTrFLqdSAjSJfBBYBFyL3ZykR79m05ay",
       ),
     ],
   ),
@@ -184,7 +172,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Furia",
-        audio: "assets/audio/clasicos/el_carrao_de_palmarito/furia.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1RDFQ_zZkF4zFlMy7FSB5mHzyBMrZdaxO",
       ),
     ],
   ),
@@ -202,7 +190,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Malaya un Camino Largo",
-        audio: "assets/audio/clasicos/luis_lozada/malaya_un_camino_largo.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1dlp6cAzb500Od3kioqaDbA4jyf2ZXWIX",
       ),
     ],
   ),
@@ -220,7 +208,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Sin Ella No Vivo",
-        audio: "assets/audio/clasicos/17_Cheo_Hernandez_Prisco,_Rigoberto_Ramirez_Sin_Ella_No_Vivo.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1Dc_IpTVkUbZf2IexF6Uiue7mfWoQJzgk",
       ),
     ],
   ),
@@ -234,7 +222,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "La Camisa Conuquera",
-        audio: "assets/audio/clasicos/Juan_Farfan_La_Camisa_Conuquera.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1iCaoX2hmH1571qLc56SsAf2PQPAFI5NI",
       ),
       CancionClasica(
         titulo: "Maté el Guayabo",
@@ -251,7 +239,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Carrao Carrao",
-        audio: "assets/audio/clasicos/1 - Reyna Lucero - Carrao Carrao.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1YvJVd9INGdcTbQ0QhgJtk9aAetwbzNpu",
       ),
       CancionClasica(
         titulo: "Son Mentiras",
@@ -273,7 +261,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Soy Apureña de Raza",
-        audio: "assets/audio/clasicos/22 Sangre Apureña - Cristina Maica.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1WJkJ-YI80xK61URcRoxughn7cV6lwxeJ",
       ),
     ],
   ),
@@ -287,7 +275,7 @@ final List<ClasicoLlano> clasicosLlano = [
     canciones: [
       CancionClasica(
         titulo: "Un Guayabo Motolito",
-        audio: "assets/audio/clasicos/25 Elisa Guerrero - Un guayabo motolito.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1yQg7fV0aBpiVV2cGsGJF6_NDf6JjhKxq",
       ),
       CancionClasica(
         titulo: "Juro Que Te Gusto",
@@ -321,7 +309,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Laguna Vieja",
-        audio: "assets/audio/clasicos/28 Reynaldo Armas - Laguna Vieja.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1HLtH9kW_WpFh4kFEftcugq9Gczayd-rm",
       ),
     ],
   ),
@@ -339,7 +327,7 @@ final List<ClasicoLlano> clasicosLlano = [
       ),
       CancionClasica(
         titulo: "Guayabo de Mes y Pico",
-        audio: "assets/audio/clasicos/30_Guayabo de Mes y Pico - Jorge Guerrero.mp3",
+        audio: "https://drive.google.com/uc?export=download&id=1l9drYQQFZ_zOXIBzPvuZ15ZxoR2yBj9p",
       ),
     ],
   ),
@@ -352,7 +340,7 @@ ClasicoLlano(
   canciones: [
     CancionClasica(
       titulo: "Egoísmo",
-      audio: "assets/audio/clasicos/julio_miranda/egoismo.mp3",
+      audio: "https://drive.google.com/uc?export=download&id=1Qkpkltef2VEXNWnsm0v3ASXpOdN0Q9EP",
     ),
     CancionClasica(
       titulo: "Los Años Pegan",
@@ -598,6 +586,16 @@ ClasicoLlano(
       audio: "assets/audio/yaneth_de_venezuela/tardes_cojedenas.mp3",
     ),
   ],
+),
+
+
+ClasicoLlano(
+  artista: "Simón Díaz",
+  apodo: "El Maestro del Llano",
+  estado: "Guárico",
+  pais: "Venezuela",
+  imagen: "assets/images/logo/logo_llano_music.png",
+  canciones: [],
 ),
 
 ];

@@ -42,7 +42,7 @@ Future<void> main() async {
       androidNotificationChannelName: 'Llano Music',
       androidNotificationOngoing: true,
     ),
-  );
+  ).timeout(const Duration(seconds: 10));
 
   AudioPlayerService.instance.audioHandler = audioHandler;
   audioHandler.onPlay = AudioPlayerService.instance.resume;

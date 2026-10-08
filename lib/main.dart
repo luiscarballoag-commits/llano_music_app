@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,6 +16,8 @@ import 'services/playlist_service.dart';
 import 'services/novedades_service.dart';
 import 'repositories/catalogo_music_repository.dart';
 import 'services/analytics_service.dart';
+import 'services/llano_audio_handler.dart';
+import 'services/audio_player_service.dart';
 
 Future<void> _inicializarGoogleCast() async {
   const appId = GoogleCastDiscoveryCriteria.kDefaultApplicationId;
@@ -30,7 +33,23 @@ Future<void> _inicializarGoogleCast() async {
 }
 
 Future<void> main() async {
+  print("### LLANO MUSIC MAIN EJECUTADO ###");
   WidgetsFlutterBinding.ensureInitialized();
+
+  final audioHandler = await AudioService.init<LlanoAudioHandler>(
+    builder: () => LlanoAudioHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.llanomusic.audio',
+      androidNotificationChannelName: 'Llano Music',
+      androidNotificationOngoing: true,
+    ),
+  );
+
+  AudioPlayerService.instance.audioHandler = audioHandler;
+  audioHandler.onPlay = AudioPlayerService.instance.resume;
+  audioHandler.onPause = AudioPlayerService.instance.pause;
+  audioHandler.onSeek = AudioPlayerService.instance.seek;
+  audioHandler.onStop = AudioPlayerService.instance.stop;
 
   await Firebase.initializeApp();
 

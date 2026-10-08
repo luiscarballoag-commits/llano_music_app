@@ -33,7 +33,6 @@ Future<void> _inicializarGoogleCast() async {
 }
 
 Future<void> main() async {
-  print("### LLANO MUSIC MAIN EJECUTADO ###");
   WidgetsFlutterBinding.ensureInitialized();
 
   final audioHandler = await AudioService.init<LlanoAudioHandler>(

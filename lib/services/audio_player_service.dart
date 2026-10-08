@@ -2,16 +2,37 @@ import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../cancion.dart';
 import 'analytics_service.dart';
+import 'llano_audio_handler.dart';
 
 class AudioPlayerService extends ChangeNotifier {
   AudioPlayerService._() {
     player.onPositionChanged.listen((p) {
       posicion = p;
+      audioHandler?.actualizarEstado(
+        reproduciendo: reproduciendo,
+        posicion: posicion,
+        duracion: duracion,
+      );
       notifyListeners();
     });
 
     player.onDurationChanged.listen((d) {
       duracion = d;
+      audioHandler?.actualizarEstado(
+        reproduciendo: reproduciendo,
+        posicion: posicion,
+        duracion: duracion,
+      );
+      notifyListeners();
+    });
+
+    player.onPlayerStateChanged.listen((state) {
+      reproduciendo = state == PlayerState.playing;
+      audioHandler?.actualizarEstado(
+        reproduciendo: reproduciendo,
+        posicion: posicion,
+        duracion: duracion,
+      );
       notifyListeners();
     });
 
@@ -40,12 +61,17 @@ class AudioPlayerService extends ChangeNotifier {
           imagenCancion: cola[indiceActual].imagen,
         );
       } else {
+        if (indiceActual >= cola.length - 1) {
+          audioHandler?.marcarCompletado();
+        }
         await siguiente();
       }
     });
   }
 
   static final AudioPlayerService instance = AudioPlayerService._();
+
+  LlanoAudioHandler? audioHandler;
 
   final AudioPlayer player = AudioPlayer();
 
@@ -96,6 +122,16 @@ class AudioPlayerService extends ChangeNotifier {
     try {
       await player.play(
         source,
+      );
+
+      await audioHandler?.customAction(
+        'cargarCancion',
+        {
+          'audio': audio,
+          'titulo': tituloCancion,
+          'artista': artistaCancion,
+          'imagen': imagenCancion,
+        },
       );
 
       await AnalyticsService.logSongPlay(

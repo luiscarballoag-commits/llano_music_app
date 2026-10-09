@@ -49,6 +49,8 @@ Future<void> main() async {
   audioHandler.onPause = AudioPlayerService.instance.pause;
   audioHandler.onSeek = AudioPlayerService.instance.seek;
   audioHandler.onStop = AudioPlayerService.instance.stop;
+  audioHandler.onPrevious = AudioPlayerService.instance.anterior;
+  audioHandler.onNext = AudioPlayerService.instance.siguiente;
 
   await Firebase.initializeApp();
 

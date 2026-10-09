@@ -353,7 +353,7 @@ class PlayerPage extends StatelessWidget {
                                   ),
                                   SizedBox(width: 7),
                                   Text(
-                                    'SONIDO LLANERO',
+                                    'EL SONIDO AUTÉNTICO DEL LLANO',
                                     style: TextStyle(
                                       color: _verde,
                                       fontWeight: FontWeight.w800,

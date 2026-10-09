@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../cancion.dart';
@@ -37,35 +39,29 @@ class AudioPlayerService extends ChangeNotifier {
     });
 
     player.onPlayerComplete.listen((_) async {
-      if (repeatMode == 1) {
-        await play(
-          audio: cola[indiceActual].audio,
-          tituloCancion: cola[indiceActual].titulo,
-          artistaCancion: cola[indiceActual].artista,
-          imagenCancion: cola[indiceActual].imagen,
-        );
-      } else if (shuffle && cola.isNotEmpty) {
-        indiceActual = (indiceActual + 1) % cola.length;
-        await play(
-          audio: cola[indiceActual].audio,
-          tituloCancion: cola[indiceActual].titulo,
-          artistaCancion: cola[indiceActual].artista,
-          imagenCancion: cola[indiceActual].imagen,
-        );
-      } else if (repeatMode == 2 && indiceActual >= cola.length - 1) {
-        indiceActual = 0;
-        await play(
-          audio: cola[indiceActual].audio,
-          tituloCancion: cola[indiceActual].titulo,
-          artistaCancion: cola[indiceActual].artista,
-          imagenCancion: cola[indiceActual].imagen,
-        );
-      } else {
-        if (indiceActual >= cola.length - 1) {
-          audioHandler?.marcarCompletado();
-        }
-        await siguiente();
+      if (cola.isEmpty ||
+          indiceActual < 0 ||
+          indiceActual >= cola.length) {
+        audioHandler?.marcarCompletado();
+        return;
       }
+
+      if (repeatMode == 1) {
+        await _reproducirIndice(indiceActual);
+        return;
+      }
+
+      if (indiceActual + 1 < cola.length) {
+        await siguiente();
+        return;
+      }
+
+      if (repeatMode == 2) {
+        await _reproducirIndice(0);
+        return;
+      }
+
+      audioHandler?.marcarCompletado();
     });
   }
 
@@ -74,6 +70,7 @@ class AudioPlayerService extends ChangeNotifier {
   LlanoAudioHandler? audioHandler;
 
   final AudioPlayer player = AudioPlayer();
+  final Random _random = Random();
 
   bool reproduciendo = false;
 
@@ -93,12 +90,23 @@ class AudioPlayerService extends ChangeNotifier {
   Duration duracion = Duration.zero;
 
   List<Cancion> cola = [];
+  List<Cancion> _colaOriginal = [];
 
   int indiceActual = 0;
 
   void cargarCola(List<Cancion> canciones, int indice) {
-    cola = canciones;
-    indiceActual = indice;
+    _colaOriginal = List<Cancion>.from(canciones);
+    cola = List<Cancion>.from(_colaOriginal);
+    if (cola.isEmpty) {
+      indiceActual = 0;
+      return;
+    }
+    indiceActual = indice.clamp(0, cola.length - 1);
+    if (shuffle && cola.length > 1) {
+      final actual = cola[indiceActual];
+      cola.shuffle(_random);
+      indiceActual = cola.indexWhere((c) => identical(c, actual));
+    }
   }
 
   Future<void> play({
@@ -148,12 +156,10 @@ class AudioPlayerService extends ChangeNotifier {
     }
   }
 
-  Future<void> siguiente() async {
-    if (cola.isEmpty) return;
-    if (indiceActual >= cola.length - 1) return;
+  Future<void> _reproducirIndice(int indice) async {
+    if (cola.isEmpty || indice < 0 || indice >= cola.length) return;
 
-    indiceActual++;
-
+    indiceActual = indice;
     final cancion = cola[indiceActual];
 
     await play(
@@ -164,20 +170,24 @@ class AudioPlayerService extends ChangeNotifier {
     );
   }
 
+  Future<void> siguiente() async {
+    if (cola.isEmpty) return;
+
+    if (indiceActual + 1 < cola.length) {
+      await _reproducirIndice(indiceActual + 1);
+    } else if (repeatMode == 2) {
+      await _reproducirIndice(0);
+    }
+  }
+
   Future<void> anterior() async {
     if (cola.isEmpty) return;
-    if (indiceActual <= 0) return;
 
-    indiceActual--;
-
-    final cancion = cola[indiceActual];
-
-    await play(
-      audio: cancion.audio,
-      tituloCancion: cancion.titulo,
-      artistaCancion: cancion.artista,
-      imagenCancion: cancion.imagen,
-    );
+    if (indiceActual > 0) {
+      await _reproducirIndice(indiceActual - 1);
+    } else if (repeatMode == 2) {
+      await _reproducirIndice(cola.length - 1);
+    }
   }
 
   Future<void> seek(Duration posicionNueva) async {
@@ -203,7 +213,25 @@ class AudioPlayerService extends ChangeNotifier {
   }
 
   void toggleShuffle() {
-    shuffle = !shuffle;
+    if (cola.isEmpty) {
+      shuffle = (shuffle == false);
+      notifyListeners();
+      return;
+    }
+
+    final actual = cola[indiceActual];
+
+    if (shuffle == false) {
+      shuffle = true;
+      cola = List<Cancion>.from(_colaOriginal);
+      cola.shuffle(_random);
+    } else {
+      shuffle = false;
+      cola = List<Cancion>.from(_colaOriginal);
+    }
+
+    final indice = cola.indexWhere((c) => identical(c, actual));
+    if (indice >= 0) indiceActual = indice;
     notifyListeners();
   }
 

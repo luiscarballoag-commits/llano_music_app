@@ -11,6 +11,8 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
   Future<void> Function()? onPause;
   Future<void> Function(Duration position)? onSeek;
   Future<void> Function()? onStop;
+  Future<void> Function()? onPrevious;
+  Future<void> Function()? onNext;
 
   static const String _portadaPredeterminada =
       'assets/images/logo/logo_llano_music.png';
@@ -76,6 +78,12 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
 
     playbackState.add(
       playbackState.value.copyWith(
+        controls: [
+          MediaControl.skipToPrevious,
+          if (reproduciendo) MediaControl.pause else MediaControl.play,
+          MediaControl.skipToNext,
+        ],
+        androidCompactActionIndices: const [0, 1, 2],
         playing: reproduciendo,
         processingState: AudioProcessingState.ready,
         updatePosition: posicion,
@@ -123,6 +131,16 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
   @override
   Future<void> seek(Duration position) async {
     await onSeek?.call(position);
+  }
+
+  @override
+  Future<void> skipToPrevious() async {
+    await onPrevious?.call();
+  }
+
+  @override
+  Future<void> skipToNext() async {
+    await onNext?.call();
   }
 
   @override

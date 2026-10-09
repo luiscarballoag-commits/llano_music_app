@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
   LlanoAudioHandler();
@@ -8,19 +12,54 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
   Future<void> Function(Duration position)? onSeek;
   Future<void> Function()? onStop;
 
-  void actualizarCancion({
+  static const String _portadaPredeterminada =
+      'assets/images/logo/logo_llano_music.png';
+
+  Future<Uri?> _obtenerPortadaUri(String imagen) async {
+    final ruta = imagen.trim();
+    if (ruta.isEmpty) return null;
+
+    final uri = Uri.tryParse(ruta);
+
+    // Las portadas remotas conservan su URL.
+    if (uri != null && (uri.scheme == 'http' || uri.scheme == 'https')) {
+      return uri;
+    }
+
+    // Solo procesamos rutas de assets de la aplicación.
+    if (!ruta.startsWith('assets/')) return null;
+
+    try {
+      final directorio = await getTemporaryDirectory();
+      final nombreSeguro = ruta.replaceAll(RegExp(r'[^a-zA-Z0-9._-]'), '_');
+      final archivo = File('${directorio.path}/portada_$nombreSeguro');
+
+      if (!await archivo.exists() || await archivo.length() == 0) {
+        final datos = await rootBundle.load(ruta);
+        await archivo.writeAsBytes(
+          datos.buffer.asUint8List(datos.offsetInBytes, datos.lengthInBytes),
+          flush: true,
+        );
+      }
+
+      return archivo.uri;
+    } catch (_) {
+      // Si falla la portada elegida, intentamos usar el logo.
+      if (ruta == _portadaPredeterminada) return null;
+      return _obtenerPortadaUri(_portadaPredeterminada);
+    }
+  }
+
+  Future<void> actualizarCancion({
     required String audio,
     required String titulo,
     required String artista,
     required String imagen,
-  }) {
+  }) async {
+    final artUri = await _obtenerPortadaUri(imagen);
+
     mediaItem.add(
-      MediaItem(
-        id: audio,
-        title: titulo,
-        artist: artista,
-        artUri: imagen.isNotEmpty ? Uri.tryParse(imagen) : null,
-      ),
+      MediaItem(id: audio, title: titulo, artist: artista, artUri: artUri),
     );
   }
 
@@ -32,9 +71,7 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
     final item = mediaItem.value;
 
     if (item != null && item.duration != duracion) {
-      mediaItem.add(
-        item.copyWith(duration: duracion),
-      );
+      mediaItem.add(item.copyWith(duration: duracion));
     }
 
     playbackState.add(
@@ -61,7 +98,7 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
     Map<String, dynamic>? extras,
   ]) async {
     if (name == 'cargarCancion') {
-      actualizarCancion(
+      await actualizarCancion(
         audio: extras?['audio'] as String? ?? '',
         titulo: extras?['titulo'] as String? ?? '',
         artista: extras?['artista'] as String? ?? '',
@@ -91,7 +128,6 @@ class LlanoAudioHandler extends BaseAudioHandler with SeekHandler {
   @override
   Future<void> stop() async {
     await onStop?.call();
-
     playbackState.add(
       playbackState.value.copyWith(
         playing: false,

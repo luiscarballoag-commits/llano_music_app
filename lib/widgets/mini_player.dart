@@ -4,6 +4,33 @@ import '../services/audio_player_service.dart';
 class MiniPlayer extends StatelessWidget {
   const MiniPlayer({super.key});
 
+  Widget _imagen(String ruta) {
+    const logo = 'assets/images/logo/logo_llano_music.png';
+    final imagen = ruta.trim().isEmpty ? logo : ruta.trim();
+    final esRemota =
+        imagen.startsWith('https://') || imagen.startsWith('http://');
+
+    if (esRemota) {
+      return Image.network(
+        imagen,
+        width: 60,
+        height: 60,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) =>
+            Image.asset(logo, width: 60, height: 60, fit: BoxFit.cover),
+      );
+    }
+
+    return Image.asset(
+      imagen,
+      width: 60,
+      height: 60,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) =>
+          Image.asset(logo, width: 60, height: 60, fit: BoxFit.cover),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -14,41 +41,21 @@ class MiniPlayer extends StatelessWidget {
         return Container(
           height: 80,
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          decoration: const BoxDecoration(
-            color: Color(0xFF1E1E1E),
-          ),
+          decoration: const BoxDecoration(color: Color(0xFF1E1E1E)),
           child: Row(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  player.imagen.isEmpty
-                      ? "assets/images/logo/logo_llano_music.png"
-                      : player.imagen,
-                  width: 60,
-                  height: 60,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) {
-                    return const Icon(
-                      Icons.music_note,
-                      size: 60,
-                      color: Colors.white,
-                    );
-                  },
-                ),
+                child: _imagen(player.imagen),
               ),
-
               const SizedBox(width: 15),
-
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      player.titulo.isEmpty
-                          ? "Llano Music"
-                          : player.titulo,
+                      player.titulo.isEmpty ? 'Llano Music' : player.titulo,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -57,12 +64,10 @@ class MiniPlayer extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 4),
-
                     Text(
                       player.artista.isEmpty
-                          ? "Seleccione una canción"
+                          ? 'Seleccione una canción'
                           : player.artista,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -74,7 +79,6 @@ class MiniPlayer extends StatelessWidget {
                   ],
                 ),
               ),
-
               IconButton(
                 icon: Icon(
                   player.reproduciendo

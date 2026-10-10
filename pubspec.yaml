@@ -42,6 +42,7 @@ flutter:
     # Logo
     - assets/images/logo/logo_llano_music.png
     - assets/images/radios/radio_dinamita.jpg
+    - assets/images/radios/Folklorisima.png
 
     # ===========================
     # AUDIOS CLÁSICOS (MP3 SUELTOS)

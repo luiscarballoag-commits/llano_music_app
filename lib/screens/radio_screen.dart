@@ -244,7 +244,7 @@ class _RadioScreenState extends State<RadioScreen> {
                       ),
                       const SizedBox(height: 7),
                       const Text(
-                        'El sonido auténtico del llano',
+                        'El Sonido Auténtico Del Llano',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
@@ -259,7 +259,7 @@ class _RadioScreenState extends State<RadioScreen> {
                     const Padding(
                       padding: EdgeInsets.only(left: 4, bottom: 14),
                       child: Text(
-                        'Sintoniza tu emisora favorita',
+                        'Sintoniza Tu Emisora Favorita',
                         style: TextStyle(
                           color: Color(0xFF24392B),
                           fontSize: 17,

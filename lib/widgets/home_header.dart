@@ -56,7 +56,7 @@ class HomeHeader extends StatelessWidget {
               ),
               SizedBox(height: 4),
                 Text(
-                  "El sonido auténtico del llano",
+                  "El Sonido Auténtico Del Llano",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,

@@ -100,11 +100,19 @@ class _RadioScreenState extends State<RadioScreen> {
             height: 94,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: _fondo,
-              borderRadius: BorderRadius.circular(16),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: Colors.black12, width: 1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.12),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(17),
               child: Image.asset(
                 emisora['imagen']!,
                 fit: BoxFit.contain,

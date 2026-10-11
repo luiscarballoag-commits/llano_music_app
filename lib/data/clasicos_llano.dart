@@ -591,10 +591,10 @@ ClasicoLlano(
 
 ClasicoLlano(
   artista: "Simón Díaz",
-  apodo: "El Maestro del Llano",
+  apodo: "Tío Simón",
   estado: "Guárico",
   pais: "Venezuela",
-  imagen: "assets/images/logo/logo_llano_music.png",
+  imagen: "https://drive.google.com/uc?export=view&id=1_5AwA9RMFZzNWYavt8eaRXVQjgpe0JqQ",
   canciones: [],
 ),
 

@@ -120,14 +120,15 @@ class _RadioScreenState extends State<RadioScreen> {
     return Expanded(
       child: InkWell(
         onTap: () => _seleccionarEmisora(indice),
-        borderRadius: BorderRadius.circular(14),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+        borderRadius: BorderRadius.circular(18),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: seleccionada
-                ? _verde.withValues(alpha: 0.12)
-                : Colors.grey.withValues(alpha: 0.08),
-            borderRadius: BorderRadius.circular(14),
+                ? _verde.withValues(alpha: 0.10)
+                : Colors.grey.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: seleccionada ? _verde : Colors.black12,
               width: seleccionada ? 2 : 1,
@@ -135,22 +136,41 @@ class _RadioScreenState extends State<RadioScreen> {
           ),
           child: Column(
             children: [
-              Icon(
-                Icons.radio,
-                color: seleccionada ? _verde : Colors.grey,
-                size: 26,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  emisora['imagen']!,
+                  width: 76,
+                  height: 76,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) => Icon(
+                    Icons.radio,
+                    size: 52,
+                    color: seleccionada ? _verde : Colors.grey,
+                  ),
+                ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Text(
                 emisora['nombre']!,
                 textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: seleccionada
                       ? FontWeight.bold
                       : FontWeight.normal,
                   color: seleccionada ? _verde : null,
                 ),
+              ),
+              const SizedBox(height: 8),
+              Icon(
+                seleccionada
+                    ? Icons.check_circle
+                    : Icons.radio_button_unchecked,
+                color: seleccionada ? _verde : Colors.grey,
+                size: 18,
               ),
             ],
           ),

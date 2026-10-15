@@ -4,9 +4,7 @@ import 'screens/explorar_screen.dart';
 import 'screens/favoritos_screen.dart';
 import 'screens/radio_screen.dart';
 import 'screens/perfil_screen.dart';
-import 'screens/trial_expired_screen.dart';
 
-import 'services/trial_service.dart';
 
 import 'widgets/home_header.dart';
 import 'widgets/banner_principal.dart';
@@ -24,27 +22,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _paginaActual = 0;
-  bool _cargandoTrial = true;
-  bool _trialExpirado = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _verificarTrial();
-  }
-
-  Future<void> _verificarTrial() async {
-    final expirado = await TrialService().isExpired();
-
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _trialExpirado = expirado;
-      _cargandoTrial = false;
-    });
-  }
 
   Widget _inicio() {
     return SafeArea(
@@ -75,21 +52,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_cargandoTrial) {
-      return const Scaffold(
-        backgroundColor: Color(0xFFF3F5F7),
-        body: Center(
-          child: CircularProgressIndicator(
-            color: Color(0xFF2E7D32),
-          ),
-        ),
-      );
-    }
-
-    if (_trialExpirado) {
-      return const TrialExpiredScreen();
-    }
-
     final paginas = [
       _inicio(),
       const ExplorarScreen(),

@@ -1,0 +1,4 @@
+project_id = "fhpvfvbwxjclwhysbqab"
+
+[functions.validar-licencia]
+verify_jwt = false

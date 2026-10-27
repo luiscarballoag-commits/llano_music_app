@@ -4,30 +4,26 @@ import 'package:url_launcher/url_launcher.dart';
 import '../services/favorites_service.dart';
 import 'favoritos_screen.dart';
 import 'playlists_screen.dart';
+import 'activar_premium_screen.dart';
 
 class PerfilScreen extends StatelessWidget {
-  const PerfilScreen({super.key});
+  final VoidCallback? onPremiumActivated;
+
+  const PerfilScreen({
+    super.key,
+    this.onPremiumActivated,
+  });
 
   Future<void> _abrirYouTube() async {
-    final url = Uri.parse(
-      'https://youtube.com/@lcarballog',
-    );
+    final url = Uri.parse('https://youtube.com/@lcarballog');
 
-    await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    );
+    await launchUrl(url, mode: LaunchMode.externalApplication);
   }
 
   Future<void> _abrirTikTok() async {
-    final url = Uri.parse(
-      'https://www.tiktok.com/@produccioneslcarballog',
-    );
+    final url = Uri.parse('https://www.tiktok.com/@produccioneslcarballog');
 
-    await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    );
+    await launchUrl(url, mode: LaunchMode.externalApplication);
   }
 
   void _mostrarAcercaDe(BuildContext context) {
@@ -38,12 +34,7 @@ class PerfilScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22),
           ),
-          contentPadding: const EdgeInsets.fromLTRB(
-            24,
-            24,
-            24,
-            10,
-          ),
+          contentPadding: const EdgeInsets.fromLTRB(24, 24, 24, 10),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -60,10 +51,7 @@ class PerfilScreen extends StatelessWidget {
                 const Text(
                   'Llano Music',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
 
                 const SizedBox(height: 5),
@@ -71,10 +59,7 @@ class PerfilScreen extends StatelessWidget {
                 const Text(
                   'Música y cultura de nuestro llano',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 15,
-                  ),
+                  style: TextStyle(color: Colors.black54, fontSize: 15),
                 ),
 
                 const SizedBox(height: 20),
@@ -82,10 +67,7 @@ class PerfilScreen extends StatelessWidget {
                 const Text(
                   'Llano Music es una plataforma dedicada a preservar, difundir y disfrutar la música del llano, acercando nuestros artistas, canciones y tradiciones a las nuevas generaciones.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    height: 1.5,
-                  ),
+                  style: TextStyle(fontSize: 15, height: 1.5),
                 ),
 
                 const SizedBox(height: 16),
@@ -93,20 +75,14 @@ class PerfilScreen extends StatelessWidget {
                 const Text(
                   'Llano Music forma parte del ecosistema Producciones Lcarballog, un proyecto orientado a impulsar contenidos, música y cultura a través de las nuevas tecnologías.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    height: 1.5,
-                  ),
+                  style: TextStyle(fontSize: 15, height: 1.5),
                 ),
 
                 const SizedBox(height: 18),
 
                 const Text(
                   'Versión 1.0',
-                  style: TextStyle(
-                    color: Colors.black45,
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: Colors.black45, fontSize: 12),
                 ),
               ],
             ),
@@ -132,16 +108,12 @@ class PerfilScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final favoritos =
-        FavoritesService.instance.obtenerFavoritos().length;
+    final favoritos = FavoritesService.instance.obtenerFavoritos().length;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F7),
 
-      appBar: AppBar(
-        title: const Text("Mi Perfil"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Mi Perfil"), centerTitle: true),
 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -153,58 +125,67 @@ class PerfilScreen extends StatelessWidget {
             CircleAvatar(
               radius: 52,
               backgroundColor: const Color(0xFF2E7D32),
-              child: const Icon(
-                Icons.person,
-                size: 60,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.person, size: 60, color: Colors.white),
             ),
 
             const SizedBox(height: 15),
 
             const Text(
               "Mi Perfil",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 5),
 
             const Text(
               "Disfruta de la música del llano",
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 15,
-              ),
+              style: TextStyle(color: Colors.black54, fontSize: 15),
             ),
 
             const SizedBox(height: 25),
 
-            // FAVORITOS
+            // ACCESO A LLANOMUSIC PREMIUM
             Card(
               child: ListTile(
                 leading: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+                  Icons.workspace_premium,
+                  color: Color(0xFF2E7D32),
+                  size: 32,
                 ),
                 title: const Text(
-                  "Canciones favoritas",
+                  'LlanoMusic Premium',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                subtitle: Text(
-                  "$favoritos canciones",
-                ),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                ),
+                subtitle: const Text('Catálogo completo • US\$ 2 / 30 días'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () async {
+                  final activada = await Navigator.push<bool>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ActivarPremiumScreen(),
+                    ),
+                  );
+
+                  if (activada == true) {
+                    onPremiumActivated?.call();
+                  }
+                },
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // FAVORITOS
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.favorite, color: Colors.red),
+                title: const Text("Canciones favoritas"),
+                subtitle: Text("$favoritos canciones"),
+                trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          const FavoritosScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const FavoritosScreen()),
                   );
                 },
               ),
@@ -217,22 +198,13 @@ class PerfilScreen extends StatelessWidget {
                   Icons.queue_music,
                   color: Color(0xFF2E7D32),
                 ),
-                title: const Text(
-                  "Mis Playlists",
-                ),
-                subtitle: const Text(
-                  "Organiza tus canciones",
-                ),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                ),
+                title: const Text("Mis Playlists"),
+                subtitle: const Text("Organiza tus canciones"),
+                trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          const PlaylistsScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const PlaylistsScreen()),
                   );
                 },
               ),
@@ -241,19 +213,10 @@ class PerfilScreen extends StatelessWidget {
             // HISTORIAL
             Card(
               child: ListTile(
-                leading: const Icon(
-                  Icons.history,
-                  color: Color(0xFF2E7D32),
-                ),
-                title: const Text(
-                  "Historial",
-                ),
-                subtitle: const Text(
-                  "Próximamente",
-                ),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                ),
+                leading: const Icon(Icons.history, color: Color(0xFF2E7D32)),
+                title: const Text("Historial"),
+                subtitle: const Text("Próximamente"),
+                trailing: const Icon(Icons.chevron_right),
               ),
             ),
 
@@ -264,15 +227,9 @@ class PerfilScreen extends StatelessWidget {
                   Icons.info_outline,
                   color: Color(0xFF2E7D32),
                 ),
-                title: const Text(
-                  "Acerca de Llano Music",
-                ),
-                subtitle: const Text(
-                  "Música y cultura de nuestro llano",
-                ),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                ),
+                title: const Text("Acerca de Llano Music"),
+                subtitle: const Text("Música y cultura de nuestro llano"),
+                trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   _mostrarAcercaDe(context);
                 },
@@ -293,8 +250,7 @@ class PerfilScreen extends StatelessWidget {
             const SizedBox(height: 10),
 
             Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
                   tooltip: "YouTube",
@@ -334,10 +290,7 @@ class PerfilScreen extends StatelessWidget {
 
             const Text(
               "Versión 1.0",
-              style: TextStyle(
-                color: Colors.black45,
-                fontSize: 12,
-              ),
+              style: TextStyle(color: Colors.black45, fontSize: 12),
             ),
           ],
         ),

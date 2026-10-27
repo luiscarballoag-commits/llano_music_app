@@ -16,6 +16,7 @@ import 'services/playlist_service.dart';
 import 'services/novedades_service.dart';
 import 'repositories/catalogo_music_repository.dart';
 import 'services/analytics_service.dart';
+import 'services/licencia_service.dart';
 import 'services/llano_audio_handler.dart';
 import 'services/audio_player_service.dart';
 
@@ -54,15 +55,10 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
 
-  FlutterError.onError =
-      FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(
-      error,
-      stack,
-      fatal: true,
-    );
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
 
@@ -77,7 +73,21 @@ Future<void> main() async {
 
   await NovedadesService.instance.inicializar();
 
-  await CatalogoMusicRepository.instance.cargarCatalogoRemoto();
+  // Solo cargar canciones remotas con Premium validado.
+  // Sin conexión, la aplicación conserva el catálogo local.
+  try {
+    final licencia = await LicenciaService.instance.verificarSesion();
+    final premiumActivo =
+        licencia['ok'] == true && licencia['estado'] == 'activa';
+
+    CatalogoMusicRepository.instance.establecerPremiumActivo(premiumActivo);
+
+    if (premiumActivo) {
+      await CatalogoMusicRepository.instance.cargarCatalogoRemoto();
+    }
+  } catch (_) {
+    // Un fallo de verificación no debe impedir abrir la aplicación.
+  }
 
   await _inicializarGoogleCast();
 

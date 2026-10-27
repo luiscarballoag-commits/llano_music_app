@@ -6,36 +6,48 @@ import '../services/novedades_service.dart';
 class CatalogoMusicRepository {
   CatalogoMusicRepository._();
 
-  static final CatalogoMusicRepository instance =
-      CatalogoMusicRepository._();
+  static final CatalogoMusicRepository instance = CatalogoMusicRepository._();
 
-  final List<Cancion> _canciones =
-      List<Cancion>.from(allSongs);
+  final List<Cancion> _cancionesLocales = List<Cancion>.from(allSongs);
+  final List<Cancion> _cancionesRemotas = [];
 
-  List<Cancion> get canciones =>
-      List.unmodifiable(_canciones);
+  bool _premiumActivo = false;
+
+  List<Cancion> get canciones => List.unmodifiable([
+    ..._cancionesLocales,
+    if (_premiumActivo) ..._cancionesRemotas,
+  ]);
+
+  List<Cancion> get cancionesPremium =>
+      _premiumActivo ? List.unmodifiable(_cancionesRemotas) : const [];
+
+  void establecerPremiumActivo(bool activo) {
+    _premiumActivo = activo;
+  }
 
   Future<void> cargarCatalogoRemoto() async {
+    if (!_premiumActivo) return;
+
     try {
-      final remotas =
-          await CatalogoRemotoService.instance
-              .cargarCatalogo();
+      final remotas = await CatalogoRemotoService.instance.cargarCatalogo();
+
+      if (!_premiumActivo) return;
 
       final existentes = <String>{
-        for (final cancion in _canciones)
+        for (final cancion in _cancionesLocales)
           '${cancion.artista.toLowerCase()}|'
-          '${cancion.titulo.toLowerCase()}',
+              '${cancion.titulo.toLowerCase()}',
+        for (final cancion in _cancionesRemotas)
+          '${cancion.artista.toLowerCase()}|'
+              '${cancion.titulo.toLowerCase()}',
       };
 
       for (final item in remotas) {
-        final titulo =
-            item['titulo']?.toString().trim();
+        if (!_premiumActivo) return;
 
-        final artista =
-            item['artista']?.toString().trim();
-
-        final audio =
-            item['audio']?.toString().trim();
+        final titulo = item['titulo']?.toString().trim();
+        final artista = item['artista']?.toString().trim();
+        final audio = item['audio']?.toString().trim();
 
         if (titulo == null ||
             titulo.isEmpty ||
@@ -46,41 +58,27 @@ class CatalogoMusicRepository {
           continue;
         }
 
-        final clave =
-            '${artista.toLowerCase()}|'
-            '${titulo.toLowerCase()}';
+        final clave = '${artista.toLowerCase()}|${titulo.toLowerCase()}';
 
-        if (existentes.contains(clave)) {
-          continue;
-        }
+        if (existentes.contains(clave)) continue;
 
-        _canciones.add(
+        _cancionesRemotas.add(
           Cancion(
             artista: artista,
             titulo: titulo,
-            imagen: _obtenerImagen(
-              item,
-              artista,
-            ),
+            imagen: _obtenerImagen(item, artista),
             audio: audio,
           ),
         );
 
         existentes.add(clave);
 
-        // ===========================
-        // REGISTRAR NOVEDAD
-        // ===========================
-
-        final id =
-            item['id']?.toString().trim();
+        final id = item['id']?.toString().trim();
 
         if (id != null && id.isNotEmpty) {
           await NovedadesService.instance.agregar(
             id: id,
-            tipo:
-                item['tipo']?.toString() ??
-                'sencillo',
+            tipo: item['tipo']?.toString() ?? 'sencillo',
             titulo: titulo,
             artista: artista,
             album: item['album']?.toString(),
@@ -88,20 +86,14 @@ class CatalogoMusicRepository {
         }
       }
     } catch (_) {
-      // Si falla Internet, se conserva
-      // el catálogo local.
+      // Si falla Internet, se conserva el catálogo local.
     }
   }
 
-  String _obtenerImagen(
-    Map<String, dynamic> item,
-    String artista,
-  ) {
-    final imagenRemota =
-        item['imagen']?.toString().trim();
+  String _obtenerImagen(Map<String, dynamic> item, String artista) {
+    final imagenRemota = item['imagen']?.toString().trim();
 
-    if (imagenRemota != null &&
-        imagenRemota.isNotEmpty) {
+    if (imagenRemota != null && imagenRemota.isNotEmpty) {
       return imagenRemota;
     }
 
@@ -110,8 +102,7 @@ class CatalogoMusicRepository {
 
   String _buscarImagenArtista(String artista) {
     for (final cancion in allSongs) {
-      if (cancion.artista.toLowerCase() ==
-          artista.toLowerCase()) {
+      if (cancion.artista.toLowerCase() == artista.toLowerCase()) {
         return cancion.imagen;
       }
     }

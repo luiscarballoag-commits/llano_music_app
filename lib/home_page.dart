@@ -5,7 +5,6 @@ import 'screens/favoritos_screen.dart';
 import 'screens/radio_screen.dart';
 import 'screens/perfil_screen.dart';
 
-
 import 'widgets/home_header.dart';
 import 'widgets/banner_principal.dart';
 import 'widgets/buscador.dart';
@@ -22,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _paginaActual = 0;
+  int _versionExplorar = 0;
 
   Widget _inicio() {
     return SafeArea(
@@ -54,10 +54,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final paginas = [
       _inicio(),
-      const ExplorarScreen(),
+      ExplorarScreen(key: ValueKey(_versionExplorar)),
       const RadioScreen(),
       const FavoritosScreen(),
-      const PerfilScreen(),
+      PerfilScreen(
+        onPremiumActivated: () {
+          setState(() {
+            _versionExplorar++;
+          });
+        },
+      ),
     ];
 
     return Scaffold(
@@ -74,10 +80,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
           BottomNavigationBarItem(
             icon: Icon(Icons.library_music),
             label: 'Explorar',
@@ -90,10 +93,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.favorite),
             label: 'Favoritos',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
         ],
       ),
     );

@@ -75,10 +75,10 @@ Future<void> main() async {
 
   // Solo cargar canciones remotas con Premium validado.
   // Sin conexión, la aplicación conserva el catálogo local.
+  var premiumActivo = false;
   try {
     final licencia = await LicenciaService.instance.verificarSesion();
-    final premiumActivo =
-        licencia['ok'] == true && licencia['estado'] == 'activa';
+    premiumActivo = licencia['ok'] == true && licencia['estado'] == 'activa';
 
     CatalogoMusicRepository.instance.establecerPremiumActivo(premiumActivo);
 
@@ -91,11 +91,13 @@ Future<void> main() async {
 
   await _inicializarGoogleCast();
 
-  runApp(const LlanoMusicApp());
+  runApp(LlanoMusicApp(mostrarAvisoPremium: premiumActivo));
 }
 
 class LlanoMusicApp extends StatelessWidget {
-  const LlanoMusicApp({super.key});
+  final bool mostrarAvisoPremium;
+
+  const LlanoMusicApp({super.key, required this.mostrarAvisoPremium});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,123 @@ class LlanoMusicApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Llano Music',
       theme: AppTheme.lightTheme,
-      home: const HomePage(),
+      home: _AvisoBienvenidaPremium(
+        mostrarAviso: mostrarAvisoPremium,
+        child: const HomePage(),
+      ),
     );
   }
+}
+
+class _AvisoBienvenidaPremium extends StatefulWidget {
+  final bool mostrarAviso;
+  final Widget child;
+
+  const _AvisoBienvenidaPremium({
+    required this.mostrarAviso,
+    required this.child,
+  });
+
+  @override
+  State<_AvisoBienvenidaPremium> createState() =>
+      _AvisoBienvenidaPremiumState();
+}
+
+class _AvisoBienvenidaPremiumState extends State<_AvisoBienvenidaPremium> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && widget.mostrarAviso) {
+        _mostrarBienvenida();
+      }
+    });
+  }
+
+  Future<void> _mostrarBienvenida() async {
+    const verdeOscuro = Color(0xFF173D2B);
+    const verdeLlanoMusic = Color(0xFF2E7D32);
+    const dorado = Color(0xFFDDB85A);
+
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => Dialog(
+        backgroundColor: verdeOscuro,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+          side: const BorderSide(color: dorado, width: 1.5),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 76,
+                height: 76,
+                decoration: BoxDecoration(
+                  color: verdeLlanoMusic.withValues(alpha: 0.28),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: dorado, width: 1.5),
+                ),
+                child: const Icon(
+                  Icons.workspace_premium,
+                  color: dorado,
+                  size: 44,
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                '¡Bienvenido a\nLlanoMusic Premium!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: dorado,
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 14),
+              const Text(
+                'Tu licencia Premium está activa. '
+                'Disfruta de tu música llanera y de todo tu catálogo.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 26),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: verdeLlanoMusic,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: const BorderSide(color: dorado, width: 1),
+                    ),
+                  ),
+                  child: const Text(
+                    'CONTINUAR',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
